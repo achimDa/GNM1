@@ -1,0 +1,36 @@
+<table class="table">
+  <thead>
+		<tr>
+			<td>
+				Tip
+			</td>
+			<td>
+				Fisier
+			</td>
+			<td>
+				Actiuni
+			</td>
+			<td>
+			</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="repeat-data" ng-repeat="note in notes" style="font:smaller">
+			<td>
+	           	<span ng-bind="note.data |  date:'dd MMM yyyy'"></span>
+			</td>
+			<td>
+				<span ng-bind="note.user"></span>
+			</td>
+			<td>
+				<span ng-bind="note.id"></span>
+			</td>
+			<td>
+			 <button type="button" class="btn btn-danger btn-xs" ng-click="f.remove()">
+                        <span class="glyphicon glyphicon-trash"></span> Elimina
+                    </button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+

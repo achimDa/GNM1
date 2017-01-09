@@ -1,0 +1,133 @@
+<div class="events-tab settings-page">
+  <div class="col-md-12 add-events">
+      <form name="myForm">
+      <uib-accordion close-others="oneAtATime">
+        <uib-tabset justified="true" class="event-tabs">
+          <uib-tab heading="Setari Generale" class="tabs">
+            <div class="col-md-12">
+              <div class="event-box row">
+                    <fieldset class="search-box top-box">
+                      <legend><b>Evenimente</b></legend>
+                      <div class="select-form-setari-gen">
+                          <label class="label-form">Permite publicului sa raporteze evenimente in afara ariei protejate
+                              <input type="checkbox" class="set-gen" ng-model="itemObj.publicCanReportEventOutsideProtectedArea">
+                          </label>
+                      </div>
+                      <div class="select-form-setari-gen">
+                          <label class="label-form"> Permite administratorilor ariilor protejate si rangerilor sa raporteze evenimente in afara ariei protejate
+                              <input type="checkbox" class="set-gen" ng-model="itemObj.adminCanReportEventOutsideProtectedArea">
+                          </label>
+                      </div>
+                      <div class="select-form-setari-gen">
+                          <label class="label-form"> Permite publicului sa ataseze continut video
+                              <input type="checkbox" class="set-gen" ng-model="itemObj.publicCanAttachVideo">
+                          </label>
+                      </div>
+                      <div class="select-form">
+                        <label class="label-form">Sterge definitiv evenimentele invalide la </label>
+                        <input class="form-control show" type="text" ng-model="itemObj.nbOfDaysInvalidEventsAreKept" required>
+                        <label class="label-form"> zile.</label>
+                      </div>
+                      <div class="select-form">
+                        <label class="label-form"> Marcheaza evenimentele validate ca nemaifiind de actualitate la </label>
+                        <input class="form-control show" type="text" ng-model="itemObj.nbOfDaysEventsAreConsideredValid" required>
+                        <label class="label-form"> zile.</label>
+                      </div>
+                      <div class="select-form">
+                        <label class="label-form">Afiseaza un numar de </label>
+                        <input class="form-control show" type="text" ng-model="itemObj.nbOfEventsAttachedOnMobile" required>
+                        <label class="label-form"> evenimente atunci cand este deschisa aplicatia mobila.</label>
+                      </div>
+                  </fieldset>
+                  <div class="fieldset-aranj-setari-gen">
+                    <fieldset class="search-box top-box">
+                        <legend><b>Atasamente-Imagini</b></legend>
+                        <div class="select-form">
+                          <label class="label-form">Dimensiune maxima: </label>
+                          <input class="form-control box-img" type="text" ng-model="itemObj.maxImageSize" required>
+                          <label class="label-form"> KB</label>
+                        </div>
+                        <div class="select-form">
+                          <label class="label-form"> Numar atasamente pe eveniment:</label>
+                          <input class="form-control box-img" type="text" ng-model="itemObj.nbOfImageAttachmentsPerEvent" required>
+                        </div>
+                        <div class="select-form">
+                          <label class="label-form">Extensii permise: </label>
+                          <input class="form-control box-img" type="text" ng-model="itemObj.allowedImageExtensions" required>
+                        </div>
+                        <div class="select-form">
+                          <label class="label-form">Rezolutie maxima: </label>
+                          <input class="form-control box-img" type="text" ng-model="itemObj.maxImageResWidth" required>
+                          <label class="label-form"> x</label>
+                          <input class="form-control box-img" type="text" ng-model="itemObj.maxImageResHeight" required>
+                          <label class="label-form"> pixeli</label>
+                        </div>
+                    </fieldset>
+                    <fieldset class="search-box top-box">
+                        <legend><b>Atasamente-Video</b></legend>
+                        <div class="select-form">
+                          <label class="label-form">Dimensiune maxima: </label>
+                          <input class="form-control box-img" type="text" ng-model="itemObj.maxVideoSize" required>
+                          <label class="label-form"> KB</label>
+                        </div>
+                        <div class="select-form">
+                          <label class="label-form"> Numar atasamente pe eveniment: </label>
+                          <input class="form-control box-img" type="text" ng-model="itemObj.nbOfVideoAttachmentsPerEvent" required>
+                        </div>
+                        <div class="select-form">
+                          <label class="label-form">Extensii permise: </label>
+                          <input class="form-control box-img" type="text" ng-model="itemObj.allowedVideoExtensions" required>
+                        </div>
+                        <div class="select-form">
+                          <label class="label-form">Rezolutie maxima: </label>
+                          <input class="form-control box-img" type="text" ng-model="itemObj.maxVideoResWidth" required>
+                          <label class="label-form"> x</label>
+                          <input class="form-control box-img" type="text" ng-model="itemObj.maxVideoResHeight" required>
+                          <label class="label-form"> pixeli</label>
+                        </div>
+                    </fieldset>
+                  <fieldset class="search-box top-box">
+                      <legend><b>Atasamente-Alte Fisiere</b></legend>
+                      <div class="select-form">
+                        <label class="label-form">Dimensiune maxima: </label>
+                        <input class="form-control box-img" type="text" ng-model="itemObj.maxSizeOfFile" required>
+                        <label class="label-form"> KB</label>
+                      </div>
+                      <div class="select-form">
+                        <label class="label-form"> Numar atasamente pe eveniment: </label>
+                        <input class="form-control box-img" type="text" ng-model="itemObj.nbOfAttachmentsOfFilePerEvent" required>
+                      </div>
+                      <div class="select-form">
+                        <label class="label-form">Extensii permise: </label>
+                        <input class="form-control box-img" type="text" ng-model="itemObj.allowedExtensionsOfFile" required>
+                      </div>
+                  </fieldset>
+                  </div>
+                    <fieldset class="search-box top-box">
+                      <legend><b>Trasee</b></legend>
+                      <div class="select-form">
+                        <label class="label-form">Este considerat traseu daca are minim </label>
+                        <input class="form-control box-route" type="text" ng-model="itemObj.minNbOfPointsForTrail" required>
+                        <label class="label-form"> puncte.</label>
+                      </div>
+                      <div class="select-form">
+                        <label class="label-form"> Perioada calendaristica maxima pentru cautarea traseelor:  </label>
+                        <input class="form-control box-route" type="text" ng-model="itemObj.maxNbOfDaysForTrailSearch" required>
+                        <label class="label-form"> zile.</label>
+                      </div>
+                  </fieldset>
+              </div>
+            </div>
+          </uib-tab>
+        </uib-tabset>
+      </uib-accordion>
+    </form>
+  </div>
+  <div class="col-md-12">
+    <div class="button-box">
+      <button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid">OK</button>
+      <button class="btn btn-default" ng-click="main.go({url:'administrare'})">Renunta</button>
+    </div>
+  </div>
+</div>
+

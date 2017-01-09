@@ -1,0 +1,80 @@
+<div class="col-md-12">
+	<div class="search-box">
+		<a 
+			ng-click="deactiveRow()"
+			ng-show="editableRow.active"
+			class="add-event act-dez">
+			<i class="fa fa-toggle-off"></i>
+			Dezactiveaza
+		</a>
+		<a 
+			ng-click="activeRow()"
+			ng-hide="editableRow.active"
+			class="add-event act-dez">
+			<i class="fa fa-toggle-on"></i>
+			Activeaza
+		</a>
+<!-- 		<a 
+			ng-href="#/adauga-element?edit=true" 
+			id="add-event" 
+			class="add-event">
+			<i class="fa fa-plus"></i>
+			Modifica
+		</a> -->
+		<a 
+			ng-href="#/adauga-element" 
+			id="add-event" 
+			class="add-event">
+			<i class="fa fa-plus"></i>
+			Adauga
+		</a>
+		<div class="table-responsive2">
+			<table class="table">
+				  <thead>
+						<tr>
+							<th>Activ</th>
+							<th>Denumire</th>
+							<th>Categorie</th>
+							<th>Dimensiune</th>
+							<th>Migrator</th>
+							<th>Specie</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="repeat-data" 
+							ng-repeat="items in tabelData.items.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy:sort.column:sort.descending"
+							ng-class="{'marked': items.id == editableRow.id, 'disabledRow': items.active === false, 'enableRow': items.active === true}" 
+							ng-click="markRow(items)">
+
+							<td>
+								<input 
+										type="checkbox" 
+										ng-checked="items.active"
+										ng-bind="items.active"
+										ng-disabled="true"
+								/>
+							</td>
+							<td ng-bind="items.name"></td>
+							<td ng-bind="items.category.name"></td>
+							<td ng-bind="items.size.name"></td>
+							<td ng-bind="items.migrate | YesNo"></td>
+							<td ng-bind="items.species.name"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<uib-pagination 
+				total-items="totalItems" 
+				boundary-links="true"
+				ng-model="currentPage" 
+				ng-change="pageChanged()" 
+				class="pagination-md" 
+				items-per-page="itemsPerPage"
+				direction-links="true"
+				previous-text="&lsaquo;" 
+				next-text="&rsaquo;"
+				first-text="&lsaquo;&lsaquo;"
+				last-text="&rsaquo;&rsaquo;">
+			</uib-pagination>
+	</div>
+</div>

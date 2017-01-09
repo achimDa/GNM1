@@ -1,0 +1,358 @@
+<div class="editare-coridor">
+	<div class="events-tab">
+	  <div class="col-md-12">
+    	<form name="myForm">
+			<uib-accordion close-others="oneAtATime">
+			  <uib-tabset justified="true" class="event-tabs">
+			    <uib-tab heading="General" class="tabs" ng-click="showStuff()" 
+	    				ng-show="
+			    			session.user.authority == 'ROLE_COMISAR_GNM' || 
+			    			session.user.authority == 'ROLE_ADMIN_ARIE_PROTEJATA' || 
+			    			session.user.authority == 'ROLE_ADMIN_GENERAL'">
+						<div class="col-md-3">
+							<div class="search-box">
+						 	<b class="titleBox">Criterii de cautare</b><br>
+								<b>Pas 1:</b><i>Selectati o categorie de eveniment</i>
+					    		<span class="title-cat"></span>
+								<div class="scroll-vert">
+									<span ng-repeat="item in formDropdownData.event track by item.id">
+								      <label class="checkbox">
+								        <!-- <input type="checkbox" ng-model="itemObj.ecoCorridorTypeId"/> -->
+								        <input type="checkbox" ng-model="item.isChecked"/>
+								        {{item.name}}
+								      </label>
+								    </span>
+								    <!-- <pre ng-bind="selection.ids | json"></pre>    -->
+							    </div>
+							    <b>Pas 2:</b><i>Selectati o denumire de animal utilizand filtrele precedente (Categorie animal, Dimensiune animal, Animal migrator, Specie animal):</i>
+							    <div class="select-form select-top">
+								    <span class="from-to">De la:</span>
+
+						            <!-- <input date-time max-date="minDate" ng-model="itemObj.date" class="form-control pickerClass" required> -->
+
+						            <input type="text" class="form-control pickerClass" ng-model="itemObj.startDate" data-bs-show="itemObj.startDate" bs-datepicker>
+
+								    <button type="button" class="btn btn-default">
+					              		<i class="glyphicon glyphicon-calendar"></i>
+					              	</button>
+							    </div>
+							    <div class="select-form">
+								    <span class="from-to">Pana la:</span>
+
+						            <!-- <input date-time max-date="minDate" ng-model="itemObj.releaseDate" class="form-control pickerClass" required> -->
+
+						            <input type="text" class="form-control pickerClass" ng-model="itemObj.endDate" data-bs-show="itemObj.endDate" bs-datepicker>
+
+								    <button type="button" class="btn btn-default">
+					              		<i class="glyphicon glyphicon-calendar"></i>
+					              	</button>
+							    </div>
+								<div class="select-form form1"> 
+								    <label for="mySelect">Categorie animal:</label>
+								    <select name="mySelect" 
+								    		id="mySelect" 
+								    		class="form-control"
+								     		ng-options="option.name for option in formDropdownData.animalcategorie" 
+								      		ng-change="animalSearch()"
+								    		ng-model="itemObj.animalCategoryId">
+								    		<option value>-- Selecteaza --</option>
+						    		</select>
+							    </div>
+							    <div class="select-form">
+								    <label for="mySelect">Dimensiune animal:</label>
+								    <select name="mySelect" 
+								    		id="mySelect" 
+								    		class="form-control"
+								    		ng-change="animalSearch()"
+								      		ng-options="option.name for option in formDropdownData.size" 
+					      					ng-model="itemObj.animalSizeId">
+					      					<option value>-- Selecteaza --</option>
+			      					</select>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form" for="mySelect">Animal migrator:</label>
+								    <select name="mySelect" id="mySelect" 
+								    		class="form-control"
+								    		ng-change="animalSearch()"
+								      		ng-model="itemObj.migrate">
+								      		<option value>-- Selecteaza --</option>
+								      		<option value="Da">Da</option>
+								      		<option value="Nu">Nu</option>
+						      		</select>
+							    </div>
+							    <div class="select-form">
+								    <label for="mySelect">Specie animal:</label>
+								    <select name="mySelect" 
+								    		id="mySelect" 
+								    		class="form-control"
+								      		ng-options="option.name for option in formDropdownData.species"
+								      		ng-change="animalSearch()"
+					      					ng-model="itemObj.animalSpecieId">
+					      					<option value>-- Selecteaza --</option>
+			      					</select>
+							    </div>
+							    <div class="select-form">
+								    <label for="mySelect">Denumire animal:</label>
+								    <select name="mySelect" 
+								    		id="mySelect" 
+								    		class="form-control"
+								      		ng-options="option as option.name disable when (option.active == false) for option in formDropdownData.animals"
+					    					ng-model="itemObj.denumireAnimal">
+					    					<option value ng-disabled="true">-- Selecteaza --</option>
+			    					</select>
+							    </div>
+							    <button class="btn btn-default" ng-click="searchEventsEco()">Cautare</button>
+							    <br>
+							    <br>
+							</div>
+						</div>
+						<div class="col-md-9">
+							<div class="event-box">
+								<b>Pas 3:</b><i>Specificati caracteristicile coridorului ecologic</i>
+								<div class="select-form form1">
+								    <label for="mySelect">Denumire coridor ecologic:</label>
+								    <input class="form-control numberA"
+								    	   ng-model="itemObj.name" required></input>
+							    </div>
+							    <div class="select-form">
+								    <label for="mySelect">Numar coridor ecologic:</label>
+								    <input class="form-control numberC" ng-pattern="/[0-9]/" min="0" type="number" ng-model="itemObj.number" required></input>
+							    </div>
+							    <div class="select-form">
+								    <label for="mySelect">Tip coridor ecologic:</label>
+								    <select name="mySelect" 
+								    		id="mySelect" 
+								    		class="numberA form-control"
+								    		ng-options="option as option.name disable when (option.active == false) for option in formDropdownData.ecocorridortype track by option.id"
+
+								     		ng-model="itemObj.ecoCorridorType" required>
+								      <option value>-- Selecteaza --</option>
+							      	</select>
+							    </div>
+							    <div class="select-form">
+								    <label for="mySelect">Descriere coridor ecologic:</label>
+								    <textarea rows="6" 
+								    		  name="comment" 
+								    		  form="usrform"
+								    		  ng-model="itemObj.description" 
+								    		  class="form-control" required>
+						    		</textarea>
+							    </div>
+							    <b>Pas 4:</b><i>Trasati conturul coridorului ecologic</i>
+
+							 <!--    <leaflet class="mapO" 
+							    		 lf-center="center" 
+							    		 width="100%" 
+							    		 defaults="defaults"
+							    		 layers="layers"
+							    		 markers="markers"
+							    		 ng-model="itemObj.poligon"
+							    		 controls="controls" 
+							    		 >
+					    		</leaflet> -->
+
+							    <leaflet class="mapO" 
+							    		 lf-draw="map.drawOptions"
+							    		 lf-center="center" 
+							    		 width="100%" 
+							    		 defaults="defaults"
+							    		 layers="layers"
+							    		 markers="markers"
+							    		 ng-model="itemObj.poligon"
+							    		 controls="controls" 
+							    		 >
+					    		</leaflet>
+
+					    		<!-- <div id="map" style="height: 350px;"></div> -->
+
+					    		<br>
+							</div>
+						</div>
+			     </uib-tab>
+			     <uib-tab heading="Informatii aditionale" class="tabs" disable="!session.editableRow" ng-click="hideStuff()"
+	     			ng-show="
+		    			session.user.authority == 'ROLE_COMISAR_GNM' || 
+		    			session.user.authority == 'ROLE_ADMIN_ARIE_PROTEJATA' || 
+		    			session.user.authority == 'ROLE_ADMIN_GENERAL'">
+			     	<div class="col-md-12 event-box">
+						<p class="title-info">Introduceti informatii ce aduc valoare adaugata pentru aria protejata (ex:populatii):</p>
+						<div class="add-stuff">
+							<a 
+								ng-click="deactiveInfo(items)"  
+								class="add-event" 
+								ng-show="editableInfo.active">
+								<i class="fa fa-toggle-off"></i>
+								Dezactiveaza
+							</a>
+							
+							<a 
+								ng-click="activeInfo(items)" 
+								ng-hide="editableInfo.active" 
+								class="add-event">
+								<i class="fa fa-toggle-on"></i>
+								Activeaza
+							</a>
+
+							<a 
+								ng-click="changeState('adauga')" 
+								data-toggle="modal" 
+								data-target="#addInfoModal" 
+								class="custom-file-upload" 
+								ng-show="session.editableInfo.description == null"
+								id="addInfo">
+								<i class="fa fa-plus"></i>
+								Adauga
+							</a>
+							
+							<a 
+								ng-click="changeState('modifica')" 
+								data-toggle="modal" 
+								data-target="#addInfoModal" 
+								class="custom-file-upload" 
+								ng-show="session.editableInfo.description != null"
+								id="addInfo">
+								<i class="fa fa-pencil"></i>
+								Modifica
+							</a>
+				    	</div>
+						<table class="table">
+						  <thead>
+								<tr>
+									<th>Activ</th>
+									<th>Denumire</th>
+									<th>Descriere</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="repeat-data" 
+					    			ng-click="Info(note)" 
+					    			ng-repeat="note in infos" 
+					    			ng-class="{'marked': note.additionalInfoId == editableInfo.additionalInfoId, 'disabledRow': note.active === null || note.active === false, 'enableRow': note.active === true}">
+					    			<td><input type="checkbox"
+							   					class="checkbox2" 
+							   					ng-disabled="true"
+							   					ng-checked="note.active"
+							   					ng-model="note.active">
+							   		</td>
+									<td><span ng-bind="note.name"></span></td>
+									<td><span ng-bind="note.description"></span></td>
+					    		</tr>
+							</tbody>
+						</table>
+			     	</div>
+			     </uib-tab>
+			    <uib-tab heading="Metodologie" disable="!itemObj.ecoCorridorType.id" ng-click="hideStuff()" 
+		    		ng-show="
+		    			(session.user.authority == 'ROLE_COMISAR_GNM' && session.editableRow.ecoCorridorNumber) ||
+		    			(session.user.authority == 'ROLE_ADMIN_GENERAL' && session.editableRow.ecoCorridorNumber)">
+				<div class="row">
+				    <div class="col-md-12 event-box">
+					    <a 
+							ng-click="print()"
+							class="add-event"
+							style="margin-bottom: 0" 
+							ng-show="(session.user.authority == 'ROLE_COMISAR_GNM' && session.editableRow.ecoCorridorNumber) ||
+					    			 (session.user.authority == 'ROLE_ADMIN_GENERAL' && session.editableRow.ecoCorridorNumber)">
+						<i class="fa fa-print"></i>
+						Tipareste</a>	
+
+						<a 
+							ng-click="deactiveEco()"
+							class="add-event"
+							style="margin-bottom: 10px"
+							ng-show="(session.user.authority == 'ROLE_COMISAR_GNM' && session.editableRow.ecoCorridorNumber) ||
+					    			 (session.user.authority == 'ROLE_ADMIN_GENERAL' && session.editableRow.ecoCorridorNumber) && itemObj.active == true">
+						<i class="fa fa-toggle-off"></i>
+						Dezactiveaza coridor ecologic</a>
+
+						<a 
+							ng-click="activeEco()"
+							class="add-event"
+							style="margin-bottom: 10px"
+							ng-show="(session.user.authority == 'ROLE_COMISAR_GNM' && session.editableRow.ecoCorridorNumber) ||
+					    			 (session.user.authority == 'ROLE_ADMIN_GENERAL' && session.editableRow.ecoCorridorNumber) && itemObj.active == false">
+						<i class="fa fa-toggle-on"></i>
+						Activeaza coridor ecologic</a>
+					</div>
+			    </div>
+				</uib-tab>
+			    <uib-tab heading="Rezolutie" disable="!itemObj.ecoCorridorType.id" ng-click="hideStuff()" 
+				    		ng-show="
+				    			(session.user.authority == 'ROLE_COMISAR_GNM' && session.editableRow.ecoCorridorNumber) ||
+				    			(session.user.authority == 'ROLE_ADMIN_GENERAL' && session.editableRow.ecoCorridorNumber)">
+					    <div class="row">
+						    <div class="col-md-12">
+						    	<div class="event-box" style="padding-right:0;">
+								    <div class="select-form">
+									    <label style="float:left" for="mySelect">Comentariu:</label>
+									    <textarea 
+								    			class="form-control" 
+								    			cols="30" 
+								    			rows="10"
+								    			ng-model="validator.resolution">
+						    			</textarea>
+								    </div>
+								    <div class="select-form">
+									    <label for="mySelect">Rezolutie:</label>
+										<input 
+												type="radio" 
+												name="validator" 
+												value="true"
+												ng-click="sendValidator(validator)"
+												ng-model="validator.valid"> 
+											<b class="text-success">Valid</b>
+												&nbsp;&nbsp;
+										<input 
+												type="radio" 
+												name="validator" 
+												value="false"
+												ng-click="sendValidator(validator)"
+												ng-model="validator.valid">
+											<b class="text-danger">Invalid</b>
+								    </div>
+						    	</div>
+							</div>
+						</div>
+				    </uib-tab>
+		      </uib-tabset>
+			</uib-accordion>
+		</form>
+	  </div>
+	  	<div class="col-md-12">
+		  	<div class="button-box">
+				<button class="btn btn-default" ng-click="main.go({url:'coridoare-ecologice'})" ng-hide="hidden">Renunta</button>
+				<button class="btn btn-default" ng-click="sendPost(itemObj)"  ng-disabled="myForm.$invalid" ng-hide="hidden">OK</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Modal Coments -->
+<div class="modal fade" id="addInfoModal" role="dialog">
+	<div class="modal-dialog">
+	<!-- Modal content-->
+		<div class="modal-content">
+			<form name="addInfoForm" ng-submit="addInfo(addInfoForm,note);">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Descriere</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-actions">
+						<div class="input-append">
+							<input class="form-control comForm" ng-model="note.description" placeholder="Descriere *"/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" 
+							ng-disabled="addInfoForm.$invalid" 
+							class="btn btn-success">OK
+					</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">RENUNTA</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

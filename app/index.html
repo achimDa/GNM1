@@ -1,0 +1,213 @@
+<!doctype html>
+<html ng-app="gnmApp" ng-controller="MainCtrl">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/libs.min.css">
+    <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/docs.min.css">
+    <!-- <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" /> -->
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/leaflet-dist/leaflet.css" />
+    <link rel="stylesheet" href="bower_components/leaflet-draw/dist/leaflet.draw.css" />
+    <link rel="stylesheet" href="bower_components/angular-datepicker/dist/angular-datepicker.css" />
+    <link rel="stylesheet" href="bower_components/angular-object-table/build/object-table-style.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    
+  </head>
+  <body>
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <header id="header">
+        <div class="col-xs-6">
+            <a href="#/dashboard">
+                <img src="images/logo.png" class="logo"><h2>GNM</h2>
+            </a>
+            <h2 class="header-title" ng-bind="session.title || session.addLink.title"></h2>
+        </div>
+        <div class="col-xs-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="header-logo pull-right">
+                        <img src="images/minister.png">
+                        <img src="images/comp.png">
+                        <img src="images/eea.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+      <!--   <div class="col-xs-2 logos">
+            <div>
+            </div>
+        </div> -->
+        <div class="col-xs-2" ng-show="session.isLoggedIn === true">
+            <div class="info-settings">
+                <a class="fa fa-home" ng-href="#/dashboard" type="button" ng-show="session.isLoggedIn === true"></a>
+                <span id="userName" ng-bind="main.session.user.firstName + ' ' + main.session.user.lastName"></span>
+                    <button class="fa fa-cog" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-show="session.isLoggedIn === true">
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a ng-href="#/schimba-parola">Schimba parola</a></li>
+                        <li><a href="" class="sub-nav-label" ng-click="logout()" type="button">Iesire</a></li>
+                    </ul>
+            </div>
+        </div>
+    </header>
+    <uib-alert 
+        ng-repeat="alert in main.alerts"
+        type="{{alert.type}}"
+        class="alert-box"
+        dismiss-on-timeout="{{alert.duration}}"
+        close="main.closeAlert($index)">
+        <span ng-bind="alert.msg"></span>
+    </uib-alert>
+
+    <!-- Add your site or application content here -->
+    <div id="main-container" ng-view="">
+    <!-- iNJECT THE VIEW HTML -->
+    </div>
+
+    <footer id="footer" class="footer" ng-if="footerScope.showFooter">
+        <div class="row">
+            <div class="col-xs-12">
+            Această platformă a fost dezvoltată de către Garda Națională de Mediu – Comisariatul General în parteneriat cu Computas AS,  în cadrul proiectului “Dezvoltarea metodologiei de stabilire a coridoarelor ecologice și instruirea administratorilor de arii protejate pentru o mai bună gestionare a acestora”.
+
+            Proiectul a urmărit dezvoltarea metodologiilor de stabilire a coridoarelor ecologice pentru mamifere mari, păsări migratoare și pești migratori și cresterea capacității de gestionare și monitorizare a coridoarelor ecologice prin instruirea și dotarea cu echipamente mobile a administratorilor de arii protejate.
+
+            Astfel, platforma dezvoltată, “AMBIANCE”, permite personalului autorizat al GNM și Administratorilor Ariilor Protejate să gestioneze și să monitorizeze ariile protejate și coridoarele ecologice ale mamiferelor mari, păsărilor migratoare și peștilor migratori de pe teritoriul Romaniei. Acestea vor putea fi delimitate prin raportarea de evenimente, atât prin intermediul acestei platforme, cât și prin intermediul aplicației mobile dezvoltată tot în cadrul acestui proiect. O parte din evenimentele raportate vor putea fi folosite la definirea coridoarelor ecologice ce vor urmari metodologiile dezvoltate in cadrul proiectului.  
+            Instituțiile partenere vor putea fi notificate cu privire la incidentele de mediu raportate pentru a putea interveni în remedierea acestora.
+            </div>
+            <div class="col-xs-12">
+                <span class="pull-right">v:04</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>
+    <script src="bower_components/ui-iconpicker/ui-iconpicker.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/ngDatepicker/src/js/ngDatepicker.js"></script>
+    <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+    <script src="bower_components/leaflet-dist/leaflet.js"></script>
+    <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
+    <script src="bower_components/leaflet-draw/dist/leaflet.draw-src.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/shp/dist/shp.js"></script>
+    <script src="bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js"></script>
+    <script src="bower_components/angular-datepicker/dist/angular-datepicker.js"></script>
+    <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
+    <script src="bower_components/ng-idle/angular-idle.js"></script>
+    <script src="bower_components/ng-csv/build/ng-csv.min.js"></script>
+    <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+    <script src="bower_components/ui-leaflet/dist/ui-leaflet.js"></script>
+    <script src="bower_components/ui-leaflet-draw/dist/ui-leaflet-draw.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
+    <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
+    <script src="bower_components/angular-object-table/build/object-table.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <script src="bower_components/moment/locale/ro.js"></script>
+
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/services/go.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/dashboard.js"></script>
+        <script src="scripts/services/helpers.js"></script>
+        <script src="scripts/services/appData.service.js"></script>
+        <script src="scripts/controllers/events.js"></script>
+        <script src="scripts/controllers/date-picker.js"></script>
+        <script src="scripts/constants/configs.js"></script>
+        <script src="scripts/constants/navigator.js"></script>
+        <script src="scripts/constants/notificari.js"></script>
+        <script src="scripts/controllers/add-event.js"></script>
+        <script src="scripts/directives/my-note/my-note.directive.js"></script>
+        <script src="scripts/directives/color-picker.directive.js"></script>
+        <script src="scripts/directives/form-validator.directive.js"></script>
+        <script src="scripts/services/noteservice.js"></script>
+        <script src="scripts/services/jquery.colorPicker.min.js"></script>
+        <script src="scripts/controllers/history-events.js"></script>
+        <script src="scripts/controllers/rezolutii-notificari.js"></script>
+        <script src="scripts/controllers/coridoare-ecologice.js"></script>
+        <script src="scripts/controllers/monitorizare-trasee.js"></script>
+        <script src="scripts/controllers/administrare.js"></script>
+        <script src="scripts/controllers/regnul-animalia.js"></script>
+        <script src="scripts/controllers/editare-coridor-ecologic.js"></script>
+        <script src="scripts/controllers/jurnal-sincronizari.js"></script>
+        <script src="scripts/controllers/arie-protejata.js"></script>
+        <script src="scripts/controllers/comisariat.js"></script>
+        <script src="scripts/controllers/adauga-judet.js"></script>
+        <script src="scripts/controllers/adauga-tara.js"></script>
+        <script src="scripts/controllers/utilizator-nou.js"></script>
+        <script src="scripts/controllers/utilizator.js"></script>
+        <script src="scripts/controllers/utilizatori.js"></script>
+        <script src="scripts/controllers/categorie-evenimente.js"></script>
+        <script src="scripts/controllers/adauga-element.js"></script>
+        <script src="scripts/controllers/adauga-utilizator.js"></script>
+        <script src="scripts/controllers/aloca-utilizator-existent.js"></script>
+        <script src="scripts/controllers/legislatie.js"></script>
+        <script src="scripts/controllers/reglementare.js"></script>
+        <script src="scripts/controllers/metodologie.js"></script>
+        <script src="scripts/controllers/animal-categorii.js"></script>
+        <script src="scripts/controllers/tip-coridor-ecologic.js"></script>
+        <script src="scripts/controllers/editare-harta-arie-protejata.js"></script>
+        <script src="scripts/controllers/adauga-localitate.js"></script>
+        <script src="scripts/controllers/editare-forme-juridice.js"></script>
+        <script src="scripts/controllers/unitati-emitente-certificate-fiscale.js"></script>
+        <script src="scripts/controllers/categorii-regnul-animalia.js"></script>
+        <script src="scripts/controllers/dimensiuni-regnul-animalia.js"></script>
+        <script src="scripts/controllers/specii-regnul-animalia.js"></script>
+        <script src="scripts/controllers/tipuri-arii-protejate.js"></script>
+        <script src="scripts/controllers/informatii-aditionale-arii-protejate.js"></script>
+        <script src="scripts/controllers/restrictii-arii-protejate.js"></script>
+        <script src="scripts/controllers/utilizator-existent.js"></script>
+        <script src="scripts/controllers/coduri-caen.js"></script>
+        <script src="scripts/controllers/persoana-fizica.js"></script>
+        <script src="scripts/controllers/persoana-juridica.js"></script>
+        <script src="scripts/controllers/autoritate.js"></script>
+        <script src="scripts/controllers/sediu-arie-protejata.js"></script>
+        <script src="scripts/controllers/setari-generale.js"></script>
+        <script src="scripts/controllers/notificari-autoritati.js"></script>
+        <script src="scripts/controllers/tip-legislatie.js"></script>
+        <script src="scripts/controllers/tip-reglementare.js"></script>
+        <script src="scripts/controllers/schimba-parola.js"></script>
+        <script src="scripts/controllers/harta-tara.js"></script>
+        <script src="scripts/controllers/harta-judet.js"></script>
+        <script src="scripts/controllers/setari.js"></script>
+        <script src="scripts/controllers/rapoarte.js"></script>
+        <script src="scripts/controllers/indicatori-performanta-categorii-evenimente.js"></script>
+        <script src="scripts/controllers/detalii-eveniment.js"></script>
+        <script src="scripts/controllers/detalii-coridor-ecologic.js"></script>
+        <script src="scripts/controllers/evenimente-dupa-legislatie.js"></script>
+        <script src="scripts/controllers/trasee.js"></script>
+        <!-- endbuild -->
+
+</body>
+</html>

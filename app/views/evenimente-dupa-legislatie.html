@@ -1,0 +1,191 @@
+<div class="search-box reports">
+		<div class="event-box box-padding">
+    		<form name="myForm">
+			    <fieldset class="search-box">
+			   		<legend><b>Completati conditiile de filtrare inainte de a rula raportul</b></legend>
+			   		<div class="row">
+				      	<div class="col-md-5">
+
+					      	<div class="row" style="diplay:flex">
+					      		<div class="col-md-2">
+						      		<label class="label-form" for="numar">Legislatie:</label>
+					      		</div>
+					      		<div class="col-md-4">
+
+						      		<input 	type="text" 
+						      				class="form-control" 
+						      				ng-model="evenimenteObj.legislatie"
+						      				bs-options="legislatie.id as legislatie.number for legislatie in legislatie($viewValue)" 
+						      				ng-disabled="evenimenteObj.reglementare"
+						      				placeholder="Introdu numarul de legislatie" bs-typeahead>
+					      		</div>
+				      		</div>
+				      		<br>
+					      	<div class="row" style="diplay:flex">
+					      		<div class="col-md-2">
+						      		<label class="label-form" for="numar">Reglementare:</label>
+					      		</div>
+					      		<div class="col-md-4">
+
+						      		<input 	type="text" 
+						      				class="form-control" 
+						      				ng-model="evenimenteObj.reglementare" 
+						      				bs-options="reglementare.id as reglementare.number for reglementare in reglementare($viewValue)" 
+						      				ng-disabled="evenimenteObj.legislatie"
+						      				placeholder="Introdu numarul de reglementare" bs-typeahead>
+					      		</div>
+				      		</div>
+				      		<br>
+				      		<div class="row">
+					      		<div class="col-md-12 area-margin">
+									<span class="title-cat">Categorii evenimente</span>
+									<div class="scroll-vert">
+										<span ng-repeat="item in formDropdownData.eventCategory">
+									      	<label class="checkbox">
+									        	<input type="checkbox" ng-model="item.isChecked" ng-disabled="!item.active"/>
+									        	{{item.name}}
+									      	</label>
+									    </span>
+								    </div>
+								</div>
+
+					      	</div>
+					      	<div class="row" style="diplay:flex">
+					      		<div class="col-md-2">
+						      		<label class="label-form" for="numar">De la:</label>
+					      		</div>
+					      		<div class="col-md-4">
+							      	<input  type="text" 
+							      			class="form-control picker-date" 
+							      			ng-model="evenimenteObj.startDate" 
+							      			data-bs-show="evenimenteObj.startDate" 
+							      			bs-datepicker>
+						      		<span class="input-group-btn">
+								        <label class="btn btn-default btn-datePicker" for="sentDate">
+								        <i class="glyphicon glyphicon-calendar"></i></label>
+								    </span>
+					      		</div>
+					      		
+					      		<div class="col-md-2">
+						      		<label class="label-form2" for="numar" style="text-align:center">pana la:</label>
+								</div>
+					      		<div class="col-md-4">
+							      	<input  type="text" 
+							      			class="form-control picker-date" 
+							      			ng-model="evenimenteObj.endDate" 
+							      			data-bs-show="evenimenteObj.endDate" 
+							      			bs-datepicker>
+								        <label class="btn btn-default btn-datePicker" for="sentDate">
+								        <i class="glyphicon glyphicon-calendar"></i></label>
+								    </span>
+							    </div>
+						    </div>
+					      	<!-- <div class="select-rows">
+						      	<label class="label-form" for="numar">Agent economic:</label>
+								<input  id="numar" 
+										type="text" 
+										ng-model="evenimenteObj.economicalAgent" 
+										ng-change="getPuntLucru(evenimenteObj)"
+										class="form-control number-input"
+										/>
+					      	</div>
+					      	<div class="select-rows">
+						      	<label class="label-form" for="numar">Punct de lucru:</label>
+						      	<select type="text"
+							    		ng-model="evenimenteObj.officeId" 
+							    		class="form-control selectListInspectie" 
+							    		ng-options="option.name for option in formDropdownData.punctlucruD track by option.id" 
+							    		name="receiverOffice">
+							        <option value> Selecteaza </option>
+							    </select>
+					      	</div> -->
+				      	</div>
+			
+				      	<div class="col-md-7">
+					      	<div class="pull-right">
+				      			<div class="col-md-12">
+						      		<button 
+						      				type="button" 
+						      				ng-click="runRaport(evenimenteObj)" 
+						      				class="btn add-event export-list" 
+						      				ng-disabled="myForm.$invalid">
+												<i class="fa fa-arrow-right"></i>
+												Ruleaza raport
+									</button>
+								</div>
+				      			<div class="col-md-12">
+						      		<button
+						      				type="button"
+							      			ng-click="downloadRaport(evenimenteObj,'raportPdf')" 
+											class=" btn add-event export-list" 
+											ng-disabled="myForm.$invalid">
+												<i class="fa fa-file-pdf-o"></i>
+												Exporta in format PDF
+									</button>
+								</div>
+
+				      			<!-- <div class="col-md-12">
+						      		<button 
+											type="button"
+						      				ng-click="downloadRaport(evenimenteObj,'raportCsv')" 
+						      				class="btn add-event export-list" 
+						      				ng-disabled="myForm.$invalid">
+												<i class="fa fa-file-o"></i>
+												Exporta in format CSV
+									</button>
+								</div> -->
+							</div>
+				      	</div>
+			      	</div>
+			    </fieldset>
+			</form>
+		   <div class="row">
+		   		<div class="col-md-12 img-container">
+		   			<div class="col-md-3"><img src="images/minister.png" class="tmp-img1"></div>
+		   			<div class="col-md-3"><img src="images/logo.png" class="tmp-img"></div>
+		   			<div class="col-md-3"><img src="images/comp.png" class="tmp-img"></div>
+		   			<div class="col-md-3"><img src="images/eea.jpg" class="tmp-img"></div>
+		   		</div>
+		   		<div class="col-md-12">
+		   			<h1 style="text-align:center">Evenimente dupa legislatie/reglementare</h1>
+		   		</div>
+		   </div>
+		   <div class="row">
+		   		<div class="col-md-12">
+		   			<div class="tableDiv">
+						<table 
+								object-table 
+						       	data="tabelData" 
+						       	display="15" 
+						       	headers="Legislatie/Reglementare, Categorie eveniment, Arie protejata, Administrator arie protejata, Data/Ora eveniment"
+						       	fields="eventCategoryName, performanceIndicator"
+						       	sorting="compound"
+						       	paging="true"
+						       	search="false"
+						       	editable="false">
+						       	<tbody>
+									<tr>
+										<td ng-bind="item.legislationAndRegulation"></td>
+										<td ng-bind="item.eventCategory"></td>
+										<td ng-bind="item.protectedArea"></td>
+										<td ng-bind="item.protectedAreaAdmin"></td>
+										<td ng-bind="item.eventDate"></td>
+									</tr>
+								</tbody>
+				        </table>
+		   		</div>
+		   </div>
+<!-- 		   <div class="">
+		   		<div class="col-md-12">
+		   			<br><br>
+					<p>Titlu raport</p>
+					<p>Tiparit de</p>
+					<p>Denumire proiect</p>
+					<p>Text copyright</p>
+					<p class="pull-right">Pagina 8 din 10</p>
+		   		</div>
+		   </div> -->
+		</div>
+	
+</div>
+

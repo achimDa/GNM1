@@ -1,0 +1,72 @@
+<div class="row events-tab tabs-main">
+	<div class="col-md-12">
+		<div class="col-md-12 add-events">
+		    <form name="myForm">
+				<uib-accordion close-others="oneAtATime">
+				  <uib-tabset justified="true" class="event-tabs">
+				    <uib-tab heading="Date generale" class="tabs">
+						<div class="col-md-12">
+							<div class="event-box row">
+								<div class="select-form">
+								    <span>Alegeti codul de licenta sursa din care va fi citit utilizatorul ce urmeaza sa fie alocat pe aceasta licenta. Codul de licenta sursa va fi dezactivat</span>
+								    <select 
+								    	name="gen" id="gen" class="form-control form-controlUtil"
+								      	ng-options="option.license for option in formDropdownData.licente"
+								      	ng-change="getData(itemObj.license2.licenseId)"
+								      	ng-model="itemObj.license2" required>
+								      <option value>-- Selecteaza --</option>
+							      	</select>
+							    </div>
+						    </div>
+						</div>
+						<div class="col-md-4">
+					   		<div class="event-box row">
+								<div class="select-form">
+								    <label class="label-form" for="mySelect">Nume utilizator:</label>
+								    <input class="form-control" ng-model="formDropdownData.data.username" ng-disabled="true" required/>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form" for="mySelect">Nume:</label>
+								    <input class="form-control" ng-model="formDropdownData.data.firstName" ng-disabled="true" required/>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form" for="mySelect">Prenume:</label>
+								    <input class="form-control" ng-model="formDropdownData.data.lastName" ng-disabled="true" required/>
+							    </div>
+							    <div class="select-form">
+						            <label for="mySelect" class="label-form">Data nasterii:</label>
+
+								  <!--   <input date-time min-date="minDate" ng-model="formDropdownData.data.dateOfBirth" class="form-control date" ng-disabled="true"/> -->
+
+								    <input type="text" class="form-control date" ng-model="formDropdownData.data.dateOfBirth" bs-datepicker ng-disabled="true">
+								    
+					                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+					            </div>
+							    <div class="select-form">
+								    <label class="label-form" for="gen">Gen:</label>
+								    <input class="form-control" ng-model="formDropdownData.data.gender" ng-disabled="true" required/>
+							    </div><br>
+							    <p>Utilizatorul de mai sus va fi mutat pe codul de licenta de mai jos</p><br>	
+							    <div class="select-form">
+								    <label class="label-form" for="mySelect">Cod licenta:</label>
+								    <input class="form-control" ng-model="itemObj.license" ng-disabled="true" required/>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form" for="mySelect">Organizatie:</label>
+								    <input class="form-control" ng-model="itemObj.organisationName" ng-disabled="true" required/>
+							    </div>
+					   		</div>
+					   	</div>
+					</uib-tab>
+				  </uib-tabset>
+				</uib-accordion>
+			</form>
+		</div>
+	</div>
+		<div class="col-md-12">
+		<div class="button-box">
+			<button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid">OK</button>
+			<button class="btn btn-default" ng-click="back()">Renunta</button>
+		</div>
+	</div>
+</div>

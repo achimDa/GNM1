@@ -1,0 +1,78 @@
+<div class="col-md-12">
+	<div class="search-box">
+		<form name="myForm">
+			<div class="row existing-user">
+				<div class="col-md-6">
+					<p>Alegeti codul de licenta sursa din care va fi citit utilizatorul ce urmeaza sa fie alocat pe acesta licenta. Codul de licenta sursa va fi dezactivat.</p>
+			    </div>
+				<div class="col-md-3">
+					<div class="select-form">
+					    <select type="text" ng-model="itemObj.denumire" class="form-control" id="item_denumire" required></select>
+					    <div class="input-help">
+					      <h4>Alege codul de licenta</h4>
+					    </div>
+				    </div>
+			    </div>
+		    </div> 
+			<div class="row existing-user">
+				<div class="col-md-5">
+					<div class="select-form">
+					    <label class="label-form" for="item_name">Nume utilizator:</label>
+					    <input type="text" ng-model="itemObj.denumire" class="form-control" id="item_denumire" required/>
+					    <div class="input-help">
+					      <h4>Adauga nume utilizator</h4>
+					    </div>
+				    </div>
+					<div class="select-form">
+					    <label class="label-form" for="item_name">Nume:</label>
+					    <input type="text" ng-model="itemObj.denumire" class="form-control" id="item_denumire" required/>
+					    <div class="input-help">
+					      <h4>Adauga nume</h4>
+					    </div>
+				    </div>
+					<div class="select-form">
+					    <label class="label-form" for="item_name">Prenume:</label>
+					    <input type="text" ng-model="itemObj.denumire" class="form-control" id="item_denumire" required/>
+					    <div class="input-help">
+					      <h4>Adauga prenume</h4>
+					    </div>
+				    </div>
+					<div class="select-form">
+					    <label class="label-form" for="item_name">Data nasterii:</label>
+			              <input type="text" class="form-control date-select" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+			              <span class="input-group-btn">
+			                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+			              </span>
+					    <div class="input-help">
+					      <h4>Selecteaza data nasterii</h4>
+					    </div>
+				    </div>
+				    <div class="select-form">
+					    <label class="label-form" for="item_name">Gen:</label>
+					    <select type="text" ng-model="itemObj.denumire" class="form-control" id="item_denumire" required></select>
+					    <div class="input-help">
+					      <h4>Selecteaza gen</h4>
+					    </div>
+				    </div>
+				    <p>Utilizatorul de mai sus va fi mutat pe codul de licenta de mai jos:</p>
+				    <div class="select-form">
+					    <label class="label-form" for="item_name">Cod licenta:</label>
+					    <input type="text" ng-model="itemObj.denumire" class="form-control" id="item_denumire" required/>
+				    </div>
+				    <div class="select-form">
+					    <label class="label-form" for="item_name">Organizatie:</label>
+					    <input type="text" ng-model="itemObj.denumire" class="form-control" id="item_denumire" required/>
+				    </div>
+			    </div>
+		    </div> 
+	    	<div class="row">
+		    	<div class="col-md-12">
+					<div class="button-box">
+						<button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid">OK</button>
+						<button class="btn btn-default" ng-click="clearSearch(itemObj)">Renunta</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

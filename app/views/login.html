@@ -1,0 +1,34 @@
+
+<div class="col-sm-12 col-pos">
+	<div class="wrapper-login">
+		<div class="col-md-12">
+			<h2 class="space-top-64">Management arii protejate si coridoare ecologice</h2><br>
+		<div/>
+		<div class="col-md-4">
+			<div class="margin-dashboard dashboard-nav">
+				<img class="nav-item" src="images/logo.jpg" width="100%">
+			</div>
+		</div>
+		<div class="col-md-5">
+			<div ng-if="loginerror" class="error">
+				<span ng-bind="loginerror"></span>
+			</div>
+			<form class="row form-margin" name="generalForm" ng-submit="login(formData, generalForm)" role="form" class="form-horizontal" >
+				<div class="form-group">
+					<label for="inputFirstName" class="control-label">Utilizator</label>
+					<input type="text" class="form-control" id="inputFirstName" name="inputFirstName" required ng-model="formData.username">
+				</div>
+				<div class="form-group">
+					<label for="inputPassword" class="control-label">Parola</label>
+					<div class="">
+						<input type="password" class="form-control" id="inputPassword" required ng-model="formData.password" placeholder="Password">
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" ng-disabled="generalForm.$invalid" class="btn btn-success btn-block">Login</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+

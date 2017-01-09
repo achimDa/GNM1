@@ -1,0 +1,484 @@
+<div class="events-tab">
+	<div class="col-md-12">
+		<uib-accordion close-others="oneAtATime">
+		  	<uib-tabset justified="true" class="event-tabs">
+			    <uib-tab heading="Date generale" class="tabs" ng-click="showStuff()" 
+		    		ng-show="
+		    			session.user.authority == 'ROLE_COMISAR_GNM' || 
+		    			session.user.authority == 'ROLE_COMISAR_JUDETEAN' || 
+		    			session.user.authority == 'ROLE_ADMIN_ARIE_PROTEJATA' || 
+		    			session.user.authority == 'ROLE_AUTORITATE' || 
+		    			session.user.authority == 'ROLE_RANGER' || 
+		    			session.user.authority == 'ROLE_ADMIN_GENERAL'">
+			    	<form name="myForm">
+					    <div class="col-md-4">
+					    	<div class="event-box" style="padding-right:0;">
+							    <div class="select-form">
+								    <label for="mySelect">*Categorie eveniment:</label>
+								    <select name="mySelect" 
+								    		class="form-control mySelect" 
+								    		ng-options="option as option.name disable when (option.active == false) for option in formDropdownData.eventcategory track by option.id"
+								    		ng-disabled="itemObj.eventStatus === 'VALID' || itemObj.eventStatus === 'NOTIFIED' || itemObj.eventStatus === 'OLD'"
+								    		ng-model="itemObj.eventCategory" required>
+								    		<option value>-- Selecteaza --</option>
+						    		</select>
+							    </div>
+							    <div class="select-form">
+								    <label for="mySelect">*Categorie:</label>
+								    <select name="mySelect" 
+								    		class="form-control mySelect" 
+								    		ng-disabled="itemObj.eventCategory.animalInfo == false || itemObj.eventStatus === 'VALID' || itemObj.eventStatus === 'NOTIFIED' || itemObj.eventStatus === 'OLD'"
+								    		ng-options="option.name for option in formDropdownData.category track by option.id" 
+								    		ng-model="itemObj.animalCategory"
+								    		ng-change="animalSearch(itemObj)">
+								    		<option value>-- Selecteaza --</option>
+						    		</select>
+							    </div>
+							    <div class="select-form">
+								    <label for="mySelect">Dimensiune:</label>
+								    <select name="mySelect" 
+								    		class="form-control mySelect" 
+								      		ng-options="option.name for option in formDropdownData.size track by option.id"
+								      		ng-disabled="itemObj.eventCategory.animalInfo == false || itemObj.eventStatus === 'VALID' || itemObj.eventStatus === 'NOTIFIED' || itemObj.eventStatus === 'OLD'"
+								      		ng-model="itemObj.animalSize"
+								      		ng-change="animalSearch(itemObj)">
+								      		<option value>-- Selecteaza --</option>
+						      		</select>
+							    </div>
+							    <div class="select-form">
+								    <label class="checkbox margin-anim">
+									        <input type="checkbox" ng-disabled="itemObj.eventCategory.animalInfo == false  || itemObj.eventStatus === 'VALID' || itemObj.eventStatus === 'NOTIFIED' || itemObj.eventStatus === 'OLD'" 
+									        ng-model="itemObj.migrate"
+									        ng-change="animalSearch(itemObj)"
+									        required>
+									        Animal migrator
+							      	</label>
+						      	</div>
+							    <div class="select-form">
+								    <label for="mySelect">Specie:</label>
+								    <select name="mySelect" 
+								    		class="form-control mySelect" 
+								      		ng-options="option.name for option in formDropdownData.species track by option.id"
+								      		ng-disabled="itemObj.eventCategory.animalInfo == false  || itemObj.eventStatus === 'VALID' || itemObj.eventStatus === 'NOTIFIED' || itemObj.eventStatus === 'OLD'"
+								      		ng-model="itemObj.animalSpecies"
+								      		ng-change="animalSearch(itemObj)">
+								      		<option value>-- Selecteaza --</option>
+						      		</select>
+							    </div>
+							    <div class="select-form">
+								    <label for="mySelect">Animal:</label>
+								    <select name="mySelect" 
+								    		class="form-control mySelect" 
+								      		ng-options="option as option.name disable when (option.active == false) for option in formDropdownData.animals track by option.id"
+								      		ng-disabled="itemObj.eventCategory.animalInfo == false  || itemObj.eventStatus === 'VALID' || itemObj.eventStatus === 'NOTIFIED' || itemObj.eventStatus === 'OLD'"
+								    		ng-model="itemObj.animal">
+								    		<option value ng-disabled="true">-- Selecteaza --</option>
+						      		</select>
+							    </div>
+							    <div class="select-form">
+							    	<label for="mySelect" class="desc">*Descriere:</label>
+								    <textarea 
+								    	rows="9" 
+								    	name="comment" 
+								    	form="usrform" 
+								    	class="form-control"
+								    	ng-model="itemObj.description"
+								    	ng-disabled="itemObj.eventStatus === 'VALID' || itemObj.eventStatus === 'NOTIFIED' || itemObj.eventStatus === 'OLD'"
+								    	required>
+									</textarea>
+							    </div>
+							    <div class="select-form data-picker">
+								    <label for="mySelect" class="date-label-prim">Data:</label>
+								    <input date-time min-date="minDate" max-date="maxDate" ng-disabled="itemObj.eventStatus === 'VALID' || itemObj.eventStatus === 'NOTIFIED' || itemObj.eventStatus === 'OLD'" ng-model="itemObj.eventDate" class="form-control mySelect" required/>
+					                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+							    </div>
+						  </div>
+					    </div>
+					    <div class="col-md-8">
+					    	<div class="event-box" style="padding-left:0;"> 
+								<p>Selectati locatia in care a aparut evenimentul sau introduceti coordonatele:</p>
+							    <div class="localization">
+										Latitudine: <input class="lat-long form-control"
+														   ng-model="markers.pin.lat"
+														   ng-disabled="session.editableRow.selected === true || itemObj.eventStatus === 'VALID' || itemObj.eventStatus === 'NOTIFIED' || itemObj.eventStatus === 'OLD'"
+														   type="number">
+										Longitudine: <input class="lat-long form-control"
+															ng-model="markers.pin.lng"
+															ng-disabled="session.editableRow.selected === true || itemObj.eventStatus === 'VALID' || itemObj.eventStatus === 'NOTIFIED' || itemObj.eventStatus === 'OLD'"
+															type="number">
+										Arie protejata:
+									    <select name="mySelect" 
+									    		class="form-control form-arie" 
+									    		ng-disabled="session.editableRow.selected === true || itemObj.eventStatus === 'VALID' || itemObj.eventStatus === 'NOTIFIED' || itemObj.eventStatus === 'OLD'"
+									      		ng-options="option.name for option in formDropdownData.protectedareas track by option.id"
+									      		ng-change="protectedAreaGeom(itemObj)"
+									      		ng-model="itemObj.arieProtected">
+							      		</select>					
+								</div>
+								<br>							
+							<leaflet lf-center="center" 
+									 height="550px"
+									 defaults="defaults" 
+									 width="100%" 
+									 layers="layers"
+									 markers="markers" 
+									 event-broadcast="events">
+							</leaflet>
+							</div>
+					    </div>
+					</form>
+			    </uib-tab>
+			    <uib-tab heading="Media" disable="!itemObj.id" ng-click="hideStuff()" 
+		    		ng-show="
+		    			session.user.authority == 'ROLE_COMISAR_GNM' || 
+		    			session.user.authority == 'ROLE_COMISAR_JUDETEAN' || 
+		    			session.user.authority == 'ROLE_ADMIN_ARIE_PROTEJATA' || 
+		    			session.user.authority == 'ROLE_AUTORITATE' || 
+		    			session.user.authority == 'ROLE_RANGER' || 
+		    			session.user.authority == 'ROLE_ADMIN_GENERAL'">
+			    	<div class="row">
+					    <div class="col-md-12">
+						    <div class="event-box">
+						    	<div class="add-stuff">
+									<button 
+				      					class="add-event" 
+				      					type="video/mov"
+			      					 	ngf-select="sendFile(doc.fileMedia)"
+										ng-model="doc.fileMedia"
+										accept="video/*"
+										ngf-max-size="20MB"
+										ng-hide="itemObj.eventStatus === 'VALID' || itemObj.eventStatus === 'NOTIFIED'"
+										multiple>
+				      					<i class="fa fa-plus"></i>
+				      					Adauga film
+			      					</button>
+									<button 
+				      					class="add-event" 
+				      					type="image/jpeg"
+			      					 	ngf-select="sendFile(doc.fileMedia)"
+										ng-model="doc.fileMedia"
+										accept="image/*"
+										ng-hide="itemObj.eventStatus === 'VALID' || itemObj.eventStatus === 'NOTIFIED'"
+										multiple>
+				      					<i class="fa fa-plus"></i>
+				      					Adauga imagine
+			      					</button>
+									<button 
+				      					class="add-event" 
+				      					type="file"
+			      					 	ngf-select="sendFile(doc.fileMedia)"
+										ng-model="doc.fileMedia"
+										accept="*"
+										ng-hide="itemObj.eventStatus === 'VALID' || itemObj.eventStatus === 'NOTIFIED'"
+										multiple>
+				      					<i class="fa fa-plus"></i>
+				      					Adauga document
+			      					</button>
+						    	</div>
+							</div>
+					    </div>
+					    <div class="col-md-12">
+					    	<div class="event-box event-pad">
+						    	<table class="table">
+						    	  <thead>
+							    		<tr>
+							    			<th>
+							    				Tip
+							    			</th>
+							    			<th>
+							    				Fisier
+							    			</th>
+							    			<th>
+												Actiuni
+							    			</th>
+							    		</tr>
+						    		</thead>
+						    		<tbody>
+							    		<tr class="repeat-data" ng-repeat="fileMedia in formDropdownData.media" style="font:smaller">
+							    			<td>
+									           	{{fileMedia.type}}
+							    			</td>
+							    			<td>
+							    				<a 
+							    				href="{{urlDownload + fileMedia.id}}"
+							    				>
+							    					{{fileMedia.fileName}}
+						    					</a>
+							    			</td>
+							    			<td>
+								    			<button 
+							    			 			type="button" 
+							    			 			class="btn btn-danger btn-xs" 
+							    			 			ng-click="delMedia(fileMedia)" 
+							    			 			ng-hide="session.editableRow.eventStatus === 'VALID' || itemObj.eventStatus === 'NOTIFIED'">
+				                                        <span class="glyphicon glyphicon-trash"></span> 
+				                                        Elimina
+			                                    </button>
+							    			</td>
+							    		</tr>
+						    		</tbody>
+						    	</table>
+							</div>
+					    </div>
+					</div>
+			    </uib-tab>
+			    <uib-tab heading="Comentarii" disable="!itemObj.id" ng-click="hideStuff()" 
+	    			ng-show="
+		    			session.user.authority == 'ROLE_COMISAR_GNM' || 
+		    			session.user.authority == 'ROLE_COMISAR_JUDETEAN' || 
+		    			session.user.authority == 'ROLE_ADMIN_ARIE_PROTEJATA' || 
+		    			session.user.authority == 'ROLE_RANGER' || 
+		    			session.user.authority == 'ROLE_AUTORITATE' || 
+		    			session.user.authority == 'ROLE_ADMIN_GENERAL'">
+				    <div class="row">
+				    	<!-- Comments -->
+					    <div class="col-md-6">
+						    <div class="event-box event-pad event-top">
+					    		<p>Introduceti comentarii legate de acest eveniment:</p>
+					    	</div>
+					    </div>
+					    <div class="col-md-6">
+						    <div class="event-box event-pad event-top">
+						    	<div class="add-stuff">
+										<button 
+											ng-click="delComment(notes)" 
+											ng-show="editableContacts || itemObj.eventStatus !== 'VALID2' || itemObj.eventStatus === 'NOTIFIED2'"
+											class="add-event">
+											<i class="fa fa-trash"></i>
+											Sterge
+										</button>
+										<button 
+											ng-click="changeState('adauga')" 
+											data-toggle="modal" 
+											data-target="#addCommentModal" 
+											class="custom-file-upload" 
+											ng-show="itemObj.eventStatus !== 'VALID2' || itemObj.eventStatus === 'NOTIFIED2'"
+											id="addComment">
+											<i class="fa fa-plus"></i>
+											Adauga
+										</button>
+										<button 
+											ng-click="changeState('modifica')" 
+											ng-show="editableContacts || itemObj.eventStatus !== 'VALID2' || itemObj.eventStatus === 'NOTIFIED2'"
+											data-toggle="modal" 
+											data-target="#addCommentModal" 
+											class="custom-file-upload" 
+											id="addComment">
+											<i class="fa fa-pencil"></i>
+											Modifica
+										</button>
+							    	</div>
+							</div>
+					    </div>
+					    <div class="col-md-12">
+							<div class="event-box event-pad">
+							    <table class="table">
+								  <thead>
+										<tr>
+											<th>
+												Data/Ora
+											</th>
+											<th>
+												Utilizator
+											</th>
+											<th>
+												Continut
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+							    		<tr class="repeat-data" 
+							    			ng-click="markRowContacts(note)" 
+							    			ng-repeat="note in notes" 
+							    			ng-class="{'marked': note.id == editableContacts.id, 'disabledRow': note.active === false, 'enableRow': note.active === true}">
+											<td><span ng-bind="note.commendDate"></span></td>
+											<td><span ng-bind="note.username"></span></td>
+											<td><span ng-bind="note.comment"></span></td>
+							    		</tr>
+						    		</tbody>
+								</table>
+								<div ng-bind="hello.title"></div>
+							</div>
+					    </div>	
+
+					    <!-- Documents -->
+					   <div class="col-md-6">
+						    <div class="event-box event-pad">
+					    		<p>Introduceti documente justificative pentru comentariul curent:</p>
+					    	</div>
+					    </div>
+					    <div class="col-md-6">
+						    <div class="event-box event-pad">
+						    	<div class="add-stuff">
+									<button 
+										ng-click="delCommentMedia(media)" 
+										ng-hide="!session.editableContacts"
+										ng-show="itemObj.eventStatus !== 'VALID2' || itemObj.eventStatus === 'NOTIFIED2'"
+										class="add-event">
+										<i class="fa fa-trash"></i>
+										Sterge
+									</button>
+									<button 
+				      					class="add-event"
+				      					type="file"
+				      					ng-hide="!session.editableContacts"
+				      					ng-show="session.editableContacts || itemObj.eventStatus !== 'VALID2' || itemObj.eventStatus === 'NOTIFIED2'"
+			      					 	ngf-select="sendFileComments(doc.fileMedia)"
+										ng-model="doc.fileMedia"
+										required multiple>
+				      					<i class="fa fa-plus"></i>
+				      					Adauga
+			      					</button>
+						    	</div>
+							</div>
+					    </div>
+					    <div class="col-md-12">
+							<div class="event-box event-pad">
+							    <table class="table">
+						    	  <thead>
+							    		<tr>
+							    			<th>
+							    				Data/Ora
+							    			</th>
+							    			<th>
+							    				Utilizator
+							    			</th>
+							    			<th>
+												Tip
+							    			</th>
+							    			<th>
+												Fisier
+							    			</th>
+							    		</tr>
+						    		</thead>
+						    		<tbody>
+							    		<tr class="repeat-data" 
+							    			ng-click="markRowContactsMedia(fRow)" 
+							    			ng-repeat="fRow in media" 
+							    			ng-class="{'marked': fRow.id == editableContactsMedia.id, 'disabledRow': fRow.active === false, 'enableRow': fRow.active === true}">
+												<td><span ng-bind="fRow.dateTime"></span></td>
+												<td><span ng-bind="fRow.accountName"></span></td>
+												<td><span ng-bind="fRow.type"></span></td>
+												<!-- <td><span ng-bind="fRow.fileName"></span></td> -->
+												<td>
+													<a href="{{urlDownloadCommentMedia + fileMedia.id}}"
+							    				>
+							    					{{fRow.fileName}}
+						    					</a>
+												</td>
+							    		</tr>
+						    		</tbody>
+						    	</table>
+								<div ng-bind="hello.title"></div>
+							</div>
+					    </div>	
+					</div>
+			    </uib-tab>
+			    <uib-tab heading="Rezolutie" disable="!itemObj.id" ng-click="hideStuff()" 
+		    		ng-show="
+		    			(session.user.authority == 'ROLE_COMISAR_GNM' && session.editableRow.eventCategoryPriority) || 
+		    			(session.user.authority == 'ROLE_COMISAR_JUDETEAN' && session.editableRow.eventCategoryPriority) || 
+		    			(session.user.authority == 'ROLE_ADMIN_ARIE_PROTEJATA' && session.editableRow.eventCategoryPriority) || 
+		    			(session.user.authority == 'ROLE_ADMIN_GENERAL' && session.editableRow.eventCategoryPriority)">
+				    <div class="row">
+					    <div class="col-md-12">
+					    	<div class="event-box" style="padding-right:0;">
+							    <div class="select-form">
+								    <label style="float:left" for="mySelect">Comentariu:</label>
+								    <textarea 
+							    			class="form-control" 
+							    			cols="30" 
+							    			rows="10"
+							    			ng-model="validator.eventResolution">
+					    			</textarea>
+							    </div>
+							    <div class="select-form">
+								    <label for="mySelect">Rezolutie:</label>
+									<input 
+											type="radio" 
+											name="validator" 
+											value="true"
+											ng-click="sendValidator(validator)"
+											ng-model="validator.valid"> 
+										<b class="text-success">Valid</b>
+											&nbsp;&nbsp;
+									<input 
+											type="radio" 
+											name="validator" 
+											value="false"
+											ng-click="sendValidator(validator)"
+											ng-model="validator.valid">
+										<b class="text-danger">Invalid</b>
+							    </div>
+					    	</div>
+						</div>
+					</div>
+			    </uib-tab>
+			    <uib-tab heading="Audit" disable="!itemObj.id" ng-click="showStuff()" 
+		    		ng-show="
+		    			(session.user.authority == 'ROLE_COMISAR_GNM' && session.editableRow.eventCategoryPriority) || 
+		    			(session.user.authority == 'ROLE_ADMIN_GENERAL' && session.editableRow.eventCategoryPriority)">
+				    <div class="row">
+					    <div class="col-md-12">
+					    	<div class="event-box">
+							    <div class="select-form">
+								    <table class="table">
+									    <thead>
+											<tr>
+												<th>Utilizator</th>
+												<th>Camp</th>
+												<th>Valoare veche</th>
+												<th>Valoare noua</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="repeat-data done-{{todo.done}}" 
+												ng-repeat="items in formDropdownData.audit | orderBy:sortType:sortReverse | filter:searchDoc">
+													<td ng-bind="items.account"></td>
+													<td ng-bind="items.field"></td>
+													<td ng-bind="items.oldValue"></td>
+													<td ng-bind="items.newValue"></td>
+											</tr>
+										</tbody>
+									</table>
+							    </div>
+						    </div>
+						</div>
+					</div>
+			    </uib-tab>
+		  	</uib-tabset>
+	    </uib-accordion> 
+	</div>
+	<div class="col-md-12">
+		<div class="button-box">
+			<button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid" ng-hide="hidden">OK</button>
+			<button class="btn btn-default" ng-click="main.go({url:'events'})" ng-hide="hidden">Renunta</button>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Coments -->
+<div class="modal fade" id="addCommentModal" role="dialog">
+	<div class="modal-dialog">
+	<!-- Modal content-->
+		<div class="modal-content">
+			<form name="addNoteForm" ng-submit="addComentariu(addNoteForm,note);">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Adauga continut</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-actions">
+						<div class="input-append">
+							<input class="form-control" ng-model="note.comment" requierd min-length="3" placeholder="Add a note"></input>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" ng-disabled="addNoteForm.$invalid" class="btn btn-success">Add Note</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

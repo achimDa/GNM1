@@ -1,0 +1,45 @@
+<div class="events-tab">
+	<div class="col-md-12">
+		<div class="add-events">
+		    <form name="myForm">
+				<uib-accordion close-others="oneAtATime">
+				  <uib-tabset justified="true" class="event-tabs">
+				    <uib-tab heading="Date generale" class="tabs">
+						<div class="col-md-12">
+					   		<div class="event-box row">
+								<div class="select-form">
+								    <label class="label-form" for="mySelect">Denumire:</label>
+								    <input class="form-control" ng-model="itemObj.name" required/>
+						<!-- 		    <div class="input-help">
+								    <h4>Adauga denumire</h4>
+								    </div>
+ -->							    </div>
+							    <div class="select-form">
+								    <label class="label-form" for="mySelect">Descriere:</label>
+								    <input class="form-control" ng-model="itemObj.description" required/>
+<!-- 								    <div class="input-help">
+								    <h4>Adauga indicativ</h4>
+								    </div> -->
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form" for="mySelect">Prioritate:</label>
+								    <input class="form-control" type="number" min="0" ng-model="itemObj.priority" required/>
+								  <!--   <div class="input-help">
+								    <h4>Adauga indicativ</h4>
+								    </div> -->
+							    </div>
+					   		</div>
+					   	</div>
+					</uib-tab>
+				  </uib-tabset>
+				</uib-accordion>
+			</form>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="button-box">
+			<button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid">OK</button>
+			<button class="btn btn-default" ng-click="main.go({url:'administrare'})">Renunta</button>
+		</div>
+	</div>
+</div>

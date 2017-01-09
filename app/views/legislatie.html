@@ -1,0 +1,72 @@
+<div class="events-tab tabs-main">
+		<div class="col-md-12 add-events cat-event">
+		    <form name="myForm">
+				<uib-accordion close-others="oneAtATime">
+				  <uib-tabset justified="true" class="event-tabs">
+				    <uib-tab heading="General" class="tabs">
+						<div class="col-md-12">
+					   		<div class="event-box row laws">
+							    <div class="select-form">
+								    <label class="label-form" for="gen">Tip:</label>
+								    <select name="mySelect" 
+										id="mySelect"  
+										class="form-control custom-select1"
+										ng-options="option.name for option in formDropdownData.legislation track by option.id"
+										ng-model="itemObj.type" required>
+										<option value>-- Selecteaza --</option>
+					      			</select>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form" for="gen">Numar:</label>
+								    <input  class="form-control custom-select1" 
+										id="prioritate" 
+										type="text" 
+										ng-model="itemObj.number" 
+										ng-pattern="/[0-9]/" required/>
+							    </div>
+							    <div class="select-form data-picker dateStrap">
+								    <label for="mySelect" class="date-label-prim">Data intrare in vigoare:</label>
+
+								  	<!--   <input date-time min-date="minDate" ng-model="itemObj.enforcementStartDate" class="form-control custom-select1"/> -->
+
+									<!-- 	    <input type="text" class="form-control custom-select1" ng-model="itemObj.enforcementStartDate" name="date" bs-datepicker> -->
+
+								    <input type="text" class="form-control custom-select1" ng-model="itemObj.enforcementStartDate" bs-datepicker data-bs-show="itemObj.enforcementStartDate" required>
+
+					                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+							    </div>
+							    <div class="select-form data-picker dateStrap">
+								    <label for="mySelect" class="date-label-prim">Data iesire in vigoare:</label>
+								   	<!--  <input date-time min-date="minDate" ng-model="itemObj.enforcementEndDate" class="form-control custom-select1"/> -->
+
+								 	<!--   <input type="text" class="form-control custom-select1" ng-model="itemObj.enforcementStartDate" name="date2" bs-datepicker> -->
+
+								 	<input type="text" class="form-control custom-select1" ng-model="itemObj.enforcementEndDate" data-bs-show="itemObj.enforcementEndDate" bs-datepicker>
+
+					                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form" for="rol">Continut:</label>
+								    <textarea style="width: 587px" 
+										rows="10" 
+										name="comment" 
+										form="usrform" 
+										class="form-control" 
+										id="descriere" 
+										ng-model="itemObj.content" required>
+					    		  	</textarea>
+							    </div>
+					   		</div>
+					   	</div>
+					</uib-tab>
+				</uib-tabset>
+			</uib-accordion>
+		</form>
+	</div>
+	<div class="col-md-12">
+		<div class="button-box">
+			<button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid">OK</button>
+			<button class="btn btn-default" ng-click="main.go({url:'administrare'})">Renunta</button>
+		</div>
+	</div>
+</div>

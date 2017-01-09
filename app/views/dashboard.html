@@ -1,0 +1,67 @@
+<div class="container">
+<div class="row margin-dashboard dashboard-nav">
+	<div 
+		class="col-lg-3 col-md-4 col-sm-6 space-bottom-md"
+		ng-if="main.hasToRender(['ROLE_COMISAR_GNM', 'ROLE_COMISAR_JUDETEAN', 'ROLE_ADMIN_ARIE_PROTEJATA', 'ROLE_RANGER', 'ROLE_AUTORITATE', 'ROLE_ADMIN_GENERAL'])">
+		<a id="#events" class="nav-item" ng-href="#/events" role="button">
+			<div class="icon"><i class="fa fa-bell"></i></div>
+			<p class="text-button">Evenimente</p>
+		</a>
+	</div>
+	<div class="col-lg-3 col-md-4 col-sm-6 space-bottom-md" ng-if="main.hasToRender(['ROLE_COMISAR_GNM', 'ROLE_COMISAR_JUDETEAN', 'ROLE_ADMIN_ARIE_PROTEJATA', 'ROLE_AUTORITATE', 'ROLE_ADMIN_GENERAL', 'ROLE_ADMIN_LOCAL'])">
+		<a class="nav-item" ng-href="#/history-events" role="button">
+			<div class="icon"><i class="fa fa-history"></i></div>
+			<p class="text-button">Istoric evenimente</p>
+		</a>
+	</div>
+	<div class="col-lg-3 col-md-4 col-sm-6 space-bottom-md" ng-if="main.hasToRender(['ROLE_COMISAR_GNM', 'ROLE_COMISAR_JUDETEAN', 'ROLE_ADMIN_ARIE_PROTEJATA', 'ROLE_ADMIN_GENERAL'])">
+		<a class="nav-item" ng-href="#/rezolutii-notificari" role="button">
+			<div class="icon"><i class="fa fa-file"></i></div>
+			<p class="text-button">Rezolutii si notificari evenimente</p>
+		</a>
+	</div>
+	<div class="col-lg-3 col-md-4 col-sm-6 space-bottom-md" ng-if="main.hasToRender(['ROLE_COMISAR_GNM', 'ROLE_COMISAR_JUDETEAN', 'ROLE_ADMIN_ARIE_PROTEJATA', 'ROLE_RANGER', 'ROLE_AUTORITATE', 'ROLE_ADMIN_GENERAL'])">
+		<a class="nav-item" ng-href="#/coridoare-ecologice" role="button">
+			<div class="icon"><i class="fa fa-road"></i></div>
+			<p class="text-button">Coridoare ecologice</p>
+		</a>
+	</div>
+	<div class="col-lg-3 col-md-4 col-sm-6 space-bottom-md" ng-if="main.hasToRender(['ROLE_COMISAR_GNM', 'ROLE_COMISAR_JUDETEAN', 'ROLE_ADMIN_ARIE_PROTEJATA', 'ROLE_RANGER', 'ROLE_ADMIN_GENERAL'])">
+		<a class="nav-item" ng-href="#/monitorizare-trasee" role="button">
+			<div class="icon"><i class="fa fa-desktop"></i></div>
+			<p class="text-button">Monitorizare trasee terminale mobile</p>
+		</a>
+	</div>
+	<div class="col-lg-3 col-md-4 col-sm-6 space-bottom-md" ng-if="main.hasToRender(['ROLE_COMISAR_GNM', 'ROLE_COMISAR_JUDETEAN', 'ROLE_ADMIN_ARIE_PROTEJATA', 'ROLE_RANGER', 'ROLE_ADMIN_GENERAL', ROLE_ADMIN_LOCAL])">
+		<a class="nav-item" ng-href="#/jurnal-sincronizari" role="button">
+			<div class="icon"><i class="fa fa-book"></i></div>
+			<p class="text-button">Jurnal sincronizari terminale mobile</p>
+		</a>
+	</div>
+	<div class="col-lg-3 col-md-4 col-sm-6 space-bottom-md"
+		 ng-if="main.hasToRender(['ROLE_ADMIN_LOCAL'])">
+		<a class="nav-item" href="#/utilizatori" role="button">
+			<div class="icon"><i class="fa fa-users"></i></div>
+			<p class="text-button">Utilizatori</p>
+		</a>
+	</div>
+	<div class="col-lg-3 col-md-4 col-sm-6 space-bottom-md" ng-if="main.hasToRender(['ROLE_COMISAR_GNM','ROLE_ADMIN_ARIE_PROTEJATA'])">
+		<a class="nav-item" ng-href="#/regnul-animalia" role="button">
+			<div class="icon"><i class="fa fa-paw"></i></div>
+			<p class="text-button">Regnul Animalia</p>
+		</a>
+	</div>
+	<div class="col-lg-3 col-md-4 col-sm-6 space-bottom-md" ng-if="main.hasToRender(['ROLE_ADMIN_GENERAL'])">
+		<a class="nav-item" href="#/rapoarte" role="button">
+			<div class="icon"><i class="fa fa-file-text-o"></i></div>
+			<p class="text-button">Rapoarte</p>
+		</a>
+	</div>
+	<div class="col-lg-3 col-md-4 col-sm-6 space-bottom-md" ng-if="main.hasToRender(['ROLE_ADMIN_GENERAL'])">
+		<a class="nav-item" ng-href="#/administrare" role="button">
+			<div class="icon"><i class="fa fa-cogs"></i></div>
+			<p class="text-button">Administrare</p>
+		</a>
+	</div>
+</div>
+</div>

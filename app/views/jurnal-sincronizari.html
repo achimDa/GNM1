@@ -1,0 +1,120 @@
+<div class="jurnal-sincronizari">
+	<form name="myForm">
+	<div class="col-md-2">
+			<div class="search-box events-tab">
+		 	<p><b>Criterii de cautare pentru sesiuni de sincronizare</b></p>
+				<div class="select-form">
+				    <label for="mySelect" class="label-text">Administrator arie protejata:</label>
+				    <select 
+				    		name="mySelect" 
+				    		id="mySelect" 
+				    		class="form-control"
+				      		ng-options="option.name for option in formDropdownData.administrator track by option.id"
+				      		ng-change="dropRangers(itemObj)"
+	    					ng-model="itemObj.protectedAreaAdministratorId" required>
+						<option value>-- Selecteaza --</option>
+					</select>
+			    </div>
+			    <div class="select-form">
+			    	<label for="mySelect" class="label-text">Ranger:</label>
+				    <select 
+				    		name="mySelect" 
+				    		id="mySelect" 
+				    		class="form-control"
+				      		ng-options="option.firstName for option in formDropdownData.ranger track by option.id"
+	    					ng-model="itemObj.rangerId" required>
+						<option value>-- Selecteaza --</option>
+					</select>
+			    </div>
+			    <div class="select-form">
+				   	<label class="label-form">De la:</label>
+
+			   		<!-- <input date-time min-date="minDate" ng-model="itemObj.startDate" class="form-control date-sync"/> -->
+
+			   		<input type="text" class="form-control date-sync" ng-model="itemObj.startDate" data-bs-show="itemObj.startDate" bs-datepicker>
+
+	                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+			    </div><br>
+			    <div class="select-form">
+				   	<label class="label-form">Pana la:</label>
+
+				   <!-- 	<input date-time min-date="minDate" ng-model="itemObj.endDate" class="form-control date-sync"/> -->
+
+				   	<input type="text" class="form-control date-sync" ng-model="itemObj.endDate" data-bs-show="itemObj.endDate" bs-datepicker>
+
+	                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+			    </div><br>
+			    <div class="select-form">
+			    	<label class="label-form">Stare:</label>
+				    <select 
+				    		name="mySelect" 
+				    		id="mySelect" 
+				    		class="form-control"
+	    					ng-model="itemObj.synchronizationState">
+						<option value="">-- Selecteaza --</option>
+						<option value="SUCCES"> Succes </option>
+						<option value="INCOMPLETE"> Incomplet </option>
+						<option value="ERROR"> Eroare </option>
+					</select>
+			    </div>
+			    <div class="btn-over"><button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid">Cautare</button></div>
+			</div>
+		</div>
+		<div class="col-md-10">
+			<div class="search-box">
+				<p>Sesiuni de sincronizare:</p>
+				<div class="table-responsive table-events">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Nr Sesiune</th>
+								<th>Cod licenta</th>
+								<th>Data/Ora start</th>
+								<th>Data/Ora stop</th>
+								<th>Stare</th>
+								<th>Mesaj</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="repeat-data done-{{todo.done}}" 
+								ng-repeat="items in formDropdownData.syncro | orderBy:sortType:sortReverse | filter:searchDoc"
+								ng-class="{'marked': items.id == editableRow.id, 'disabledRow': items.active === false, 'enableRow': items.active === true}"
+								ng-click="markRow(items)"
+								style="font:smaller">
+									<td ng-bind="items.id"></td>
+									<td ng-bind="items.licenseCode"></td>
+									<td ng-bind="items.startSynchronization"></td>
+									<td ng-bind="items.stopSynchronization"></td>
+									<td ng-bind="items.synchronizationState"></td>
+									<td ng-bind="items.message"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>Sesiuni de sincronizare:</p>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th ng-repeat="headers in formDropdownData.headers"
+						   				ng-bind="headers"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="repeat-data done-{{todo.done}}" 
+								ng-repeat="items in formDropdownData.syncrosession | orderBy:sortType:sortReverse | filter:searchDoc"
+								style="font:smaller">
+									<!-- <td ng-bind="items.eventId"></td>
+									<td ng-bind="items.protectedAreaName"></td>
+									<td ng-bind="items.eventCategoryName"></td>
+									<td ng-bind="items.description"></td> -->
+									<td ng-repeat="item in items track by $index" ng-bind="item"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+

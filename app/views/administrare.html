@@ -1,0 +1,11 @@
+<div class="monitorizare-trasee">
+	<div class="col-md-2">
+		 <ng-include src="'views/navigator.tpl.html'"></ng-include>
+	</div>
+	<div class="col-md-10" ng-hide="isSettingsPage">
+		 <ng-include src="'views/administrare-tabel.tpl.html'"></ng-include>
+	</div>
+	<div class="col-md-10" ng-show="isSettingsPage">
+		 <ng-include src="'views/setari-generale.html'"></ng-include>
+	</div>
+</div>

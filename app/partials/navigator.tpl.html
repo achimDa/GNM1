@@ -1,0 +1,25 @@
+<ul class="list-group nav-navigation">
+  	<li class="list-group-item nav-section"
+  		 ng-repeat="group in navigatorConfig"
+  		 id="listmenu{{$index}}">
+	  	<h4 class="nav-section-title" ng-bind="::group.groupLabel"></h4>
+		<ul class="list-group nav-section-list">
+			<li ng-hide="settings"
+		  		class="list-group-item nav-section-item"
+		  		ng-repeat="item in group.groupLinks"
+		  		ng-class="{'selected': session.addLink.link == item.link}">
+				<span
+					ng-click="populateTabel(item)"
+					ng-bind="::item.label"
+					id="menu{{$index}}"></span>
+			</li>
+		</ul>
+	</li>
+	<li class="list-group-item nav-section">
+		<ul class="list-group nav-section-list">
+			<li class="list-group-item nav-section-item" ng-class="{'selected': setari === true}">
+				<span type="button" ng-click="populateTabel({isSettings: true})">Setari generale</span>
+			</li>
+		</ul>
+	</li>
+</ul>

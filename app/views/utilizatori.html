@@ -1,0 +1,168 @@
+<div class="col-md-12">
+	<div class="search-box">
+		<div class="buttonsDiv">
+			<a 
+				href="#/utilizator-nou?password=true" 
+				class="add-event export-list" 
+				ng-show="resetPassword">
+				<i class="fa fa-key"></i>
+				Reseteaza parola
+			</a>
+			
+			<a 
+				ng-click="deactiveRow(items)" 
+				class="add-event act-dez" 
+				ng-show="editableRow.active">
+				<i class="fa fa-toggle-off"></i>
+				Dezactiveaza
+			</a>
+			
+			<a 
+				ng-click="activeRow(items)" 
+				class="add-event act-dez" 
+				ng-show="editableRow.active == false">
+				<i class="fa fa-toggle-on"></i>
+				Activeaza
+			</a>
+			
+			<a 
+				ng-href="#/utilizator-existent?edit=true" 
+				ng-show="existUtil"
+				class="add-event">
+				<i class="fa fa-user"></i>
+				Aloca utilizator existent
+			</a>
+			
+			<a 
+				ng-href="#/utilizator-nou?create=true" 
+				ng-show="utilNew" 
+				class="add-event">
+				<i class="fa fa-user-plus"></i>
+				Aloca utilizator nou
+
+			</a>
+			<form class="form-search form-inline">
+		        <input type="text" class="search-query sInput" placeholder="Cautare dupa continut" ng-model="searchDoc" />
+		    </form>
+		</div>
+	    <div class="tableDiv">
+			<table class="table">
+			  <thead>
+					<tr>
+						<th>
+							<a href="" ng-click="sortType = 'license'; sortReverse = !sortReverse">Cod licenta
+					            <span ng-show="sortType == 'license' && !sortReverse" class="fa fa-caret-down"></span>
+					            <span ng-show="sortType == 'license' && sortReverse" class="fa fa-caret-up"></span>
+				            </a>
+						</th>
+						<th>
+							<a href="" ng-click="sortType = 'active'; sortReverse = !sortReverse">Activ
+					            <span ng-show="sortType == 'active' && !sortReverse" class="fa fa-caret-down"></span>
+					            <span ng-show="sortType == 'active' && sortReverse" class="fa fa-caret-up"></span>
+				            </a>
+						</th>
+						<th>
+							<a href="" ng-click="sortType = 'protectedAreaName'; sortReverse = !sortReverse">Arie protejata
+					            <span ng-show="sortType == 'protectedAreaName' && !sortReverse" class="fa fa-caret-down"></span>
+					            <span ng-show="sortType == 'protectedAreaName' && sortReverse" class="fa fa-caret-up"></span>
+				            </a>
+						</th>
+						<th>
+							<a href="" ng-click="sortType = 'webAccess'; sortReverse = !sortReverse">Acces web
+					            <span ng-show="sortType == 'webAccess' && !sortReverse" class="fa fa-caret-down"></span>
+					            <span ng-show="sortType == 'webAccess' && sortReverse" class="fa fa-caret-up"></span>
+				            </a>
+						</th>
+						<th>
+							<a href="" ng-click="sortType = 'mobileAccess'; sortReverse = !sortReverse">Acces mobil
+					            <span ng-show="sortType == 'mobileAccess' && !sortReverse" class="fa fa-caret-down"></span>
+					            <span ng-show="sortType == 'mobileAccess' && sortReverse" class="fa fa-caret-up"></span>
+				            </a>
+						</th>
+						<th>
+							<a href="" ng-click="sortType = 'firstName'; sortReverse = !sortReverse">Nume
+					            <span ng-show="sortType == 'firstName' && !sortReverse" class="fa fa-caret-down"></span>
+					            <span ng-show="sortType == 'firstName' && sortReverse" class="fa fa-caret-up"></span>
+				            </a>
+						</th>
+						<th>
+							<a href="" ng-click="sortType = 'lastName'; sortReverse = !sortReverse">Prenume
+					            <span ng-show="sortType == 'lastName' && !sortReverse" class="fa fa-caret-down"></span>
+					            <span ng-show="sortType == 'lastName' && sortReverse" class="fa fa-caret-up"></span>
+				            </a>
+						</th>
+						<th>
+							<a href="" ng-click="sortType = 'username'; sortReverse = !sortReverse">Utilizator
+					            <span ng-show="sortType == 'username' && !sortReverse" class="fa fa-caret-down"></span>
+					            <span ng-show="sortType == 'username' && sortReverse" class="fa fa-caret-up"></span>
+				            </a>
+						</th>
+						<th>
+							<a href="" ng-click="sortType = 'phone'; sortReverse = !sortReverse">Telefon
+					            <span ng-show="sortType == 'phone' && !sortReverse" class="fa fa-caret-down"></span>
+					            <span ng-show="sortType == 'phone' && sortReverse" class="fa fa-caret-up"></span>
+				            </a>
+						</th>
+						<th>
+							<a href="" ng-click="sortType = 'email'; sortReverse = !sortReverse">E-mail
+					            <span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
+					            <span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+				            </a>
+						</th>
+						<th>
+							<a href="" ng-click="sortType = 'dateOfBirth'; sortReverse = !sortReverse">Data nastere
+					            <span ng-show="sortType == 'dateOfBirth' && !sortReverse" class="fa fa-caret-down"></span>
+					            <span ng-show="sortType == 'dateOfBirth' && sortReverse" class="fa fa-caret-up"></span>
+				            </a>
+						</th>
+						<th>
+							<a href="" ng-click="sortType = 'gender'; sortReverse = !sortReverse">Gen
+					            <span ng-show="sortType == 'gender' && !sortReverse" class="fa fa-caret-down"></span>
+					            <span ng-show="sortType == 'gender' && sortReverse" class="fa fa-caret-up"></span>
+				            </a>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="repeat-data done-{{todo.done}}" 
+						ng-repeat="items in tabelData.items | orderBy:sortType:sortReverse | filter:searchDoc" 
+						ng-class="{'marked': items.licenseId == editableRow.licenseId, 'disabledRow': items.active === false, 'enableRow': items.active === true}"
+						ng-click="markRow(items)"
+						style="font:smaller">
+							<td ng-bind="items.license"></td>
+							<td class="forCheck">
+								<input type="checkbox"
+									   class="checkbox2" 
+									   ng-disabled="true"
+									   ng-checked="items.active"
+									   ng-model="items.active"/>
+						   	</td>
+							<td ng-bind="items.protectedAreaName"></td>
+							<td ng-bind="items.webAccess | YesNo"></td>
+							<td ng-bind="items.mobileAccess | YesNo"></td>
+							<td ng-bind="items.firstName"></td>
+							<td ng-bind="items.lastName"></td>
+							<td ng-bind="items.username"></td>
+							<td ng-bind="items.phone"></td>
+							<td ng-bind="items.email"></td>
+							<td ng-bind="items.dateOfBirth | date:DD.MM.YY"></td>
+							<td ng-bind="items.gender | MaleFemale"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+<!-- 		<uib-pagination 
+			total-items="totalItems" 
+			boundary-links="true"
+			ng-model="currentPage" 
+			ng-change="pageChanged()" 
+			class="pagination-md" 
+			items-per-page="itemsPerPage"
+			direction-links="true"
+			previous-text="&lsaquo;" 
+			next-text="&rsaquo;"
+			first-text="&lsaquo;&lsaquo;"
+			last-text="&rsaquo;&rsaquo;">
+		</uib-pagination> -->
+	</div>
+</div>

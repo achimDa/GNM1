@@ -1,0 +1,45 @@
+<div class="events-history" ng-controller="Datepicker">
+	<div class="events-tab">
+		<div class="col-md-8">
+			<div class="search-box">
+			<p>Selectati un eveniment pentru vizualizare pe harta:</p>
+				<div class="table-responsive">
+					<table class="table">
+					  <thead>
+							<tr>
+								<th>ID eveniment</th>
+								<th>Categorie eveniment</th>
+								<th>Data eveniment</th>
+								<th>Arie protejata</th>
+								<th>Notificat de</th>
+								<th>Notificat la</th>
+								<th>Notificat catre</th>
+								<th>Email notificare</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="repeat-data done-{{todo.done}}" 
+								ng-repeat="items in formDropdownData.history | orderBy:sortType:sortReverse | filter:searchDoc"
+								ng-click="markEvent(items)" 
+								ng-class="{'marked': items.id == editableRow.id, 'disabledRow': items.active === false, 'enableRow': items.active === true}">
+									<td ng-bind="items.eventId"></td>
+									<td ng-bind="items.eventCategoryName"></td>
+									<td ng-bind="items.eventDate"></td>
+									<td ng-bind="items.protectedAreaName"></td>
+									<td ng-bind="items.accountNotification"></td>
+									<td ng-bind="items.notificationDate"></td>
+									<td ng-bind="items.organisationNotificaton"></td>
+									<td ng-bind="items.notificatoinEmail"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="search-box">
+				<leaflet id="mapO" lf-center="center" width="100%" markers="markers" defaults="defaults"></leaflet>
+			</div>
+		</div>
+	</div>
+</div>

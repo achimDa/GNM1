@@ -1,0 +1,226 @@
+<div class="events-wrap">
+	<div class="col-md-4">
+		<div class="search-box">
+			<span class="title">Criterii de cautare</span>
+			 <div class="row">
+				<div class="col-md-6 area-margin">
+		            <span class="from-to">De la:</span>
+					<div class="dateIn">
+			            <!-- <input date-time min-date="minDate" max-date="maxDate" ng-model="itemObj.startDate" class="form-control myDate"/> -->
+
+			            <input type="text" class="form-control pickerClass" ng-model="itemObj.startDate" data-bs-show="itemObj.startDate" bs-datepicker>
+
+		                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+			        </div>
+		        </div>
+		        <div class="col-md-6 area-margin">
+			      	<span class="from-to">Pana la:</span>
+			      	<div class="dateIn">
+			            <!-- <input date-time min-date="minDate" max-date="maxDate" ng-model="itemObj.endDate" class="form-control myDate"/> -->
+
+			            <input type="text" class="form-control pickerClass" ng-model="itemObj.endDate" data-bs-show="itemObj.endDate" bs-datepicker>
+			            
+		                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+		        	</div>
+		        </div>
+				<!-- Tables -->
+				<div class="col-md-12 area-margin">
+					<span class="title-cat">Administrator arie protejata</span>
+						<div class="scroll-vert">
+							 <span ng-repeat="item in formDropdownData.administrators">
+						      <label class="checkbox">
+						        <input type="checkbox" ng-model="item.isChecked"/>
+						        {{item.name}}
+						      </label>
+						    </span>
+						    <!-- <pre ng-bind="selection.ids | json"></pre>    -->
+					    </div>
+				</div>
+				<div class="col-md-12 area-margin">
+					<span class="title-cat">Arie protejata</span>
+						<div class="scroll-vert">
+							 <span ng-repeat="item in formDropdownData.custody">
+						      <label class="checkbox">
+						        <input type="checkbox" ng-model="item.isChecked" ng-disabled="!item.active"/>
+						        {{item.name}}
+						      </label>
+					    </span>
+				    <!-- <pre ng-bind="selection.ids | json"></pre>    -->
+				    </div>
+				</div>
+				<div class="col-md-12 area-margin">
+					<span class="title-cat">Ranger</span>
+						<div class="scroll-vert">
+							 <span ng-repeat="item in formDropdownData.ranger">
+						      <label class="checkbox">
+						        <input type="checkbox" ng-model="item.isChecked"/>
+						        {{item.userName}}
+						      </label>
+					    </span>
+				    <!-- <pre ng-bind="selection.ids | json"></pre>    -->
+				    </div>
+				</div>
+				<div class="col-md-12 area-margin" ng-show="session.user.authority == 'ROLE_ADMIN_GENERAL' || session.user.authority == 'ROLE_COMISAR_GNM'">
+					<span class="title-cat">Stare evenimente</span>
+						<div class="scroll-vert">
+							 <span ng-repeat="item in categories.stare">
+						      <label class="checkbox">
+						        <input type="checkbox" ng-model="item.isChecked"/>
+						        {{item.name}}
+						      </label>
+					    </span>
+				    <!-- <pre ng-bind="selection.ids | json"></pre>    -->
+				    </div>
+				</div>
+				<div class="col-md-12 area-margin">
+					<span class="title-cat">Categorii evenimente</span>
+						<div class="scroll-vert">
+							<span ng-repeat="item in formDropdownData.eventcategory">
+						      <label class="checkbox">
+						        <input type="checkbox" ng-model="item.isChecked" ng-disabled="!item.active"/>
+						        {{item.name}}
+						      </label>
+						    </span>
+				    <!-- <pre ng-bind="selection.ids | json"></pre>    -->
+				    </div>
+				</div>
+				<div class="col-md-6 area-margin">
+					<span class="title-cat">Categorii animale</span>
+						<div class="scroll-vert">
+							 <span ng-repeat="item in formDropdownData.category">
+							      <label class="checkbox">
+							        <input type="checkbox" ng-model="item.isChecked"/>
+							        {{item.name}}
+							      </label>
+						    </span>
+				    <!-- <pre ng-bind="selection.ids | json"></pre>    -->
+				    </div>
+				</div>
+				<div class="col-md-6 area-margin">
+					<span class="title-cat">Dimensiune animale</span>
+						<div class="scroll-vert">
+							 <span ng-repeat="item in formDropdownData.size">
+							      <label class="checkbox">
+							        <input type="checkbox" ng-model="item.isChecked"/>
+							        {{item.name}}
+							      </label>
+						    </span>
+				    <!-- <pre ng-bind="selection.ids | json"></pre>    -->
+				    </div>
+				</div>
+				<div class="col-md-6 area-margin">
+					<span class="title-cat">Specii</span>
+						<div class="scroll-vert">
+							 <span ng-repeat="item in formDropdownData.species">
+						      	<label class="checkbox">
+							        <input type="checkbox" ng-model="item.isChecked"/>
+							        {{item.name}}
+						     </label>
+					    </span>
+				    <!-- <pre ng-bind="selection.ids | json"></pre>    -->
+				    </div>
+				</div>
+				<div class="col-md-6 area-margin">
+					<span class="title-cat">Animal</span>
+					<div class="scroll-vert">
+				      	<span ng-repeat="item in formDropdownData.animale">
+					      	<label class="checkbox" >
+						        <input type="checkbox" ng-model="item.isChecked" ng-disabled="item.active"/>
+					        	<span ng-bind="item.name"></span>
+						     </label>
+					    </span>
+				    </div>
+					</div>
+				<div class="col-md-6 area-margin">
+					<span class="title-cat">Migrator</span>
+					<div class="scroll-vert">
+					 	<span ng-repeat="category in categories.migrator">
+					        <label class="checkbox">
+						        <input type="checkbox" ng-model="category.isChecked"/>
+						        {{category.name}}
+					     	</label>
+			    		</span>
+			    	</div>
+				</div>
+				<div class="col-md-6 area-margin">
+					<button type="button" class="btn btn-default" ng-click="searchEvent()">Cautare</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="search-box">
+			<div class="row">
+			<div class="col-xs-12">
+				<a  ng-hide="session.user.authority == 'ROLE_AUTORITATE'"
+					ng-href="#/add-event"  
+					class="add-event" 
+					ng-click="clean()">
+					<i class="fa fa-plus"></i>
+					Adauga eveniment
+				</a>
+			</div>
+			<div class="col-xs-12">
+				<div class="results-table">
+					<p>Rezultatul cautarii de evenimente conform criteriilor de cautare:</p>
+					<div class="table-events">
+						<div class="table-responsive">
+							<table class="table table-Forevents">
+							    <thead>
+									<tr>
+										<th>
+											<input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" />
+											Afiseaza pe harta
+										</th>
+										<th>Id eveniment</th>
+										<th>Categorie eveniment</th>
+										<th>Data eveniment</th>
+										<th>Arie protejata</th>
+										<th>Categorii animale</th>
+										<th>Dimensiune animale</th>
+										<th>Specii</th>
+										<th>Animal</th>
+										<th>Migrator</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="repeat-data done-{{todo.done}}" 
+										ng-repeat="items in formDropdownData.events | orderBy:sortType:sortReverse | filter:searchDoc"
+										ng-class="{'marked': items.eventId == editableRow.eventId, 'disabledRow': items.active === false, 'enableRow': items.active === true}"
+										style="font:smaller">
+											<td class="forCheck">
+												<input type="checkbox"
+													   class="checkbox2" 
+													   ng-model="items.selected"
+													   ng-click="showMarkers(items)"/>
+										   	</td>
+											<td ng-bind="items.eventId"></td>
+											<td ng-bind="items.eventCategory"></td>
+											<td ng-bind="items.eventDate"></td>
+											<td ng-bind="items.protectedArea"></td>
+											<td ng-bind="items.animalCategory"></td>
+											<td ng-bind="items.animalSize"></td>
+											<td ng-bind="items.animalSpecies"></td>
+											<td ng-bind="items.animalName"></td>
+											<td ng-bind="items.migrating | YesNo2"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<a  class="add-event export-list" 
+						ng-href="{{ fileUrl }}" download="file.csv" ng-click="downloadCsv()"
+						ng-show="
+			    			session.user.authority == 'ROLE_COMISAR_GNM' || 
+			    			session.user.authority == 'ROLE_COMISAR_JUDETEAN' || 
+			    			session.user.authority == 'ROLE_ADMIN_ARIE_PROTEJATA' || 
+			    			session.user.authority == 'ROLE_AUTORITATE' || 
+			    			session.user.authority == 'ROLE_ADMIN_GENERAL'"><i class="fa fa-plus"></i>Exporta lista</a>
+				</div>
+				<!--<leaflet id="mapO" center="center" width="100%" markers="markers" layers="layers" defaults="defaults" controls="controls"></leaflet>-->
+				<leaflet  center="center" markers="markers" height="480px" width="100%" controls="controls" defaults="defaults"></leaflet>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>

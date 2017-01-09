@@ -1,0 +1,166 @@
+<div class="events-tab">
+	<div class="col-md-12">
+		<div class="eco-type">
+		    <form name="myForm">
+				<uib-accordion close-others="oneAtATime">
+				  <uib-tabset justified="true" class="event-tabs">
+				    <uib-tab heading="General" class="tabs" ng-click="showStuff()">
+						<div class="col-md-5">
+					   		<div class="event-box row">
+								<div class="select-form">
+								    <label class="label-form">Denumire coridor ecologic:</label>
+								    <input class="form-control" ng-model="itemObj.name" required/>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form">Culoare coridor ecologic:</label>
+								    <input color-picker="project.colorGreen"
+								    	   required
+								    	   ng-model="itemObj.color" required/>
+								    <div class="input-help">
+								      <h4>Adauga culoare</h4>
+								    </div>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form">Categorie animal:</label>
+								    <select name="mySelect" 
+								    		class="form-control mySelect" 
+								    		ng-options="option.name for option in formDropdownData.category track by option.id"
+								    		ng-model="itemObj.animalCategory"
+								    		required>
+								    		<option value>-- Selecteaza --</option>
+						    		</select>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form">Dimensiune animal:</label>
+								    <select name="mySelect" id="mySelect" 
+								    		class="form-control"
+								      		ng-options="option.name for option in formDropdownData.size track by option.id" 
+								      		ng-model="itemObj.animalSize">
+								      		<option value>-- Selecteaza --</option>
+						      		</select>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form" for="mySelect">Animal migrator:</label>
+								    <select name="mySelect" id="mySelect" 
+								    		class="form-control"
+								    		ng-options="option.name for option in formDropdownData.migrator track by option.id"
+								      		ng-model="itemObj.migrate">
+								      		<option value>-- Selecteaza --</option>
+						      		</select>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form">Specie animal:</label>
+								    <select name="mySelect" id="mySelect" 
+								    		class="form-control"
+								      		ng-options="option.name for option in formDropdownData.species track by option.id"
+								      		ng-model="itemObj.animalSpecies">
+								      		<option value>-- Selecteaza --</option>
+						      		</select>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form">Denumire animal:</label>
+								    <select name="mySelect" id="mySelect" 
+								    		class="form-control"
+								      		ng-options="option as option.name disable when (option.active == true) for option in formDropdownData.animale track by option.id"
+								    		ng-model="itemObj.animal">
+								    		<option value ng-disabled="true">-- Selecteaza --</option>
+						    		</select>
+							    </div>
+					   		</div>
+					   	</div>
+						<div class="col-md-7">
+					   		<div class="event-box row">
+								<div class="select-form">
+								    <label class="label-form2">Descriere:</label>
+								    <textarea class="form-control form-l" rows="17" ng-model="itemObj.description" required>
+								    </textarea>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form2">Metodologie:</label>
+								    <!-- <select name="mySelect" id="mySelect" 
+								    		class="form-control form-l"
+								      		ng-options="option.title for option in formDropdownData.methodologies track by option.id" 
+								      		options-disabled="option.active for option in formDropdownData.methodologies"
+								    		ng-model="itemObj.methodology">
+						    		</select> -->
+								    <select name="mySelect" id="mySelect" 
+								    		class="form-control form-l"
+								      		ng-options="option as option.title disable when (option.active == true) for option in formDropdownData.methodologies track by option.id"
+								    		ng-model="itemObj.methodology">
+						    		<option value ng-disabled="true">-- Selecteaza --</option>
+						    		</select>
+							    </div>
+					   		</div>
+					   	</div>
+					</uib-tab>
+					<uib-tab heading="Permisiuni" class="tabs" disable="!itemObj.id" ng-click="hideStuff()">
+					   	<div class="col-md-12 map-zone">
+					   		<div class="event-box row">
+						   	<p>Specificati permisiunile pe coridorul ecologic disponibile pentru fiecare rol:</p>
+						   	<ul>
+						   		<li>Vizualizare = utilizatorii din acest rol vizualizeaza coridoare de acest tip;</li>
+						   		<li>Adaugare = utilizatorii din acest rol adauga coridoare de acest tip;</li>
+						   		<li>Validare = utilizatorii din acest rol valideaza coridoare de acest tip;</li>
+						   		<li>Activare/Dezactivare = utilizatorii din acest rol activeaza/dezactiveaza coridoare de acest tip;</li>
+						   	</ul>
+						   	<br>
+						   	<table class="table table-rols">
+						   		<thead>
+						   			<tr>
+						   				<th class="roles-eco">Rol</th>
+						   				<th>Vizualizare</th>
+						   				<th>Adaugare</th>
+						   				<th>Validare</th>
+						   				<th>Activare/Dezactivare</th>
+						   			</tr>
+						   		</thead>
+						   		<tbody>
+									<tr class="repeat-data done-{{todo.done}}" 
+										ng-repeat="items in formDropdownData.typepermissions">
+											<td ng-bind="items.role"></td>
+											<td class="forCheck">
+												<input type="checkbox"
+													   class="checkbox2" 
+													   ng-click="visualization(items)"
+													   ng-checked="items.canView"
+													   ng-model="items.canView"/>
+										   	</td>
+											<td class="forCheck">
+												<input type="checkbox"
+													   class="checkbox2" 
+													   ng-click="add(items)"
+													   ng-checked="items.canAdd"
+													   ng-model="items.canAdd"/>
+										   	</td>
+											<td class="forCheck">
+												<input type="checkbox"
+													   class="checkbox2" 
+													   ng-click="validation(items)"
+													   ng-checked="items.canValidate"
+													   ng-model="items.canValidate"/>
+										   	</td>
+											<td class="forCheck">
+												<input type="checkbox"
+													   class="checkbox2" 
+													   ng-click="enable(items)"
+													   ng-checked="items.canEnable"
+													   ng-model="items.canEnable"/>
+										   	</td>
+									</tr>
+								</tbody>
+						   	</table>
+					    	</div>
+					   	</div>
+					</uib-tab>
+				  </uib-tabset>
+				</uib-accordion>
+			</form>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="button-box">
+			<button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid" ng-hide="hidden">OK</button>
+			<button class="btn btn-default" ng-click="main.go({url:'administrare'})" ng-hide="hidden">Renunta</button>
+		</div>
+	</div>
+</div>

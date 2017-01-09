@@ -1,0 +1,604 @@
+<div class="events-tab arie-protejata">
+    <div class="col-md-12">
+        <form name="myForm">
+            <uib-accordion close-others="oneAtATime">
+                <uib-tabset justified="true" class="event-tabs">
+                    <uib-tab heading="General" class="tabs" ng-click="showStuff()">
+                        <div class="col-md-12">
+                        	<div class="search-box" style="border: 0; margin-bottom: -40px;">
+                        		<p>Primul pas in definirea unei arii protejate presupune localizarea acesteia pe harta. Acest lucru se face prin selectia hartii in care se afla aria protejata urmata de selectia ariei protejate:</p>
+                        	</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="event-box">
+                                    <fieldset class="search-box">
+                                        <legend>Localizare arie protejata</legend>
+                                        <div class="">
+                                            <div class="select-form">
+                                                <label for="mySelect">Alege harta in care se afla aria protejata:</label>
+                                                <select name="mySelect" id="mySelect" class="form-control" ng-options="option.name for option in formDropdownData.protectedAreaMaps track by option.id" ng-model="itemObj.maparea"
+                                                ng-change="assignedArea(itemObj)">
+                                                <option value>-- Selecteaza --</option>
+                                                </select>
+                                            </div>
+                                            <div class="select-form">
+                                                <label for="mySelect">Alege aria protejata corespunzatoare:</label>
+                                                <select 
+                                            		name="mySelect" 
+                                            		id="mySelect" 
+                                            		class="form-control" 
+                                            		ng-change="assignedGeometry(itemObj)"
+                                            		ng-model="itemObj.area" 
+                                            		ng-options="option for option in formDropdownData.area">
+                                                <option value>-- Selecteaza --</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </fieldset><br>
+                                    <div class="">
+                                        <span>Dupa efectuarea localizarii ariei protejate specificati denumirea si tipul acesteia. In mod implicit denumirea este cea din harta</span><br><br>
+                                        <div class="select-form">
+                                            <label for="mySelect">Denumire:</label>
+                                            <input class="form-control" ng-model="itemObj.name"></input>
+                                        </div>
+                                        <div class="select-form">
+                                            <label for="mySelect">Tip:</label>
+
+                                            <select 
+                                            		name="mySelect" 
+                                            		class="form-control" 
+
+                                            		ng-options="option as option.name disable when (option.active == true) for option in formDropdownData.protectedareatypes track by option.id"
+
+                                            		ng-model="itemObj.protectedAreaType">
+                                                <option value ng-disabled="true">-- Selecteaza --</option>
+                                            </select>
+
+                                        </div>
+                                        <fieldset class="search-box">
+                                            <legend>Delegare validare evenimente</legend>
+                                            <div class="select-form">
+                                                <p>In cazul in care doriti sa delegati validarea evenimentelor din aceasta arie protejata catre un alt comisariat judetean specificati comisariatul judetean dorit:</p>
+                                                <select name="mySelect" class="form-control" ng-options="option.name for option in formDropdownData.commissariats track by option.id" ng-model="itemObj.validationOrganisation">
+                                                    <option value>-- Selecteaza --</option>
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset class="search-box">
+                                            <legend>Delegare notificare evenimente</legend>
+                                            <div class="select-form">
+                                                <p>In cazul in care doriti sa delegati notificarea evenimentelor din aceasta arie protejata catre un alt comisariat judetean specificati comisariatul judetean dorit:</p>
+                                                <select name="mySelect" class="form-control" ng-options="option.name for option in formDropdownData.commissariats track by option.id" ng-model="itemObj.notificationOrganisation">
+                                                    <option value>-- Selecteaza --</option>
+                                                </select>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+	                        <div class="event-box">
+	                            <leaflet class="mapO" lf-center="center" width="100%" layers="layers" defaults="defaults">
+	                            </leaflet>
+	                        </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab heading="Sedii" disable="!itemObj.id" ng-click="hideStuff()">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="event-box">
+                                    <div class="add-stuff">
+                                        <a 
+											ng-click="deactiveResidence(items)" 
+											class="add-event act-dez" 
+											ng-show="editableResidence.active">
+											<i class="fa fa-toggle-off"></i>
+											Activeaza
+										</a>
+										
+										<a 
+											ng-click="activeResidence(items)" 
+											class="add-event act-dez" 
+											ng-hide="editableResidence.active">
+											<i class="fa fa-toggle-on"></i>
+											Dezactiveaza
+										</a>
+
+                                        <a ng-href="#/sediu-arie-protejata?edit=true" class="add-event"><i class="fa fa-plus"></i>Modifica</a>
+                                        <a ng-href="#/sediu-arie-protejata" class="add-event"><i class="fa fa-plus"></i>Adauga</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="event-box">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Inactiv</th>
+                                                <th>Tip</th>
+                                                <th>Tara</th>
+                                                <th>Judet</th>
+                                                <th>Localitate/Sector</th>
+                                                <th>Strada</th>
+                                                <th>Numar</th>
+                                                <th>Bloc</th>
+                                                <th>Scara</th>
+                                                <th>Ap.</th>
+                                                <th>Cod postal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+											<tr class="repeat-data done-{{todo.done}}" 
+												ng-repeat="items in formDropdownData.residences | orderBy:sortType:sortReverse | filter:searchDoc"
+												ng-class="{'marked': items.id == editableResidence.id, 'disabledRow': items.active === true, 'enableRow': items.active === false}"
+												ng-click="markResidence(items)"
+												style="font:smaller">
+													<td class="forCheck">
+														<input type="checkbox"
+															   class="checkbox2" 
+															   ng-disabled="true"
+															   ng-checked="items.active"
+															   ng-model="items.active"/>
+												   	</td>
+													<td ng-bind="items.residenceType"></td>
+													<td ng-bind="items.address.city.county.country.name"></td>
+													<td ng-bind="items.address.city.county.name"></td>
+													<td ng-bind="items.address.city.name"></td>
+													<td ng-bind="items.address.street"></td>
+													<td ng-bind="items.address.number"></td>
+													<td ng-bind="items.address.block"></td>
+													<td ng-bind="items.address.floor"></td>
+													<td ng-bind="items.address.apartament"></td>
+													<td ng-bind="items.address.postalCode"></td>
+											</tr>
+										</tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab heading="Responsabilitati" disable="!itemObj.id" ng-click="hideStuff()">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="event-box">
+                                    <div class="add-stuff">
+                                        <a 
+											ng-click="deactiveRow(items)"  
+											class="add-event" 
+											ng-show="editableContact.active">
+											<i class="fa fa-toggle-off"></i>
+											Activeaza
+										</a>
+										
+										<a 
+											ng-click="activeRow(items)" 
+											ng-hide="editableContact.active" 
+											class="add-event">
+											<i class="fa fa-toggle-on"></i>
+											Dezactiveaza
+										</a>
+
+										<a 
+											ng-click="changeState('adauga')" 
+											data-toggle="modal" 
+											data-target="#addCommentModal" 
+											class="custom-file-upload" 
+											id="addComment">
+											<i class="fa fa-plus"></i>
+											Adauga
+										</a>
+										
+										<a 
+											ng-show="editableContact" 
+											ng-click="changeState('modifica')" 
+											data-toggle="modal" 
+											data-target="#addCommentModal" 
+											class="custom-file-upload" 
+											id="addComment">
+											<i class="fa fa-pencil"></i>
+											Modifica
+										</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="event-box">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Inactiv</th>
+                                                <th>Denumire</th>
+                                                <th>Descriere</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+								    		<tr class="repeat-data" 
+								    			ng-click="markRow2(note)" 
+								    			ng-repeat="note in notes" 
+								    			ng-class="{'marked': note.id == editableContact.id, 'disabledRow': note.active === true, 'enableRow': note.active === false}">
+								    			<td><input type="checkbox"
+										   					class="checkbox2" 
+										   					ng-checked="note.active"
+										   					ng-model="note.active">
+										   		</td>
+												<td><span ng-bind="note.name"></span></td>
+												<td><span ng-bind="note.description"></span></td>
+								    		</tr>
+							    		</tbody>
+                                    </table>
+                                    <div ng-bind="hello.title"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab heading="Informatii custodie" disable="!itemObj.id" ng-click="showStuff()">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="event-box">
+                                    <div class="select-form">
+                                        <form name="myForm">
+                                            <label for="mySelect">Denumire:</label>
+                                            <select name="mySelect" class="form-control nameInfo" ng-options="option.name for option in formDropdownData.custody track by option.id" ng-model="itemObj.custodyOrganisation">
+                                                <option value>-- Selecteaza --</option>
+                                            </select>
+                                        </form>
+                                    </div>
+                                    <fieldset class="search-box">
+                                        <legend>Perioada contractuala</legend>
+                                        <div class="col-md-6">
+                                            <span class="from-to">De la:</span>
+
+                                            <!-- <input date-time max-date="minDate" ng-model="itemObj.startDate" class="form-control custom-date"> -->
+
+                                            <input type="text" class="form-control custom-date" ng-model="itemObj.startDate" data-bs-show="itemObj.startDate" bs-datepicker>
+                                            
+                                            <button type="button" class="btn btn-default">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <span class="from-to">Pana la:</span>
+
+                                           <!--  <input date-time max-date="minDate" ng-model="itemObj.endDate" class="form-control custom-date"> -->
+
+                                            <input type="text" class="form-control custom-date" ng-model="itemObj.endDate" data-bs-show="itemObj.endDate" bs-datepicker>
+
+                                            <button type="button" class="btn btn-default">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                            </button>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="button-box">
+                                    <a 
+										ng-click="changeState('adauga')" 
+										data-toggle="modal" 
+										data-target="#addDocModal" 
+										class="custom-file-upload" 
+										id="addDoc">
+										<i class="fa fa-plus"></i>
+										Adauga
+									</a>
+									
+									<a 
+										ng-show="editableDoc" 
+										ng-click="changeState('modifica')" 
+										data-toggle="modal" 
+										data-target="#addDocModal" 
+										class="custom-file-upload" 
+										id="addDoc">
+										<i class="fa fa-pencil"></i>
+										Modifica
+									</a>
+
+									<a 
+										ng-show="editableDoc" 
+										ng-click="deleteDocument()" 
+										class="custom-file-upload" 
+										id="addDoc">
+										<i class="fa fa-trash"></i>
+										Sterge
+									</a>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="event-box event-box-table">
+                                    <p><b>Documente prezentate</b>
+                                    </p>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Tip document</th>
+                                                <th>Descriere</th>
+                                                <th>Document</th>
+                                                <th>Actiune</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="repeat-data" 
+								    			ng-click="Doc(note)" 
+								    			ng-repeat="note in documents" 
+								    			ng-class="{'marked': note.id == editableDoc.id, 'editableDoc': note.active === false, 'enableRow': note.active === true}">
+												<td><span ng-bind="note.type"></span></td>
+												<td><span ng-bind="note.description"></span></td>
+												<td><a ng-bind="note.fileName" href="{{urlDownload + note.mediaId}}"
+							    				>
+						    					</a>
+                                                <td>
+                                                    <button  type="button"
+                                                    		 ng-hide="note.fileName === null"
+                                                    		 class="btn btn-danger btn-xs pull-right"
+                                                    		 ng-click="delMedia(note)">
+				                                        <span class="glyphicon glyphicon-trash"></span> Elimina
+				                                    </button>
+	                                                <button 
+								      					class="btn btn-default btn-xs pull-right" 
+								      					ng-show="note.fileName == null && note.id == editableDoc.id"
+								      					type="file"
+							      					 	ngf-select="sendFile(doc.fileMedia)"
+														ng-model="doc.fileMedia"
+														accept="*"
+													 	multiple>
+								      					<i class="fa fa-plus"></i>
+								      					Ataseaza
+							      					</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div ng-bind="hello.title"></div>
+                                    <!-- {{hello.title}} -->
+                                </div>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab heading="Restrictii" disable="!itemObj.id" ng-click="hideStuff()">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="event-box">
+                                    <div class="add-stuff">
+                                        <a 
+											ng-click="deactiveRestrictions(items)"  
+											class="add-event" 
+											ng-show="editableRestrictions.active">
+											<i class="fa fa-toggle-off"></i>
+											Dezactiveaza
+										</a>
+										
+										<a 
+											ng-click="activeRestrictions(items)" 
+											ng-hide="editableRestrictions.active" 
+											class="add-event">
+											<i class="fa fa-toggle-on"></i>
+											Activeaza
+										</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="event-box">
+                                    <!-- <ul class="thumbnails">
+							        <li ng-repeat="note in notes">
+							            <span ng-bind="note.id"></span>
+							            <span ng-bind="note.title"></span>
+							            <span ng-bind="note.data |  date:'dd MMM yyyy'"></span>
+							            <span ng-bind="note.user"></span>
+							        </li>
+							    </ul> -->
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Activ</th>
+                                                <th>Denumire</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+								    		<tr class="repeat-data done-{{todo.done}}" 
+												ng-repeat="items in formDropdownData.restrictions | orderBy:sortType:sortReverse | filter:searchDoc"
+												ng-class="{'marked': items.id == editableRestrictions.id, 'disabledRow': items.active === false, 'enableRow': items.active === true}"
+												ng-click="markRestrictions(items)"
+												style="font:smaller">
+								    			<td><input type="checkbox"
+										   					class="checkbox2" 
+										   					ng-checked="items.active"
+										   					ng-disabled="true"
+										   					ng-model="items.active">
+										   		</td>
+												<td><span ng-bind="items.nume"></span></td>
+								    		</tr>
+							    		</tbody>
+                                    </table>
+                                    <div ng-bind="hello.title"></div>
+                                    <!-- {{hello.title}} -->
+                                </div>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab heading="Informatii aditionale" disable="!itemObj.id" ng-click="hideStuff()">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="event-box">
+                                    <div class="add-stuff">
+                                        <a 
+											ng-click="deactiveInfo(items)"  
+											class="add-event" 
+											ng-show="editableInfo.active">
+											<i class="fa fa-toggle-off"></i>
+											Dezactiveaza
+										</a>
+										
+										<a 
+											ng-click="activeInfo(items)" 
+											ng-hide="editableInfo.active" 
+											class="add-event">
+											<i class="fa fa-toggle-on"></i>
+											Activeaza
+										</a>
+
+										<a 
+											ng-click="changeState('adauga')" 
+											data-toggle="modal" 
+											data-target="#addInfoModal" 
+											class="custom-file-upload" 
+											ng-show="editableInfo.active == null || editableInfo.active == false"
+											id="addInfo">
+											<i class="fa fa-plus"></i>
+											Adauga
+										</a>
+										
+										<a 
+											ng-show="editableInfo.description != null" 
+											ng-click="changeState('modifica')" 
+											data-toggle="modal" 
+											data-target="#addInfoModal" 
+											class="custom-file-upload" 
+											id="addInfo">
+											<i class="fa fa-pencil"></i>
+											Modifica
+										</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="event-box">
+                                   <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Activ</th>
+                                                <th>Denumire</th>
+                                                <th>Descriere</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+								    		<tr class="repeat-data" 
+								    			ng-click="Info(note)" 
+								    			ng-repeat="note in infos" 
+								    			ng-class="{'marked': note.additionalInfoId == editableInfo.additionalInfoId, 'disabledRow': note.active === null || note.active === false, 'enableRow': note.active === true}">
+								    			<td><input type="checkbox"
+										   					class="checkbox2" 
+										   					ng-checked="note.active"
+										   					ng-model="note.active">
+										   		</td>
+												<td><span ng-bind="note.name"></span></td>
+												<td><span ng-bind="note.description"></span></td>
+								    		</tr>
+							    		</tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+            </uib-accordion>
+        </form>
+    </div>
+    <div class="col-md-12">
+        <div class="button-box">
+            <button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid" ng-hide="hidden">OK</button>
+            <!-- <button class="btn btn-default" ng-click="goBack(path,link)">Renunta</button> -->
+            <button type="button" ng-click="main.go({url:'administrare'})" class="btn btn-default" ng-hide="hidden">Renunta</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addCommentModal" role="dialog">
+	<div class="modal-dialog">
+	<!-- Modal content-->
+		<div class="modal-content">
+			<form name="addNoteForm" ng-submit="addComment(addNoteForm,note);">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Responsabilitati</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-actions">
+						<div class="input-append">
+							<input class="form-control comForm" ng-model="note.name" placeholder="Denumire *"/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-actions">
+						<div class="input-append">
+							<input class="form-control comForm" ng-model="note.description" placeholder="Desciere *"/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" 
+							ng-disabled="addNoteForm.$invalid" 
+							class="btn btn-success">OK
+					</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">RENUNTA</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="addInfoModal" role="dialog">
+	<div class="modal-dialog">
+	<!-- Modal content-->
+		<div class="modal-content">
+			<form name="addInfoForm" ng-submit="addInfo(addInfoForm,note);">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Descriere</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-actions">
+						<div class="input-append">
+							<input class="form-control comForm" ng-model="note.description" placeholder="Descriere *"/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" 
+							ng-disabled="addInfoForm.$invalid" 
+							class="btn btn-success">OK
+					</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">RENUNTA</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="addDocModal" role="dialog">
+	<div class="modal-dialog">
+	<!-- Modal content-->
+		<div class="modal-content">
+			<form name="addDocForm" ng-submit="addDoc(addDocForm,note);">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Documente prezentate</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-actions">
+						<div class="input-append">
+							<input class="form-control comForm" ng-model="note.type" placeholder="Tip document *"/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-actions">
+						<div class="input-append">
+							<input class="form-control comForm" ng-model="note.description" placeholder="Desciere *"/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" 
+							ng-disabled="addDocForm.$invalid" 
+							class="btn btn-success">OK
+					</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">RENUNTA</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

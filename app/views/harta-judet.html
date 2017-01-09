@@ -1,0 +1,38 @@
+<div class="add-element">
+	<div class="col-md-12">
+		<div class="col-md-12 search-box">
+			<form name="myForm">
+				<div class="select-form">
+				    <label class="label-form" for="mySelect">Fisier:</label>
+	    			<input type="text" ng-disabled="true" class="form-control fc-zip" placeholder="{{files[0].name || session.editableRow.zipName}}" style="width: 20%!important;">
+				    <button 
+      					class="btn btn-default" 
+      					type="file"
+  					 	ngf-select="sendFile(doc.fileMedia)"
+						ng-model="doc.fileMedia"
+						accept="/*"
+						multiple>
+      					<i class="fa fa-plus"></i>
+      					Incarca
+  					</button>
+			    </div>
+
+			    <label class="label-form" for="mySelect">Harta:</label> <br> <br>
+		   		<leaflet 
+   					lf-center="romania" 
+   					height="600px"
+   					width="100%" 
+   					geojson="geojson"
+					geojson-nested="true"
+   					defaults="defaults">
+				</leaflet>
+			</form>
+		</div>
+	</div>
+	<!-- <div class="col-md-12">
+		<div class="button-box">
+			<button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid">OK</button>
+			<button class="btn btn-default" ng-click="main.go({url:'administrare'})">Renunta</button>
+		</div>
+	</div> -->
+</div>

@@ -1,0 +1,37 @@
+<div class="events-tab tabs-main">
+	<div class="">
+		<div class="col-md-12 add-events">
+		    <form name="myForm">
+				<uib-accordion close-others="oneAtATime">
+				  <uib-tabset justified="true" class="event-tabs">
+				    <uib-tab heading="Date generale - Utilizator: {{session.editableRow.username || session.editableLicenses.username}}" class="tabs">
+						<div class="col-md-5">
+					   		<div class="event-box row">
+							    <div class="select-form">
+							     	<label class="label-form">Parola actuala*:</label>
+							     	<input ng-model="itemObj.oldPassword" class="form-control" type="password" name="password"/>
+							    </div>
+							    <div class="select-form">
+							     	<label class="label-form">Parola noua*:</label>
+							     	<input ng-model="itemObj.password" class="form-control" type="password" name="password" data-ng-class="{'ng-invalid':myForm.confirmPassword.$error.match}"/>
+						     	</div>
+						     	<div class="select-form">
+							        <label class="label-form">Reintrodu parola noua*:</label>
+							        <input ng-model="itemObj.newPassword" class="form-control "type="password" data-match="itemObj.password" name="confirmPassword"/>
+							        <div class="notmatch" data-ng-show="myForm.confirmPassword.$error.match">*Nu se potrivesc!</div>
+						        </div>
+						    </div>
+				   		</div>
+					</uib-tab>
+				  </uib-tabset>
+				</uib-accordion>
+			</form>
+		</div>
+	</div>
+		<div class="col-md-12">
+		<div class="button-box">
+			<button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid">OK</button>
+			<button class="btn btn-default" ng-click="back()">Renunta</button>
+		</div>
+	</div>
+</div>

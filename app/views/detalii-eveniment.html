@@ -1,0 +1,225 @@
+<div class="search-box reports">
+		<div class="event-box box-padding">
+    		<form name="myForm">
+			    <fieldset class="search-box">
+			   		<legend><b>Completati conditiile de filtrare inainte de a rula raportul</b></legend>
+			   		<div class="row">
+				      	<div class="col-md-5">
+				      		<div class="row">
+
+					      		<div class="col-md-12 area-margin">
+									<span class="title-cat">Categorii evenimente</span>
+									<div class="scroll-vert">
+										<span ng-repeat="item in formDropdownData.eventCategory">
+									      	<label class="checkbox">
+									        	<input type="checkbox" ng-model="item.isChecked" ng-disabled="!item.active"/>
+									        	{{item.name}}
+									      	</label>
+									    </span>
+								    </div>
+								</div>
+
+								<div class="col-md-12 area-margin">
+									<span class="title-cat">Arie protejata</span>
+									<div class="scroll-vert">
+									 	<span ng-repeat="item in formDropdownData.protectedArea">
+									      	<label class="checkbox">
+									        	<input type="checkbox" ng-model="item.isChecked"/>
+									        	{{item.name}}
+									      	</label>
+									    </span>
+								    </div>
+								</div>
+
+								<div class="col-md-12 area-margin">
+									<span class="title-cat">Categorii animale</span>
+									<div class="scroll-vert">
+									 	<span ng-repeat="item in formDropdownData.animalCategory">
+									      	<label class="checkbox">
+									        	<input type="checkbox" ng-model="item.isChecked"/>
+									        	{{item.name}}
+									      	</label>
+									    </span>
+								    </div>
+								</div>
+
+								<div class="col-md-12 area-margin">
+									<span class="title-cat">Specii</span>
+									<div class="scroll-vert">
+									 	<span ng-repeat="item in formDropdownData.animalSpecies">
+									      	<label class="checkbox">
+									        	<input type="checkbox" ng-model="item.isChecked"/>
+									        	{{item.name}}
+									      	</label>
+									    </span>
+								    </div>
+								</div>
+
+					      	</div>
+					      	<div class="row" style="diplay:flex">
+					      		<div class="col-md-2">
+						      		<label class="label-form" for="numar">De la:</label>
+					      		</div>
+					      		<div class="col-md-4">
+							      	<input  type="text" 
+							      			class="form-control picker-date" 
+							      			ng-model="raportObj.startDate" 
+							      			data-bs-show="raportObj.startDate" 
+							      			bs-datepicker>
+						      		<span class="input-group-btn">
+								        <label class="btn btn-default btn-datePicker" for="sentDate">
+								        <i class="glyphicon glyphicon-calendar"></i></label>
+								    </span>
+					      		</div>
+					      		
+					      		<div class="col-md-2">
+						      		<label class="label-form2" for="numar" style="text-align:center">pana la:</label>
+								</div>
+					      		<div class="col-md-4">
+							      	<input  type="text" 
+							      			class="form-control picker-date" 
+							      			ng-model="raportObj.endDate" 
+							      			data-bs-show="raportObj.endDate" 
+							      			bs-datepicker>
+								        <label class="btn btn-default btn-datePicker" for="sentDate">
+								        <i class="glyphicon glyphicon-calendar"></i></label>
+								    </span>
+							    </div>
+						    </div>
+				      	</div>
+			
+				      	<div class="col-md-5">
+							<div class="col-md-12 area-margin">
+								<span class="title-cat">Dimensiune animale</span>
+								<div class="scroll-vert">
+								 	<span ng-repeat="item in formDropdownData.animalSize">
+								      	<label class="checkbox">
+								        	<input type="checkbox" ng-model="item.isChecked"/>
+								        	{{item.name}}
+								      	</label>
+								    </span>
+							    </div>
+							</div>
+
+							<div class="col-md-12 area-margin">
+								<span class="title-cat">Animal</span>
+								<div class="scroll-vert">
+								 	<span ng-repeat="item in formDropdownData.animal">
+								      	<label class="checkbox">
+								        	<input type="checkbox" ng-model="item.isChecked"/>
+								        	{{item.name}}
+								      	</label>
+								    </span>
+							    </div>
+							</div>
+
+							<div class="col-md-12 area-margin">
+								<label for="">Stare eveniment</label>
+						    	<select type="text"
+						   				ng-model="raportObj.type"
+						   				class="form-control actTip">
+						      		<option value>-- Selecteaza --</option>
+						      		<option value="PENDING">Asteapta rezolutie</option>
+						      		<option value="VALID">Validat</option>
+						      		<option value="INVALID">Invalidat</option>
+						      	</select>
+							</div>
+				      	</div>
+				      	<div class="col-md-2">
+					      	<div class="pull-right">
+				      			<div class="col-md-12">
+						      		<button 
+						      				type="button" 
+						      				ng-click="runRaport(raportObj)" 
+						      				class="btn add-event export-list" 
+						      				ng-disabled="myForm.$invalid">
+												<i class="fa fa-arrow-right"></i>
+												Ruleaza raport
+									</button>
+								</div>
+				      			<div class="col-md-12">
+						      		<button
+						      				type="button"
+							      			ng-click="downloadRaport(raportObj,'raportPdf')" 
+											class=" btn add-event export-list" 
+											ng-disabled="myForm.$invalid">
+												<i class="fa fa-file-pdf-o"></i>
+												Exporta in format PDF
+									</button>
+								</div>
+<!-- 
+				      			<div class="col-md-12">
+						      		<button 
+											type="button"
+						      				ng-click="downloadRaport(raportObj,'raportCsv')" 
+						      				class="btn add-event export-list" 
+						      				ng-disabled="myForm.$invalid">
+												<i class="fa fa-file-o"></i>
+												Exporta in format CSV
+									</button>
+								</div> -->
+							</div>
+				      	</div>
+			      	</div>
+			    </fieldset>
+			</form>
+		   <div class="row">
+		   		<div class="col-md-12 img-container">
+		   			<div class="col-md-3"><img src="images/minister.png" class="tmp-img1"></div>
+		   			<div class="col-md-3"><img src="images/logo.png" class="tmp-img"></div>
+		   			<div class="col-md-3"><img src="images/comp.png" class="tmp-img"></div>
+		   			<div class="col-md-3"><img src="images/eea.jpg" class="tmp-img"></div>
+		   		</div>
+		   		<div class="col-md-12">
+		   			<h1 style="text-align:center">Detalii eveniment</h1>
+		   		</div>
+		   </div>
+		   <div class="row">
+		   		<div class="col-md-12">
+		   			<div class="tableDiv">
+						<table 
+								object-table 
+						       	data="tabelData" 
+						       	display="15" 
+						       	headers="Categorie eveniment, Data/ora, Creat de/Creat la, Validat de, Validat la, Categorie animal, Animal, Dimensiune animale, Specie animal, Descriere, Latitudine, Longitudine, Arie protejata, Rezolutie, Comentarii"
+						       	fields="eventCategory, createdDate, createdBy, validatedBy, validationDate, animalCategory, animal, animalSize, animalSpecies, description, latitude, longitude, protectedArea, resolution, comments"
+						       	sorting="compound"
+						       	paging="true"
+						       	search="false"
+						       	editable="false">
+						       	<tbody>
+									<tr>
+										<td ng-bind="item.eventCategory"></td>
+										<td ng-bind="item.createdDate | date: 'dd-MM-yyyy'"></td>
+										<td ng-bind="item.createdBy"></td>
+										<td ng-bind="item.validatedBy"></td>
+										<td ng-bind="item.validationDate"></td>
+										<td ng-bind="item.animalCategory"></td>
+										<td ng-bind="item.animal"></td>
+										<td ng-bind="item.animalSize"></td>
+										<td ng-bind="item.animalSpecies"></td>
+										<td ng-bind="item.description"></td>
+										<td ng-bind="item.latitude"></td>
+										<td ng-bind="item.longitude"></td>
+										<td ng-bind="item.protectedArea"></td>
+										<td ng-bind="item.resolution"></td>
+										<td ng-bind="item.comments"></td>
+									</tr>
+								</tbody>
+				        </table>
+		   		</div>
+		   </div>
+<!-- 		   <div class="">
+		   		<div class="col-md-12">
+		   			<br><br>
+					<p>Titlu raport</p>
+					<p>Tiparit de</p>
+					<p>Denumire proiect</p>
+					<p>Text copyright</p>
+					<p class="pull-right">Pagina 8 din 10</p>
+		   		</div>
+		   </div> -->
+		</div>
+	
+</div>
+

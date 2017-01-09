@@ -1,0 +1,119 @@
+<div class="coridoare-ecologice">
+	<form name="myForm">
+		<div class="col-md-2">
+			<div class="search-box events-tab">
+		 		<b>Criterii de cautare</b>
+				<p>Selectati un tip de coridor ecologic utilizand criteriile de filtrare de mai jos:</p>
+				<div class="select-form">
+				    <label for="mySelect">Categorie animal:</label>
+				    <select name="mySelect" 
+				    		id="mySelect" 
+				    		class="form-control"
+				     		ng-options="option.name for option in formDropdownData.animalcategorie"
+				    		ng-change="animalSearch()"
+				    		ng-model="itemObj.animalCategoryId">
+				    		<option value>-- Selecteaza --</option>
+		    		</select>
+			    </div>
+			    <div class="select-form">
+				    <label for="mySelect">Dimensiune animal:</label>
+				    <select name="mySelect" 
+				    		id="mySelect" 
+				    		class="form-control"
+				      		ng-change="animalSearch()"
+				      		ng-options="option.name for option in formDropdownData.size" 
+	      					ng-model="itemObj.animalSizeId">
+				      		<option value>-- Selecteaza --</option>
+		      		</select>
+			    </div>
+			    <div class="select-form">
+				    <label class="checkbox migration">
+					        <input type="checkbox" ng-model="itemObj.migrating">
+					        Animal migrator
+			      	</label>
+		      	</div>
+			    <div class="select-form">
+				    <label for="mySelect">Specie animal:</label>
+				    <select name="mySelect" 
+				    		id="mySelect" 
+				    		class="form-control"
+				      		ng-options="option.name for option in formDropdownData.species"
+				      		ng-change="animalSearch()"
+	      					ng-model="itemObj.animalSpecieId">
+				      		<option value>-- Selecteaza --</option>
+		      		</select>
+			    </div>
+			    <div class="select-form">
+				    <label for="mySelect">Denumire animal:</label>
+				    <select name="mySelect" 
+				    		id="mySelect" 
+				    		class="form-control"
+
+				      		ng-options="option as option.name disable when (option.active == false) for option in formDropdownData.animals"
+
+	    					ng-model="itemObj.animalId">
+				    		<option value ng-disabled="true">-- Selecteaza --</option>
+		    		</select>
+			    </div>
+			    <div class="box">
+				    <span class="title-cat">Tip coridor ecologic</span>
+					<div class="scroll-vert">
+						<span ng-repeat="item in formDropdownData.ecocorridortype track by item.id">
+					      <label class="checkbox">
+					        <!-- <input type="checkbox" ng-model="itemObj.ecoCorridorTypeId"/> -->
+					        <input type="checkbox" ng-model="item.isChecked"/>
+					        {{item.name}}
+					      </label>
+					    </span>
+					    <!-- <pre ng-bind="selection.ids | json"></pre>    -->
+				    </div>
+			    </div>
+			    <div class="box">
+			    <span class="title-cat">Stare coridor ecologic</span>
+				<div class="scroll-vert">
+					 <span ng-repeat="item in categories.stare2 track by item.name">
+				      <label class="checkbox">
+				        <input type="checkbox" ng-model="item.isChecked"/>
+				        {{item.name}}
+				      </label>
+				    </span>
+				    <!-- <pre ng-bind="selection.ids | json"></pre>    -->
+			    </div>
+			    </div>
+			    <button class="btn btn-default" ng-click="searchCEco()">Cautare</button>
+			</div>
+		</div>
+		<div class="col-md-10">
+			<div class="search-box">
+				<a  ng-hide="!clickCoridor.type"
+					ng-href="#/editare-coridor-ecologic?edit=true" 
+					ng-show="
+			    			session.user.authority == 'ROLE_COMISAR_GNM' || 
+			    			session.user.authority == 'ROLE_ADMIN_ARIE_PROTEJATA' || 
+			    			session.user.authority == 'ROLE_ADMIN_GENERAL'"
+					class="add-event" 
+					id="mod-event">
+					<i class="fa fa-plus"></i>
+					Modifica coridor ecologic - {{coridors}}
+				</a>
+				<a 
+					ng-href="#/editare-coridor-ecologic" 
+					ng-show="
+			    			session.user.authority == 'ROLE_COMISAR_GNM' || 
+			    			session.user.authority == 'ROLE_ADMIN_ARIE_PROTEJATA' || 
+			    			session.user.authority == 'ROLE_ADMIN_GENERAL'" 
+	    			id="add-event"
+	    			ng-click="clean()" 
+	    			class="add-event">
+	    			<i class="fa fa-plus"></i>
+	    			Adauga coridor ecologic
+    			</a>
+				<leaflet id="mapO" lf-center="center" width="100%" layers="layers" defaults="defaults"></leaflet>
+			</div>
+			<br>
+			<!-- <pre ng-show="coridors" class="corridors-pre">coridoare: {{coridors}}</pre> -->
+			<br>
+		</div>
+	</form>
+</div>
+

@@ -1,0 +1,205 @@
+<div class="events-tab tabs-main">
+		<div class="col-md-12 add-events cat-event">
+		    <form name="myForm">
+				<uib-accordion close-others="oneAtATime">
+				  <uib-tabset justified="true" class="event-tabs">
+				    <uib-tab heading="General" class="tabs" ng-click="hideStuff()">
+						<div class="col-md-5">
+					   		<div class="event-box row">
+								<div class="select-form">
+								    <label class="label-form" for="item_name">Denumire:</label>
+								    <input type="text" ng-model="itemObj.name" class="form-control" id="item.denumire" required/>
+							    </div>
+							    <div class="check-form">
+								   	<label class="checkbox">
+								        <input type="checkbox" id="info" ng-model="itemObj.animalInfo">
+								        Contine informatii despre animale 
+						      		</label>
+								   	<label class="checkbox">
+								        <input type="checkbox" id="coridoareecologice" ng-model="itemObj.ecoCorridorInfo">
+								        Utilizat in definirea coridoarelor ecologice
+						      		</label>
+							    </div>
+							    <div class="form-group">
+								    <p>Specificati simbolul asociat acestei categorii</p> 
+
+								    <ui-iconpicker id="simbol" groups="gnmIconset" ng-model="itemObj.symbol" required></ui-iconpicker>
+
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form" for="gen">Prioritate:</label>
+								    <input class="form-control custom-select1" id="prioritate" type="text" ng-model="itemObj.priority" ng-pattern="/[0-9]/" required/>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form" for="rol">Desciere:</label>
+								    <textarea style="width: 587px" rows="7" name="comment" form="usrform" class="form-control" id="descriere" ng-model="itemObj.description" required></textarea>
+								    <!-- <div class="input-help i-h2">
+								      <h4>Adauga o denumire</h4>
+								    </div> -->
+							    </div>
+					   		</div>
+					   	</div>
+					</uib-tab>
+					<uib-tab heading="Permisiuni" class="tabs" disable="!itemObj.id" ng-click="hideStuff2()">
+					   	<div class="col-md-12">
+					   		<div class="event-box row">
+						      	<p class="titleP">Specificati permisiunile pe categoria de eveniment disponibil pentru fiecare rol:</p>
+						      	 <table class="table">
+								    <thead>
+										<tr>
+											<th>Rol</th>
+											<th>Vizualizare</th>
+											<th>Inregistrare</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="repeat-data done-{{todo.done}}" 
+											ng-repeat="items in formDropdownData.permissions | orderBy:sortType:sortReverse | filter:searchDoc">
+												<td ng-bind="items.role"></td>
+												<td class="forCheck">
+													<input type="checkbox"
+														   class="checkbox2" 
+														   ng-click="visualization(items)"
+														   ng-checked="items.canView"
+														   ng-model="items.canView"/>
+											   	</td>
+												<td class="forCheck">
+													<input type="checkbox"
+														   class="checkbox2" 
+														   ng-click="register(items)"
+														   ng-checked="items.canAdd"
+														   ng-model="items.canAdd"/>
+											   	</td>
+										</tr>
+									</tbody>
+								</table>
+					    	</div>
+					   	</div>
+					</uib-tab>
+					<uib-tab heading="Indicator de performanta" class="tabs" disable="!itemObj.id" ng-click="hideStuff1()">
+					   	<div class="col-md-12">
+					   		<div class="event-box row">
+						      	<p class="titleP">Specificati intervalele pentru stabilirea indicatorului de performanta. In functie de acestea indicatorul de performanta va fi prezentat in rapoarte utilizand culoarea din dreptul sau:</p>
+						      	<div class="select-form flex">
+								    <label class="label-form" for="gen">Intre:</label>
+								    <input class="form-control custom-select1" type="text" ng-pattern="/[0-9]/" ng-model="indicatorObj.firstCollorMin"/>
+								    <label class="label-form" for="gen">aparitii si:</label>
+								    <input class="form-control custom-select1" type="text" ng-pattern="/[0-9]/" ng-model="indicatorObj.firstCollorMax"/>
+								    <label class="label-form2" for="gen">afiseaza culoarea:</label>
+								    <input color-picker="project.colorRed" ng-model="indicatorObj.firstCollor"/>
+						         	<!-- <input id="whizz" name="whizz" type="color" ng-model="itemObj.color" required /> -->
+							    </div>
+						      	<div class="select-form flex">
+								    <label class="label-form" for="gen">Intre:</label>
+								    <input class="form-control custom-select1" ng-pattern="/[0-9]/" ng-model="indicatorObj.secondCollorMin"/>
+								    <label class="label-form" for="gen">aparitii si:</label>
+								    <input class="form-control custom-select1" ng-pattern="/[0-9]/" ng-model="indicatorObj.secondCollorMax"/>
+								    <label class="label-form2" for="gen">afiseaza culoarea:</label>
+								    <input color-picker="project.colorYellow" ng-model="indicatorObj.secondCollor">
+							    </div>
+						      	<div class="select-form flex">
+								    <label class="label-form" for="gen">Intre:</label>
+								    <input class="form-control custom-select1" ng-pattern="/[0-9]/" ng-model="indicatorObj.thirdCollorMin"/>
+								    <label class="label-form" for="gen">aparitii si:</label>
+								    <input class="form-control custom-select1" ng-pattern="/[0-9]/" ng-model="indicatorObj.thirdCollorMax"/>
+								    <label class="label-form2" for="gen">afiseaza culoarea:</label>
+								    <input color-picker="project.colorGreen" ng-model="indicatorObj.thirdCollor">
+							    </div>
+					    	</div>
+					   	</div>
+					</uib-tab>
+					<uib-tab heading="Legislatie" class="tabs" disable="!itemObj.id" ng-click="hideStuff2()">
+					   	<div class="col-md-12">
+					   		<div class="event-box row">
+						      	<p class="titleP">Specificati legislatia in vigoare aplicabila pentru categoria de eveniment curenta:</p>
+						      	<table class="table">
+						    	  <thead>
+							    		<tr>
+							    			<th>
+							    				Activ
+							    			</th>
+							    			<th>
+							    				Tip
+							    			</th>
+							    			<th>
+							    				Numar
+							    			</th>
+							    			<th>
+							    				Continut
+							    			</th>
+							    		</tr>
+						    		</thead>
+						    		<tbody>
+						    			<tr 
+						    			ng-repeat="items in formDropdownData.legislations">
+							    			<td>
+							    				<input type="checkbox"
+														   class="checkbox2" 
+														   ng-click="legislations(items)"
+														   ng-checked="items.active"
+														   ng-model="items.active"/>
+							    			</td>
+							    			<td ng-bind="items.type"></td>
+							    			<td ng-bind="items.number"></td>
+							    			<td ng-bind="items.content"></td>
+						    			</tr>
+						    		</tbody>
+						    	</table>
+					    	</div>
+					   	</div>
+					</uib-tab>
+					<uib-tab heading="Reglementari" class="tabs" disable="!itemObj.id" ng-click="hideStuff2()">
+					   	<div class="col-md-12">
+					   		<div class="event-box row">
+						      	<p class="titleP">Specificati reglementarile in vigoare aplicabile pentru categoria de eveniment curenta:</p>
+						      	<table class="table">
+						    	  <thead>
+							    		<tr>
+							    			<th>
+							    				Activ
+							    			</th>
+							    			<th>
+							    				Tip
+							    			</th>
+							    			<th>
+							    				Numar
+							    			</th>
+							    			<th>
+							    				Titlu
+							    			</th>
+							    			<th>
+							    				Continut
+							    			</th>
+							    		</tr>
+						    		</thead>
+						    		<tbody>
+						    			<tr ng-repeat="items in formDropdownData.reglementations">
+						    				<td>
+							    				<input type="checkbox"
+														   class="checkbox2" 
+														   ng-click="regulations(items)"
+														   ng-checked="items.active"
+														   ng-model="items.active"/>
+							    			</td>
+							    			<td ng-bind="items.type"></td>
+							    			<td ng-bind="items.number"></td>
+							    			<td ng-bind="items.title"></td>
+							    			<td ng-bind="items.content"></td>
+						    			</tr>
+						    		</tbody>
+						    	</table>
+					    	</div>
+					   	</div>
+					</uib-tab>
+				  </uib-tabset>
+				</uib-accordion>
+			</form>
+		</div>
+	<div class="col-md-12">
+		<div class="button-box">
+			<button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid" ng-hide="hiddenOk">OK</button>
+			<button class="btn btn-default" ng-click="saveIdicators(indicatorObj)" ng-hide="hiddenIndicators">OK</button>
+			<button class="btn btn-default" ng-click="main.go({url:'administrare'})" ng-hide="hiddenBack">Renunta</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,542 @@
+<div class="events-tab comisariat">
+		<div class="col-md-12">
+		    <form name="myForm">
+				<uib-accordion close-others="oneAtATime">
+				  <uib-tabset justified="true" class="event-tabs">
+				    <uib-tab heading="Date generale" class="tabs" ng-click="showStuff()">
+					    <div class="col-md-12">
+					    	<div class="event-box row">
+						    	<div class="col-md-6">
+							    	<fieldset class="search-box top-box">
+							    		<legend><b>Identificare</b></legend>
+									    <div class="select-form">
+										    <label class="label-form" for="mySelect">Denumire *:</label>
+										    <input 	class="form-control name"
+										    	   	ng-model="itemObj.name" 
+										    	   	required/>
+										    <select name="mySelect1" 
+										    		class="form-control custom-select1"
+										    		ng-options="option.name for option in formDropdownData.juridic track by option.id"
+							    					ng-model="itemObj.legalEntityType" required>
+					    					<option value>-- Selecteaza --</option>
+					    					</select>
+									    </div>
+									    <div class="select-form">
+										    <label class="label-form" for="mySelect">Atribut fiscal *:</label>
+										    <select name="mySelect1" 
+										    		class="form-control custom-select1"
+										    		ng-model="itemObj.fiscalAttribute"
+										    		value="RO" required
+										    		>
+					    					<option value>-- Selecteaza --</option>
+											<option value="RO">RO</option>
+										    </select>
+										    <span for="mySelect" class="cui">CUI *:</span>
+										    <input class="form-control name"
+										    	   ng-model="itemObj.uniqueIdentificationCode" required/>
+									    </div>
+							            <div class="select-form">
+									    	<label class="label-form" for="mySelect">Data infiintarii *:</label>
+									    	
+									    	<!-- <input date-time max-date="minDate" ng-model="itemObj.registrationDate" class="form-control custom-select1" required> -->
+
+									    	<input type="text" class="form-control custom-select1" ng-model="itemObj.registrationDate" data-bs-show="itemObj.registrationDate" bs-datepicker required>
+
+										    <button type="button" class="btn btn-default">
+							              		<i class="glyphicon glyphicon-calendar"></i>
+							              	</button>
+
+							              	<!-- <ng-datepicker ng-model="itemObj.dateOfEstablishment" class="datepicker" format="YYYY-MM-DD" required>
+							              	</ng-datepicker>
+							              	<button type="button" class="btn btn-default">
+							              		<i class="glyphicon glyphicon-calendar"></i>
+							              	</button> -->
+							            </div>
+							            <div class="select-form">
+									    	<label class="label-form" for="mySelect">Capital social *:</label>
+										    <input class="form-control name" maxlength="10"
+										    	   ng-model="itemObj.jointStock" required/>
+										    <select name="mySelect1" 
+										    		class="form-control custom-select1"
+										    		value="RON"
+										    		ng-model="itemObj.jointStockCurrency
+										    		" required>
+					    					<option value>-- Selecteaza --</option>
+											<option value="RON">RON</option>
+								    		</select>
+										</div>
+									</fieldset>
+								</div>
+								<div class="col-md-6">
+							    	<fieldset class="search-box top-box">
+										<legend><b>Activitate</b></legend>
+							            <div class="select-form">
+									    	<label class="label-form" for="mySelect">Cod CAEN *:</label>
+										    <select name="mySelect1" 
+										    		class="form-control custom-select1"
+										    		ng-options="option as option.caenCode disable when (option.active == true) for option in formDropdownData.caen track by option.id"
+
+							    					ng-model="itemObj.caenCode" required>
+					    					<option value>-- Selecteaza --</option>
+					    					</select>
+							            </div>
+							            <div class="select-form">
+									    	<label class="label-form" for="mySelect">Descriere CAEN:</label>
+										    <textarea class="form-control caen" rows="6"
+										    		  ng-model="itemObj.caenCode.caenDescription" 
+										    		  disabled>
+							    		  	</textarea>
+							            </div>
+									</fieldset>
+								</div>
+								<div class="col-md-12">
+							    	<fieldset class="search-box">
+										<legend><b>Unitatea emitenta</b></legend>
+										 <div class="select-form">
+									    	<label class="label-form" for="mySelect">Denumire *:</label>
+										    <select name="mySelect1" 
+										    		class="form-control custom-select1"
+										    		ng-options="option.name for option in formDropdownData.certificat track by option.id"
+							    					ng-model="itemObj.issuingUnit" required>
+					    					<option value>-- Selecteaza --</option>
+					    					</select>
+										    <label class="label-form nr-reg" for="mySelect">Nr. inregistrare *:</label>
+										    <input class="form-control box" ng-model="itemObj.registrationCode" required/>
+							            </div>
+									</fieldset>
+							    </div>
+								<div class="col-md-12">
+							    	<fieldset class="search-box">
+										<legend><b>Sediul social</b></legend>
+										<div class="select-form">
+									    	<label class="label-form2" for="mySelect">Tara *:</label>
+										    <select name="mySelect1" 
+										    		class="form-control custom-select1"
+										    		ng-change="populateJudete(itemObj.socialAddress.countryId, 'judetHQ')"
+										    		ng-options="option.name for option in formDropdownData.tara track by option.id"
+							    					ng-model="itemObj.socialAddress.countryId" required>
+					    					<option value>-- Selecteaza --</option>
+								    		</select>
+										    <label class="label-form2" for="mySelect">Judet *:</label>
+										    <select name="mySelect2" 
+										    		class="form-control custom-select1"
+										    		ng-change="populateLocalitati(itemObj.socialAddress.countyId, 'localitateHQ')"
+										    		ng-options="option.name for option in formDropdownData.judetHQ track by option.id"
+							    					ng-model="itemObj.socialAddress.countyId" required>
+					    					<option value>-- Selecteaza --</option>
+								    		</select> 
+										    <label class="label-form2" for="mySelect">Localitate *:</label>
+										    <select name="mySelect3" 
+										    		class="form-control custom-select1"
+										    		ng-options="option.name for option in formDropdownData.localitateHQ track by option.id"
+							    					ng-model="itemObj.socialAddress.city" required>
+					    					<option value>-- Selecteaza --</option>
+								    		</select>
+
+										    <label class="label-form2" for="mySelect">Strada *:</label>
+										    <input class="form-control box"
+										    	   ng-model="itemObj.socialAddress.street" required/>
+
+										    <label class="label-form2" for="mySelect">Numar *:</label>
+										    <input class="form-control custom-select3"
+										    	   ng-model="itemObj.socialAddress.number" required/>
+							            </div>
+										<div class="select-form">
+									    	<label class="label-form2" for="mySelect">Bloc:</label>
+										    <input class="form-control custom-select1"
+										    	   ng-model="itemObj.socialAddress.block"/>
+
+										    <label class="label-form2" for="mySelect">Scara:</label>
+										    <input class="form-control custom-select1"
+										    	   ng-model="itemObj.socialAddress.entrance"/>
+
+										    <label class="label-form2" for="mySelect">Etaj:</label>
+										    <input class="form-control custom-select1"
+										    	   ng-model="itemObj.socialAddress.floor"/>
+
+										    <label class="label-form2" for="mySelect">Apt:</label>
+										    <input class="form-control custom-select3"
+										           ng-model="itemObj.socialAddress.apartament"/>
+							            </div>
+										<div class="select-form">
+											<label class="label-form2" for="mySelect">Cod postal:</label>
+										    <input class="form-control custom-select1"
+										    	   ng-model="itemObj.socialAddress.postalCode"/>
+										</div>
+									</fieldset>
+							    </div>
+								<div class="col-md-12">
+							    	<fieldset class="search-box">
+										<legend><b>Adresa de lucru</b></legend>
+										<div class="select-form">
+									    	<label class="label-form2" for="mySelect">Tara *:</label>
+										    <select name="mySelect1" 
+										    		class="form-control custom-select1"
+										    		ng-change="populateJudete(itemObj.workAddress.countryId, 'judetPL')"
+										    		ng-options="option.name for option in formDropdownData.tara track by option.id"
+							    					ng-model="itemObj.workAddress.countryId" required>
+					    					<option value>-- Selecteaza --</option>
+								    		</select>
+										    <label class="label-form2" for="mySelect">Judet *:</label>
+										    <select name="mySelect2" 
+										    		class="form-control custom-select1"
+										    		ng-change="populateLocalitati(itemObj.workAddress.countyId, 'localitatePL')"
+										    		ng-options="option.name for option in formDropdownData.judetPL track by option.id"
+							    					ng-model="itemObj.workAddress.countyId" required>
+					    					<option value>-- Selecteaza --</option>
+								    		</select> 
+										    <label class="label-form2" for="mySelect">Localitate *:</label>
+										    <select name="mySelect3" 
+										    		class="form-control custom-select1"
+										    		ng-options="option.name for option in formDropdownData.localitatePL track by option.id"
+							    					ng-model="itemObj.workAddress.city" required>
+					    					<option value>-- Selecteaza --</option>
+								    		</select>
+										    <label class="label-form2" for="mySelect">Strada *:</label>
+										    <input class="form-control box"
+										    	   ng-model="itemObj.workAddress.street" required/>
+
+										    <label class="label-form2" for="mySelect">Numar *:</label>
+										    <input class="form-control custom-select3"
+										    	   ng-model="itemObj.workAddress.number" required/>
+							            </div>
+										<div class="select-form">
+									    	<label class="label-form2" for="mySelect">Bloc:</label>
+										    <input class="form-control custom-select1"
+										    	   ng-model="itemObj.workAddress.block"/>
+
+										    <label class="label-form2" for="mySelect">Scara:</label>
+										    <input class="form-control custom-select1"
+										    	   ng-model="itemObj.workAddress.entrance"/>
+
+										    <label class="label-form2" for="mySelect">Etaj:</label>
+										    <input class="form-control custom-select1"
+										           ng-model="itemObj.workAddress.floor"/>
+
+										    <label class="label-form2" for="mySelect">Apt:</label>
+										    <input class="form-control custom-select3"
+										           ng-model="itemObj.workAddress.apartament"/>
+							            </div>
+										<div class="select-form">
+											<label class="label-form2" for="mySelect">Cod postal:</label>
+										    <input class="form-control custom-select1"
+										           ng-model="itemObj.workAddress.postalCode"/>
+										</div>
+									</fieldset>
+							    </div>
+							</div>
+					    </div>
+				    </uib-tab>
+				    <uib-tab heading="Contacte" disable="!itemObj.id" ng-click="hideStuff()">
+				    	<div class="row">
+						    <div class="col-md-12">
+							    <div class="event-box">
+							    	<div class="add-stuff">
+										<a 
+											ng-click="deactiveRow(items)"  
+											class="add-event" 
+											ng-show="editableContact.active">
+											<i class="fa fa-toggle-off"></i>
+											Activeaza
+										</a>
+										
+										<a 
+											ng-click="activeRow(items)" 
+											ng-hide="editableContact.active" 
+											class="add-event">
+											<i class="fa fa-toggle-on"></i>
+											Dezactiveaza
+										</a>
+
+										<a 
+											ng-click="changeState('adauga')" 
+											data-toggle="modal" 
+											data-target="#addCommentModal" 
+											class="custom-file-upload" 
+											id="addComment">
+											<i class="fa fa-plus"></i>
+											Adauga
+										</a>
+										
+										<a 
+											ng-show="editableContact" 
+											ng-click="changeState('modifica')" 
+											data-toggle="modal" 
+											data-target="#addCommentModal" 
+											class="custom-file-upload" 
+											id="addComment">
+											<i class="fa fa-pencil"></i>
+											Modifica
+										</a>
+
+
+							    	</div>
+								</div>
+						    </div>
+						    <div class="col-md-12">
+						    <div class="event-box">
+						    	<table class="table">
+						    	  <thead>
+							    		<tr>
+							    			<th>Inactiv</th>
+							    			<th>Nume</th>
+							    			<th>Prenume</th>
+							    			<th>Telefon 1</th>
+							    			<th>Telefon 2</th>
+							    			<th>Fax</th>
+							    			<th>E-Mail</th>
+							    			<th>Functie</th>
+							    		</tr>
+						    		</thead>
+						    		<tbody>
+							    		<tr class="repeat-data" 
+							    			ng-click="markRow2(note)" 
+							    			ng-repeat="note in notes" 
+							    			ng-class="{'marked': note.id == editableContact.id, 'disabledRow': note.active === true, 'enableRow': note.active === false}">
+							    			<td><input type="checkbox"
+									   					class="checkbox2" 
+									   					ng-disabled="true"
+									   					ng-checked="note.active"
+									   					ng-model="note.active">
+									   		</td>
+											<td><span ng-bind="note.firstName"></span></td>
+											<td><span ng-bind="note.lastName"></span></td>
+											<td><span ng-bind="note.phone1"></span></td>
+											<td><span ng-bind="note.phone2"></span></td>
+											<td><span ng-bind="note.fax"></span></td>
+											<td><span ng-bind="note.email"></span></td>
+											<td><span ng-bind="note.function"></span></td>
+							    		</tr>
+						    		</tbody>
+						    	</table>
+								</div>
+						    </div>
+						</div>
+				    </uib-tab>
+				    <uib-tab heading="Evidente licente" disable="!itemObj.id" ng-click="hideStuff()">
+					    <div class="row">
+						    <div class="col-md-12">
+							    <div class="event-box">
+							    	<div class="add-stuff">
+										<a 
+											href="#/utilizator-nou?password=true" 
+											class="add-event export-list" 
+											ng-show="editableLicenses.username">
+											<i class="fa fa-key"></i>
+											Reseteaza parola
+										</a>
+										
+										<a 
+											ng-click="deactiveLicenses(items)" 
+											class="add-event act-dez" 
+											ng-show="editableLicenses.active">
+											<i class="fa fa-toggle-off"></i>
+											Activeaza
+										</a>
+										
+										<a 
+											ng-click="activeLicenses(items)" 
+											class="add-event act-dez" 
+											ng-show="editableLicenses.active == false">
+											<i class="fa fa-toggle-on"></i>
+											Dezactiveaza
+										</a>
+										
+										<a 
+											ng-href="#/utilizator-existent?edit=true" 
+											ng-show="editableLicenses.isUsed == false"
+											class="add-event">
+											<i class="fa fa-user"></i>
+											Aloca utilizator
+										</a>
+
+										<a 
+											ng-click="licensesGenerator()" 
+											ng-show="session.user.authority == 'ROLE_ADMIN_GENERAL'"
+											class="add-event">
+											<i class="fa fa-plus-square-o"></i>
+											Adauga
+										</a>
+										
+										<!-- <a 
+											ng-href="#/utilizator-nou?create=true" 
+											ng-show="editableLicenses.active == null"
+											class="add-event">
+											<i class="fa fa-user-plus"></i>
+											Aloca utilizator nou
+										</a> -->
+							    	</div>
+								</div>
+						    </div>
+						    <div class="col-md-12">
+								<div class="event-box">
+								    <table class="table">
+									  <thead>
+											<tr>
+												<th>Inactiv</th>
+												<th>Cod licenta</th>
+												<th>Data activare</th>
+												<th>Utilizator</th>
+												<th>Nume</th>
+												<th>Prenume</th>
+												<th>Telefon</th>
+												<th>E-mail</th>
+												<th>Data nastere</th>
+												<th>Gen</th>
+												<th>Rol</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="repeat-data done-{{todo.done}}" 
+												ng-repeat="items in formDropdownData.licenses | orderBy:sortType:sortReverse | filter:searchDoc"
+												ng-class="{'marked': items.licenseId == editableLicenses.licenseId, 'disabledRow': items.active === true, 'enableRow': items.active === false}"
+												ng-click="markLicenses(items)"
+												style="font:smaller">
+													<td class="forCheck">
+														<input type="checkbox"
+															   class="checkbox2" 
+															   ng-disabled="true"
+															   ng-checked="items.active"
+															   ng-model="items.active"/>
+												   	</td>
+													<td ng-bind="items.license"></td>
+													<td ng-bind="items.activedDate"></td>
+													<td ng-bind="items.username"></td>
+													<td ng-bind="items.firstName"></td>
+													<td ng-bind="items.lastName"></td>
+													<td ng-bind="items.phone"></td>
+													<td ng-bind="items.email"></td>
+													<td ng-bind="items.dateOfBirth"></td>
+													<td ng-bind="items.gender"></td>
+													<td ng-bind="items.accountRole"></td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="pull-left generator">
+										<a  class="add-event" 
+											ng-href="{{ fileUrl }}" download="file.csv" ng-click="downloadCsv()">
+			    							<i class="fa fa-plus-square-o"></i>
+											Genereaza lista coduri licente
+										</a>
+									</div>
+								</div>
+						    </div>	
+						</div>
+				    </uib-tab>
+				    <uib-tab heading="Sisteme" disable="!itemObj.id" ng-click="hideStuff()">
+					   <div class="event-box row systems">
+					    	<div class="col-md-12">
+						    	<fieldset class="search-box">
+						    		<legend>Administrare conturi utilizator</legend>
+						    		<div class="select-form">
+										<label class="label-sistem" for="mySelect">Specificati contul de utilizator care gestioneaza utilizatorii inregistrati in cadrul acestui comisatiat:</label>
+									    <select 
+									    		name="mySelect" 
+									    		class="form-control label-select"
+									    		ng-options="option.userName for option in formDropdownData.localadmin track by option.id"
+									    		ng-change="localAdminState(systemObj)"
+									    		ng-model="systemObj.localAdminAccount">
+							    		<option value>-- Selecteaza --</option>
+							    		></select>
+									</div>
+						    	</fieldset>
+						    	<fieldset class="search-box">
+						    		<legend>Validator evenimente</legend>
+						    		<div class="select-form" style="display:block">
+										<label class="label-sistem" for="mySelect">Specificati contul de utilizator care este responsabil de validarea evenimentelor raportate in aria (ariile) pentru care este responsabil acestei institutii</label>
+									    <select 
+									    		name="mySelect" 
+									    		class="form-control label-select"
+									    		ng-options="option.userName for option in formDropdownData.areaadmin track by option.id"
+									    		ng-change="localAdminState(systemObj)"
+									    		ng-model="systemObj.resolutionAccount">
+							    		<option value>-- Selecteaza --</option>
+							    		></select>
+									</div>
+						    	</fieldset>
+							</div>
+					    </div>	
+				    </uib-tab>
+				  </uib-tabset>
+			    </uib-accordion>
+			</form>
+		</div>
+	<div class="col-md-12">
+		<div class="button-box">
+			<button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid" ng-hide="hidden">OK</button>
+			<!-- <button class="btn btn-default" ng-click="goBack(path,link)">Renunta</button> -->
+			<button type="button" ng-click="main.go({url:'administrare'})" class="btn btn-default" ng-hide="hidden">Renunta</button>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="addCommentModal" role="dialog">
+	<div class="modal-dialog">
+	<!-- Modal content-->
+		<div class="modal-content">
+			<!-- <form name="addNoteForm" ng-submit="addComment(noteTitle,noteDescription,noteTel1,noteTel2,noteFax,noteEmail,noteStatus,addNoteForm);"> -->
+			<form name="addNoteForm" ng-submit="addComment(addNoteForm,note);">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Contacte</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-actions">
+						<div class="input-append">
+							<input class="form-control comForm" ng-model="note.firstName" placeholder="Nume *" required/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-actions">
+						<div class="input-append">
+							<input class="form-control comForm" ng-model="note.lastName" placeholder="Prenume *" required/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-actions">
+						<div class="input-append">
+							<input class="form-control comForm" ng-model="note.phone1" placeholder="Telefon 1 *" required/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-actions">
+						<div class="input-append">
+							<input class="form-control comForm" ng-model="note.phone2" placeholder="Telefon 2"/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-actions">
+						<div class="input-append">
+							<input class="form-control comForm" ng-model="note.fax" placeholder="Fax"/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-actions">
+						<div class="input-append">
+							<input class="form-control comForm" ng-model="note.email" placeholder="E-Mail *" type="email" required/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-actions">
+						<div class="input-append">
+							<input class="form-control comForm" ng-model="note.function"  placeholder="Functie *" required/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" 
+							ng-disabled="addNoteForm.$invalid" 
+							class="btn btn-success">OK
+					</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">RENUNTA</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

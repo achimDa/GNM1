@@ -1,0 +1,345 @@
+{
+    "columnHeaders" : [
+        "Denumire",
+        "Indicativ",
+        "Tara"
+    ],
+    "rows" : [
+        {   
+            "id" : "Alba",
+            "columns" : {
+                "Denumire" : "Alba",
+                "Indicativ" : "AB",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Arad",
+            "columns" : {
+                "Denumire" : "Arad",
+                "Indicativ" : "AR",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Arges",
+            "columns" : {
+                "Denumire" : "Arges",
+                "Indicativ" : "AG",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Bacau",
+            "columns" : {
+                "Denumire" : "Bacau",
+                "Indicativ" : "BC",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Bihor",
+            "columns" : {
+                "Denumire" : "Bihor",
+                "Indicativ" : "BH",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Bistrita Nasaud",
+            "columns" : {
+                "Denumire" : "Bistrita Nasaud",
+                "Indicativ" : "BN",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Botosani",
+            "columns" : {
+                "Denumire" : "Botosani",
+                "Indicativ" : "BT",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Braila",
+            "columns" : {
+                "Denumire" : "Braila",
+                "Indicativ" : "BR",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Brasov",
+            "columns" : {
+                "Denumire" : "Brasov",
+                "Indicativ" : "BV",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Bucuresti",
+            "columns" : {
+                "Denumire" : "Bucuresti",
+                "Indicativ" : "IF",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Buzau",
+            "columns" : {
+                "Denumire" : "Buzau",
+                "Indicativ" : "BZ",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Calarasi",
+            "columns" : {
+                "Denumire" : "Calarasi",
+                "Indicativ" : "CL",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Caras Severin",
+            "columns" : {
+                "Denumire" : "Caras Severin",
+                "Indicativ" : "CS",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Cluj",
+            "columns" : {
+                "Denumire" : "Cluj",
+                "Indicativ" : "CJ",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Constanta",
+            "columns" : {
+                "Denumire" : "Constanta",
+                "Indicativ" : "CT",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Covasna",
+            "columns" : {
+                "Denumire" : "Covasna",
+                "Indicativ" : "CV",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Dambovita",
+            "columns" : {
+                "Denumire" : "Dambovita",
+                "Indicativ" : "DB",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Dolj",
+            "columns" : {
+                "Denumire" : "Dolj",
+                "Indicativ" : "DJ",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Galati",
+            "columns" : {
+                "Denumire" : "Galati",
+                "Indicativ" : "GL",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Giurgiu",
+            "columns" : {
+                "Denumire" : "Giurgiu",
+                "Indicativ" : "GR",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Gorj",
+            "columns" : {
+                "Denumire" : "Gorj",
+                "Indicativ" : "GJ",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Harghita",
+            "columns" : {
+                "Denumire" : "Harghita",
+                "Indicativ" : "HR",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Hunedoara",
+            "columns" : {
+                "Denumire" : "Hunedoara",
+                "Indicativ" : "HD",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Ialomita",
+            "columns" : {
+                "Denumire" : "Ialomita",
+                "Indicativ" : "IL",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Iasi",
+            "columns" : {
+                "Denumire" : "Iasi",
+                "Indicativ" : "IS",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Ilfov",
+            "columns" : {
+                "Denumire" : "Ilfov",
+                "Indicativ" : "IF",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Maramures",
+            "columns" : {
+                "Denumire" : "Maramures",
+                "Indicativ" : "MM",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Mehedinti",
+            "columns" : {
+                "Denumire" : "Mehedinti",
+                "Indicativ" : "MH",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Mures",
+            "columns" : {
+                "Denumire" : "Mures",
+                "Indicativ" : "MS",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Neamt",
+            "columns" : {
+                "Denumire" : "Neamt",
+                "Indicativ" : "NT",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Olt",
+            "columns" : {
+                "Denumire" : "Olt",
+                "Indicativ" : "OT",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Prahova",
+            "columns" : {
+                "Denumire" : "Prahova",
+                "Indicativ" : "PH",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Salaj",
+            "columns" : {
+                "Denumire" : "Salaj",
+                "Indicativ" : "SJ",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Satu Mare",
+            "columns" : {
+                "Denumire" : "Satu Mare",
+                "Indicativ" : "SM",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Sibiu",
+            "columns" : {
+                "Denumire" : "Sibiu",
+                "Indicativ" : "SB",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Suceava",
+            "columns" : {
+                "Denumire" : "Suceava",
+                "Indicativ" : "SV",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Teleorman",
+            "columns" : {
+                "Denumire" : "Teleorman",
+                "Indicativ" : "TR",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Timis",
+            "columns" : {
+                "Denumire" : "Timis",
+                "Indicativ" : "TM",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Tulcea",
+            "columns" : {
+                "Denumire" : "Tulcea",
+                "Indicativ" : "TL",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Valcea",
+            "columns" : {
+                "Denumire" : "Valcea",
+                "Indicativ" : "VL",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Vaslui",
+            "columns" : {
+                "Denumire" : "Vaslui",
+                "Indicativ" : "VS",
+                "Tara" : "Romania"
+            }
+        },
+        {   
+            "id" : "Vrancea",
+            "columns" : {
+                "Denumire" : "Vrancea",
+                "Indicativ" : "VR",
+                "Tara" : "Romania"
+            }
+        }
+    ]
+}

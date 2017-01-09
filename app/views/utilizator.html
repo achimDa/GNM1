@@ -1,0 +1,80 @@
+<div class="events-tab tabs-main">
+		<div class="col-md-12 add-events cat-event">
+		    <form name="myForm">
+				<uib-accordion close-others="oneAtATime">
+				  <uib-tabset justified="true" class="event-tabs">
+				    <uib-tab heading="General" class="tabs">
+						<div class="col-md-5">
+					   		<div class="event-box row">
+								<div class="select-form">
+								    <label class="label-form" for="item_name">Nume utilizator *:</label>
+								    <input type="text" ng-model="itemObj.username" class="form-control" id="item_denumire" required/>
+							    </div>
+							    <div class="select-form">
+							     	<label class="label-form" for="item_name">Parola *:</label>
+							     	<input ng-model="itemObj.password" class="form-control" type="password" name="password" data-ng-class="{'ng-invalid':myForm.confirmPassword.$error.match}"/>
+						     	</div>
+						     	<div class="select-form">
+							        <label class="label-form" for="item_name">Verifica parola *:</label>
+							        <input ng-model="itemObj.passwordConfirm" class="form-control "type="password" data-match="itemObj.password" name="confirmPassword"/>
+							        <div class="notmatch" data-ng-show="myForm.confirmPassword.$error.match">*Nu se potrivesc!</div>
+						        </div>
+								<div class="select-form">
+								    <label class="label-form" for="item_name">Nume *:</label>
+								    <input type="text" ng-model="itemObj.firstName" class="form-control" id="item_denumire" required/>
+							    </div>
+								<div class="select-form">
+								    <label class="label-form" for="item_name">Prenume *:</label>
+								    <input type="text" ng-model="itemObj.lastName" class="form-control" id="item_denumire" required/>
+							    </div>
+								<div class="select-form">
+								    <label class="label-form" for="item_name">Telefon:</label>
+								    <input type="text" ng-model="itemObj.telephone" class="form-control" id="item_denumire" required/>
+							    </div>
+								<div class="select-form">
+								    <label class="label-form" for="item_name">E-Mail:</label>
+								    <input type="text" ng-model="itemObj.email" class="form-control" id="item_denumire"/>
+							    </div>
+					   		</div>
+					   	</div>
+					</uib-tab>
+					<uib-tab heading="Permisiuni" class="tabs">
+					   	<div class="col-md-12 event-box">
+					   		<fieldset class="search-box top-box">
+					    		<legend><b>Comisariat</b></legend>
+					    		<div class="select-form">
+								    <label class="labelW" for="mySelect">Specificati comisariatul in care utilizatorul isi desfasoara activitatea *:</label>
+								    <select name="mySelect" 
+								    		class="form-control custom-drop"
+								    		ng-options="option.name for option in formDropdownData.comisariat track by option.id" 
+							    			ng-model="itemObj.agency" required>
+					    			<option value>-- Selecteaza --</option>
+						    		</select>
+						   		</div>
+					    	</fieldset>
+					    	<br><br>
+					   		<fieldset class="search-box top-box">
+					    		<legend><b>Rol</b></legend>
+					    		<div class="select-form">
+								    <label class="labelW" for="mySelect">Specificati rolul din cadrul comisariatului in care utilizatorul isi desfasoara activitatea *:</label>
+								    <select name="mySelect" 
+								    		class="form-control custom-drop"
+								    		ng-options="option.i18n for option in formDropdownData.rol track by option.nume"
+								    		ng-model="itemObj.roles" required>
+						    		<option value>-- Selecteaza --</option>
+						    		</select>
+						   		</div>
+					    	</fieldset>
+					   	</div>
+					</uib-tab>
+				  </uib-tabset>
+				</uib-accordion>
+			</form>
+		</div>
+	<div class="col-md-12">
+		<div class="button-box">
+			<button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid">OK</button>
+			<button class="btn btn-default" ng-click="back()">Renunta</button>
+		</div>
+	</div>
+</div>

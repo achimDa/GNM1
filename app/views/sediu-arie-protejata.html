@@ -1,0 +1,93 @@
+<div class="events-tab">
+	<div class="col-md-12 add-events">
+	    <form name="myForm">
+			<uib-accordion close-others="oneAtATime">
+			  <uib-tabset justified="true" class="event-tabs">
+			    <uib-tab heading="Date generale" class="tabs">
+					<div class="col-md-12">
+						<div class="event-box row">
+					   		<div class="select-form">
+							 	<label class="label-form2" for="mySelect">Tip:</label>
+				              	<input class="form-control box" ng-model="itemObj.residenceType" required/>
+						    </div>
+					   		<div class="select-form">
+						    	<label class="label-form2" for="mySelect">*Tara:</label>
+							    <select name="mySelect1" 
+							    		class="form-control custom-select1"
+							    		ng-change="populateJudete(itemObj.workAddress.countryId, 'judetPL')"
+							    		ng-options="option.name for option in formDropdownData.tara track by option.id"
+				    					ng-model="itemObj.workAddress.countryId" required>
+		    					<option value>-- Selecteaza --</option>
+					    		</select>
+				    		</div>
+					   		<div class="select-form">
+					    		</select>
+							    <label class="label-form2" for="mySelect">*Judet:</label>
+							   <select name="mySelect2" 
+							    		class="form-control custom-select1"
+							    		ng-change="populateLocalitati(itemObj.workAddress.countyId, 'localitatePL')"
+							    		ng-options="option.name for option in formDropdownData.judetPL track by option.id"
+				    					ng-model="itemObj.workAddress.countyId"  required>
+		    					<option value>-- Selecteaza --</option>
+					    		</select>
+				    		</div> 
+					   		<div class="select-form">
+							    <label class="label-form2" for="mySelect">*Localitate:</label>
+							    <select name="mySelect3" 
+							    		class="form-control custom-select1"
+							    		ng-options="option.name for option in formDropdownData.localitatePL track by option.id"
+				    					ng-model="itemObj.address.city" required>
+		    					<option value>-- Selecteaza --</option>
+					    		</select> 
+				    		</div>
+				    		<div class="select-form">
+					    		<label class="label-form2" for="mySelect">Strada *:</label>
+							    <input class="form-control box"
+							    	   ng-model="itemObj.address.street" required/>
+							</div>
+				    		<div class="select-form">
+							    <label class="label-form2" for="mySelect">Numar *:</label>
+							    <input class="form-control custom-select3"
+							    	   ng-model="itemObj.address.number" required/>
+				    	  	</div> 
+				    		<div class="select-form">
+						    	<label class="label-form2" for="mySelect">Bloc:</label>
+							    <input class="form-control custom-select1"
+							    	   ng-model="itemObj.address.block"/>
+							</div>
+				    		<div class="select-form">
+							    <label class="label-form2" for="mySelect">Scara:</label>
+							    <input class="form-control custom-select1"
+							    	   ng-model="itemObj.address.entrance"/>
+							</div>
+				    		<div class="select-form">
+							    <label class="label-form2" for="mySelect">Etaj:</label>
+							    <input class="form-control custom-select1"
+							    	   ng-model="itemObj.address.floor"/>
+							</div>
+				    		<div class="select-form">
+							    <label class="label-form2" for="mySelect">Apt:</label>
+							    <input class="form-control custom-select3"
+							           ng-model="itemObj.address.apartament"/>
+				            </div>
+							<div class="select-form">
+								<label class="label-form2" for="mySelect">Cod postal:</label>
+							    <input class="form-control custom-select1"
+							    	   ng-model="itemObj.address.postalCode"/>
+							</div>
+					    </div>
+				   	</div>
+				</uib-tab>
+			  </uib-tabset>
+			</uib-accordion>
+		</form>
+	</div>
+	<div class="col-md-12">
+		<div class="button-box">
+			<button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid">OK</button>
+			<button class="btn btn-default" ng-click="main.go({url:'administrare'})">Renunta</button>
+		</div>
+	</div>
+</div>
+
+

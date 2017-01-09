@@ -1,0 +1,245 @@
+<div class="search-box">
+	<a 
+		href="{{session.addLink.url + '?password=true'}}" 
+		ng-if="session.addLink.reset" 
+		class="add-event export-list" 
+		ng-show="editableRow.active == false">
+		<i class="fa fa-key"></i>
+		Reseteaza parola
+	</a>
+	<a 
+		ng-click="deactiveRowUser(row)" 
+		id="myP" 
+		ng-if="session.addLink.dezactiveazaUser" 
+		class="add-event" 
+		ng-show="editableRow.active">
+		<i class="fa fa-toggle-off"></i>
+		Activeaza
+	</a>			
+	<a 
+		ng-click="activeRowUser(row)" 
+		ng-if="session.addLink.activeazaUser" 
+		ng-hide="editableRow.accountId == null || editableRow.active == true"
+		class="add-event" 
+		ng-hide="editableRow.active">
+		<i class="fa fa-toggle-on"></i>
+		Dezactiveaza
+	</a>
+	<a 
+		ng-click="deactiveRow(row)" 
+		id="myP" 
+		ng-if="session.addLink.dezactiveaza" 
+		class="add-event" 
+		ng-show="editableRow.active">
+		<i class="fa fa-toggle-off"></i>
+		Activeaza
+	</a>
+	<a 
+		ng-click="activeRow(row)" 
+		ng-if="session.addLink.activeaza" 
+		class="add-event" 
+		ng-hide="editableRow.active">
+		<i class="fa fa-toggle-on"></i>
+		Dezactiveaza
+	</a>
+	<a 
+		ng-click="deleteRow(row)" 
+		class="add-event export-list" 
+		ng-if="session.addLink.sterge" 
+		ng-show="editableRow">
+		<i class="fa fa-plus"></i>
+		Sterge
+	</a>
+	<a 
+		href="{{session.addLink.url + '?edit=true'}}" 
+		class="add-event export-list" 
+		ng-if="session.addLink.modifica" 
+		ng-show="editableRow">
+		<i class="fa fa-pencil"></i>
+		Modifica
+	</a>
+	<a 
+		href="{{session.addLink.url + '?edit=true'}}" 
+		class="add-event export-list" 
+		ng-if="session.addLink.modificaPF" 
+		ng-show="editableRow.type == 'Persoana Fizica'">
+		<i class="fa fa-pencil"></i>
+		Modifica
+	</a>
+	<a 
+		href="{{session.addLink.url2 + '?edit=true'}}" 
+		class="add-event export-list" 
+		ng-if="session.addLink.modificaPJ" 
+		ng-show="editableRow.type == 'Persoana Juridica'">
+		<i class="fa fa-pencil"></i>
+		Modifica
+	</a>
+	<a 
+		href="{{session.addLink.url + '?edit=true'}}" 
+		class="add-event export-list" 
+		ng-if="session.addLink.modificaUser" 
+		ng-show="editableRow.isUsed">
+		<i class="fa fa-pencil"></i>
+		Modifica
+	</a>
+	<a 
+		href="{{session.addLink.url}}" 
+		ng-if="session.addLink.adauga" 
+		class="add-event export-list">
+		<i class="fa fa-plus"></i>
+		Adauga
+	</a>
+	<a 
+		ng-href="#/utilizator-existent?edit=true" 
+		ng-show="editableRow.isUsed == false"
+		ng-if="session.addLink.existent"
+		class="add-event">
+		<i class="fa fa-user"></i>
+		Aloca utilizator existent
+	</a>
+	<a 
+		ng-href="#/utilizator-nou?create=true" 
+		ng-show="editableRow.isUsed == false"
+		ng-if="session.addLink.nou" 
+		class="add-event">
+		<i class="fa fa-user-plus"></i>
+		Aloca utilizator nou
+	</a>
+	<a 
+		href="{{session.addLink.url2}}"
+		ng-if="session.addLink.alocajuridica" 
+		class="add-event">
+		<i class="fa fa-user-plus"></i>
+		Aloca persoana juridica
+	</a>
+	<a 
+		href="{{session.addLink.url}}"
+		ng-if="session.addLink.alocafizica" 
+		class="add-event">
+		<i class="fa fa-user-plus"></i>
+		Aloca persoana fizica
+	</a>
+	<a 
+		href="#/harta-judet"
+		ng-if="session.addLink.hartatara" 
+		class="add-event">
+		<i class="fa fa-user-plus"></i>
+		Harta judet
+	</a>
+	<a 
+		href="#/harta-tara"
+		ng-if="session.addLink.hartatara" 
+		class="add-event">
+		<i class="fa fa-user-plus"></i>
+		Harta tara
+	</a>
+    <span class="title-sett" ng-bind="session.addLink.title"></span>
+	<br><br>
+    <div>
+        <form class="form-search form-inline" name="forSearch" id="forSearch">
+	        <input  type="text" 
+	        		class="search-query sInput" 
+	        		placeholder="Cautare dupa continut" 
+	        		ng-model="search.query" 
+	        		style="height: 35px;"/>
+	    </form>
+    </div>
+	<br>
+	<div>
+		<table class="table admin-table">
+		    <thead>
+				<tr 
+					ng-click="changeSorting('columnHeader')" 
+					class="headerAdmin" 
+					ng-class="{'disabledRow': row.active === false, 'enableRow': row.active === true}">
+						<th 
+							ng-repeat="columnHeader in headerData" 
+							ng-bind="columnHeader">
+						</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- 	<tr class="repeat-data" 
+					ng-repeat="row in filtered = tabelData | filter:search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit" -->
+
+				<tr class="repeat-data" 
+					
+					ng-repeat="row in filtered = (tabelData | filter:search.query) | start:(currentPage-1)* perPage | limitTo: perPage"	
+
+
+					ng-class="{'marked': row.id == editableRow.id && row.licenseId == editableRow.licenseId, 'disabledRow': row.active === true, 'enableRow': row.active === false}" 
+					ng-disabled="inactive" 
+				 	ng-click="markRow(row,'del')">
+
+					<td ng-repeat="(key,td) in filterTdId(row)" ng-if="key != 'did'">
+			           	<span 
+		           			ng-bind="td" 
+		           			ng-show="hasToRender(key,td,'string','text')">
+	           			</span>
+			           	<p 
+			           		ng-show="hasToRender(key,td,'string','color')" 
+			           		style="width:100px;height:30px;background:{{td}};">
+		           		</p>
+			           	<span 
+			           		ng-show="hasToRender(key,td,'string','icon')">
+			           		<i class="{{td}}"></i>
+		           		</span>
+			           	<span 
+			           		ng-bind="td.name" 
+			           		ng-show="hasToRender(key,td, 'object')">
+		           		</span>
+			           	<span 
+			           		ng-bind="td" 
+			           		ng-show="hasToRender(key,td, 'number')">
+		           		</span>
+			           	<span 
+		           			ng-bind="td | date:'dd MMM yyyy'" 
+		           			ng-show="hasToRender(key,td, 'Date')">
+	           			</span>
+						<input 
+							type="checkbox" 
+							ng-disabled="true" 
+							ng-show="hasToRender(key,td, 'boolean')" 
+							ng-checked="td"
+						/>
+					</td>
+				</tr>
+				<tr 
+					ng-if="tabelData.items.length === 0" 
+					class="repeat-data" 
+					style="font:smaller; text-align: center;">
+						<td colspan="20">Nu exista date introduse</td>
+			 	</tr>
+			</tbody>
+		</table>
+	</div>
+
+<!-- 	<uib-pagination 
+		total-items="totalItems" 
+		boundary-links="true"
+		ng-model="currentPage" 
+		ng-change="pageChanged()" 
+		class="pagination-md" 
+		items-per-page="entryLimit"
+		max-size="noOfPages"
+		page="currentPage"
+		direction-links="true"
+		previous-text="&lsaquo;" 
+		next-text="&rsaquo;"
+		first-text="&lsaquo;&lsaquo;"
+		last-text="&rsaquo;&rsaquo;">
+	</uib-pagination> -->
+
+  	<uib-pagination 
+	  		class="pagination-md" 
+	  		total-items="filtered.length" 
+	  		items-per-page="20" 
+	  		next-text="Next" 
+	  		previous-text="Previous" 
+	  		ng-model="currentPage" 
+	  		max-size="maxSize" 
+	  		class="pagination-sm" 
+	  		boundary-link-numbers="true">
+	</uib-pagination>
+
+</div>

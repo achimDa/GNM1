@@ -1,0 +1,44 @@
+<div class="events-tab tabs-main">
+		<div class="col-md-12 add-events cat-event">
+		    <form name="myForm">
+				<uib-accordion close-others="oneAtATime">
+				  <uib-tabset justified="true" class="event-tabs">
+				    <uib-tab heading="General" class="tabs">
+						<div class="col-md-12">
+					   		<div class="event-box row reglementation">
+							    <div class="select-form">
+								    <label class="label-form" for="type">Tip:</label>
+								    <select name="mySelect" 
+								    		id="mySelect"  
+								    		class="form-control custom-select2"
+							      			ng-options="option.name for option in formDropdownData.regulationtypes track by option.id"
+							      			ng-model="itemObj.type" required>
+					      				<option value>-- Selecteaza --</option>
+					      			</select>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form" for="number">Numar:</label>
+								    <input class="form-control custom-select2" type="text" ng-pattern="/[0-9]/" ng-model="itemObj.number" required/>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form" for="title">Titlu:</label>
+								    <input class="form-control custom-select1" type="text" ng-model="itemObj.title" required/>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form" for="rol">Continut:</label>
+								    <textarea rows="15" name="content" form="usrform" class="form-control" ng-model="itemObj.content" required></textarea>
+							    </div>
+					   		</div>
+					   	</div>
+					</uib-tab>
+				</uib-tabset>
+			</uib-accordion>
+		</form>
+	</div>
+	<div class="col-md-12">
+		<div class="button-box">
+			<button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid">OK</button>
+			<button class="btn btn-default" ng-click="main.go({url:'administrare'})">Renunta</button>
+		</div>
+	</div>
+</div>

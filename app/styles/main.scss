@@ -1,0 +1,1960 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+/* ============== Variables ============== */
+
+//Collors
+$w 					: rgb(245, 255, 255); // White
+$customB 			: #337ab7;
+$customG 			: #eee;
+
+$mainGreen			: rgb(140, 160, 35);
+$mainGreenHover		: rgba(140, 160, 35, 0.7);
+$greenHoverTable	: rgba(229, 234, 197, 0.5);
+$greenActiveTable	: rgba(229, 234, 197, 0.9);
+$errorRed			: #922;
+/* ============== Mixins ============== */
+
+@mixin transition($time: 0.3s, $ease: ease) {
+    transition: all $time $ease;
+}
+
+body {
+    padding: 0;
+    background-color: #eee;
+    a {
+        color: $mainGreen;
+        &:focus,
+        &:hover {
+            color: $mainGreenHover;
+        }
+    }
+    .form-control:focus {
+        border-color: rgba(140, 160, 35, 0.7);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(140, 160, 35, 0.7);
+    }
+}
+
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+
+.header,
+.marketing,
+.footer {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+/* Custom page header */
+
+.header {
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 10px;
+    /* Make the masthead heading the same height as the navigation */
+    h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+        line-height: 40px;
+        padding-bottom: 19px;
+    }
+}
+
+
+/* Custom page footer */
+
+.container-narrow > hr {
+    margin: 30px 0;
+}
+
+
+/* Main marketing message and sign up button */
+
+.jumbotron {
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+    .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+    }
+}
+
+
+/* Supporting marketing content */
+
+.marketing {
+    margin: 40px 0;
+    p + h4 {
+        margin-top: 28px;
+    }
+}
+
+.wrapper-login {
+    overflow: hidden;
+    margin: 8% auto 0;
+    width: 40%;
+}
+
+.form-margin {
+    margin-top: 40px;
+}
+
+.margin-dashboard {
+    margin-top: 7%;
+    .btn-block {
+        height: 120px;
+        display: table-cell;
+        width: 270px;
+        padding: 10px 50px;
+    }
+    .space-bottom-md {
+        margin-bottom: 30px;
+    }
+    .fa {
+        font-size: 42px;
+        margin-bottom: 3px;
+        color: $mainGreen;
+    }
+}
+
+.text-button {
+    font-size: 16px;
+    color: #464646;
+    line-height: 16px;
+    display: inline-block;
+}
+
+label {
+    margin-bottom: 0;
+}
+
+legend {
+    width: auto;
+    border: 0;
+    font-size: 14px;
+    margin-bottom: 0;
+    padding: 5px;
+}
+
+.button-box {
+    float: right;
+    padding-right: 15px;
+}
+
+.checkbox {
+    margin: 0;
+    font-weight: normal;
+    input[type="checkbox"] {
+        position: relative;
+        margin-left: 0;
+    }
+    &:hover {
+        background: #red;
+    }
+}
+
+.marked {
+    background: $greenActiveTable !important;
+    outline: none;
+}
+
+.arrow {}
+
+// ** MAIN STYLES ** //
+input {
+    border: 1px solid #ccc;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+input[type="file"].visible {
+    display: inline;
+}
+
+.input {
+    display: block !important;
+}
+
+.add-event {
+    float: right;
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 3px 9px;
+    cursor: pointer;
+    font-weight: normal;
+    background: white;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    .fa {
+        margin-right: 5px;
+    }
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 3px 9px;
+    cursor: pointer;
+    font-weight: normal;
+    background: white;
+}
+
+.btn-over {
+    overflow: hidden;
+}
+
+.table {
+    border: 1px solid #ccc;
+    thead {
+        tr {
+            background: $customG;
+            outline: none;
+            th {
+                border: 1px solid #ccc;
+                padding: 8px;
+                // text-transform: capitalize;
+                font-weight: normal;
+                outline: none;
+            }
+        }
+    }
+    tbody {
+        tr {
+            // &:nth-child(2n) {
+            //   background: #f8f8f8;
+            // }
+            td {
+                border: 1px solid #ccc;
+                padding: 8px;
+                position: relative;
+                outline: none;
+            }
+            &:hover {
+                background: $greenHoverTable;
+            }
+        }
+    }
+}
+
+// End Common style
+header {
+    height: 70px;
+    background: white;
+    margin-bottom: 30px;
+    .header-title {
+        float: left;
+        margin-left: 30px;
+    }
+    .info-settings {
+        position: relative;
+        line-height: 70px;
+        float: right;
+        i,
+        span {
+            margin-right: 5px;
+        }
+        .fa {
+            font-size: 22px;
+            position: relative;
+            top: 2px;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        .settings {
+            display: none;
+            border: 1px solid #ccc;
+            background: white;
+            position: absolute;
+            width: 180px;
+            line-height: 32px;
+            z-index: 9;
+            a {
+                text-indent: 10px;
+                display: block;
+                &:hover {
+                    background: #EEEEEE;
+                    text-decoration: none;
+                }
+            }
+        }
+        .dropdown-menu {
+            top: 60px;
+            left: initial;
+            right: 0;
+        }
+    }
+    .logo {
+        width: 40px;
+        margin: 10px;
+        float: left;
+    }
+    h2 {
+        font-size: 20px;
+        float: left;
+    }
+    .header-logo {
+        margin-top: 7px;
+        img {
+            max-width: 190px;
+            float: left;
+        }
+        img:nth-child(2) {
+            margin: 0 30px;
+            width: 150px;
+        }
+        img:nth-child(3) {
+            width: 80px;
+            margin-top: 3px;
+        }
+    }
+}
+
+.main-padding {
+    padding: 20px;
+}
+
+.dashboard-nav {
+    .nav-item {
+        display: block;
+        text-align: center;
+        background: #f8f8f8;
+        padding: 20px;
+        min-height: 140px;
+        @include transition(0.2s, ease-in);
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
+        &:hover {
+            background: #fff;
+            color: #444;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .icon {}
+    }
+    p {
+        margin-top: 10px;
+    }
+}
+
+.search-box {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    position: relative;
+    .title {
+        font-size: 16px;
+        margin-bottom: 10px;
+        display: block;
+    }
+    .existing-user {
+        p {
+            line-height: 34px;
+            margin-bottom: 30px;
+        }
+        .select-form {
+            line-height: 34px;
+            margin-bottom: 20px;
+            display: flex;
+            .form-control {
+                width: 55%;
+                float: left;
+            }
+            .label-form {
+                float: left;
+                width: 130px;
+                font-weight: normal;
+            }
+            .date-select {
+                width: 49.3%;
+            }
+            .input-help {
+                float: right;
+            }
+            .input-group-btn {
+                width: initial;
+            }
+        }
+        &:last-child {
+            margin-top: 20px;
+        }
+    }
+    .ng-datepicker-input {
+        float: left;
+        margin-right: -1px;
+        text-indent: 10px;
+        height: 34px;
+    }
+    .box {
+        margin-bottom: 10px;
+        .dateIn {
+            display: flex;
+            .datepicker {
+                width: 100%;
+                .ng-datepicker-input {
+                    width: 101%;
+                }
+            }
+        }
+    }
+}
+
+.events-wrap {
+    .from-to {
+        display: block;
+        float: left;
+        line-height: 34px;
+        margin-right: 3px;
+    }
+    .area-margin {
+        margin-bottom: 10px;
+        .title-cat {
+            display: block;
+            background: #EEE;
+            padding: 2px 6px;
+            font-weight: bold;
+            border: 1px solid #ccc;
+        }
+        .scroll-vert {
+            height: 75px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            border-top: 0;
+            padding: 5px;
+        }
+    }
+    .results-table {
+        display: none;
+        .table {
+            table {
+                td {
+                    width: 20%;
+                }
+            }
+        }
+    }
+    #mapO {
+        height: 920px;
+    }
+    .mapSmall {
+        height: 450px !important;
+    }
+    .export-list {
+        float: left;
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+}
+
+// Events tab
+.events-tab {
+    .event-tabs {
+        // width: 30%;
+    }
+    .event-box {
+        padding: 30px;
+        position: relative;
+        .add-stuff {
+            float: right;
+            a {
+                margin: 0 5px;
+            }
+            .fa {
+                margin-right: 5px;
+            }
+        }
+        .localization {
+            display: flex;
+            line-height: 34px;
+            .lat-long {
+                margin: 0 40px 0px 10px;
+                width: 15%;
+            }
+        }
+        .mapO {
+            height: 955px;
+        }
+        .form-arie {
+            width: 40%;
+            margin-left: 10px;
+        }
+    }
+    .tab-content {
+        background: white;
+        float: left;
+        border: 1px solid #ddd;
+        border-top: 0;
+        width: 100%;
+    }
+    .nav-tabs li {
+        width: auto;
+    }
+    .panel-group {
+        margin-bottom: 5px;
+        // overflow: hidden;
+    }
+    .panel-group .panel {
+        border-radius: 0;
+    }
+    input[type="checkbox"] {
+        position: relative;
+        margin-left: 0;
+    }
+    .select-form {
+        margin-bottom: 30px;
+        label {
+            width: 140px;
+            font-weight: normal;
+            vertical-align: top;
+        }
+
+        .mySelect {
+            display: table-cell;
+            vertical-align: top;
+            width: 71%;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+        textarea {
+            width: 71%;
+            border: 1px solid #ccc;
+        }
+        .desc {
+            float: left;
+            margin-right: 5px;
+        }
+        .date-label {
+            float: left;
+            width: 145px;
+        }
+        .date-input {
+            width: 71%;
+        }
+    }
+    .data-picker {
+        .date-label-prim {
+            float: left;
+            width: 145px;
+        }
+        .datepicker {
+            float: left;
+            width: 64%;
+            .ng-datepicker-input {
+                width: 101%;
+                height: 34px;
+                text-indent: 10px;
+            }
+        }
+    }
+    .maps-prop {
+        margin-top: 10px;
+    }
+    #mapO {
+        height: 590px;
+        margin: 20px 0;
+    }
+    #mapO2 {
+        height: 590px;
+        margin: 20px 0;
+    }
+    .add-events {
+        .select-form {
+            line-height: 34px;
+            margin-bottom: 15px;
+            display: flex;
+            .label-form {
+                width: 100px;
+                float: left;
+            }
+            .form-control {
+                width: 400px;
+            }
+            .custom-drop {
+                width: 400px !important;
+            }
+            .small-input {
+                width: 60px;
+            }
+        }
+        .map-zone {
+            .event-box {
+                .label-form {
+                    width: auto;
+                    margin-right: 20px;
+                }
+                .form-control {
+                    width: 40%;
+                }
+                #mapO {
+                    height: 500px;
+                }
+            }
+        }
+    }
+    .button-box {
+        padding-right: 0;
+    }
+    .eco-type {
+        .select-form {
+            display: flex;
+            line-height: 34px;
+            .label-form {
+                width: 220px;
+            }
+            .form-control {
+                width: 58%;
+            }
+            .form-l {
+                width: 68%;
+            }
+            .input-help {
+                height: 34px;
+            }
+        }
+    }
+    .button-box {
+        padding: 0;
+        margin-top: 20px;
+    }
+}
+
+.tabs-main {
+    .add-events {
+        .tab-content {
+            display: flex;
+            overflow: initial;
+            .select-form {
+                position: relative;
+                margin-bottom: 20px;
+                display: flex;
+                .label-form {
+                    width: 130px;
+                    float: left;
+                }
+                .date {
+                    width: 68%;
+                    float: left;
+                }
+                .checkbox {
+                    width: 100%;
+                    margin-bottom: 0;
+                }
+                .custom-select1 {
+                    width: 165px !important;
+                }
+                // .fa {
+                //   margin-left: 20px;
+                //   font-size: 20px;
+                // }
+                .form-control {
+                    width: 55%;
+                }
+                .form-controlUtil {
+                    width: 25%;
+                    margin-left: 20px;
+                }
+                .date-select {
+                    width: 49.3%;
+                }
+                .input-group-btn {
+                    width: initial;
+                }
+            }
+            .data-picker {
+                .date-label-prim {
+                    float: left;
+                    width: 190px;
+                }
+                .datepicker {
+                    float: left;
+                    width: 195px;
+                    .ng-datepicker-input {
+                        width: 101%;
+                        height: 34px;
+                        text-indent: 10px;
+                    }
+                }
+                button {
+                    margin-top: 0px;
+                }
+                span.date {
+                    width: 170px;
+                }
+            }
+            .check-form {
+                line-height: 30px;
+                margin: 20px 0;
+            }
+            .flex {
+                display: flex;
+                position: relative;
+                .label-form {
+                    width: 70px;
+                }
+                .custom-select1 {
+                    margin-right: 20px;
+                }
+            }
+        }
+        .panel-group {
+            overflow: initial;
+            .tab-pane {
+                width: 100%;
+            }
+        }
+        .laws {
+            .select-form {
+                .label-form {
+                    width: 190px;
+                }
+                textarea {
+                    width: 80% !important;
+                }
+                p {
+                    margin-bottom: 0;
+                    .form-control {
+                        width: 100%;
+                    }
+                }
+                .custom-select1 {
+                    width: 235px !important;
+                }
+            }
+        }
+        .reglementation {
+            .select-form {
+                .custom-select2 {
+                    width: 300px !important;
+                }
+                textarea,
+                .custom-select1 {
+                    width: 80% !important;
+                }
+            }
+        }
+    }
+    .checkbox {
+        margin-bottom: 10px;
+    }
+    .table {
+        input {
+            text-align: center;
+            display: block;
+            margin: auto;
+        }
+        .checkB {
+            margin: initial;
+        }
+    }
+    .titleP {
+        margin-bottom: 20px;
+    }
+    .cat-event {
+        .form-group {
+            line-height: 34px;
+            margin-bottom: 25px;
+            p {
+                float: left;
+                margin-right: 20px;
+            }
+        }
+    }
+}
+
+.comisariat {
+    .select-form {
+        display: flex;
+        line-height: 35px;
+    }
+    .search-box {
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        .select-form {
+            line-height: 34px;
+            margin-bottom: 20px;
+            display: flex;
+            .label-form {
+                width: 130px;
+                display: table;
+            }
+            .label-form2 {
+                width: 7%;
+                display: table;
+                margin-right: 10px;
+                text-align: right;
+                &:first-child {
+                    margin-left: 0;
+                }
+            }
+            .name {
+                width: 50%;
+                float: left;
+                margin-right: 50px;
+            }
+            .indicator {
+                width: 15%;
+                float: left;
+                margin-right: 50px;
+            }
+            .mr {
+                margin-right: 30px;
+            }
+            .custom-select1 {
+                width: 165px;
+            }
+            .custom-select2 {
+                width: 20%;
+            }
+            .custom-select3 {
+                width: 5%;
+            }
+            // .date {
+            //   width: 20%;
+            // }
+            .cui {
+                margin: 0 8px 0 10px;
+            }
+            .caen {
+                width: 75% !important;
+            }
+            .box {
+                width: 15%;
+            }
+            .nr-reg {
+                margin: 0 10px 0 6%;
+            }
+            .label-sistem {
+                width: 37%;
+                margin-right: 20px;
+                float: left;
+                line-height: 23px;
+            }
+            .label-select {
+                width: 20%;
+            }
+            .checkbox {
+                clear: both;
+                float: left;
+                margin: 10px 10px 0 0px;
+                width: 100%;
+            }
+        }
+    }
+    .top-box {
+        height: 280px;
+    }
+    .systems {
+        .select-form {
+            margin-bottom: 0;
+            .lb-mg {
+                margin-top: 6px;
+            }
+        }
+    }
+}
+
+.arie-protejata {
+    .search-box {
+        label {
+            width: 100%;
+        }
+        .mapO {
+            height: 300px;
+            margin: 0;
+        }
+        .select-form {
+            .form-control {
+                width: 100%;
+            }
+        }
+    }
+    label {
+        float: left;
+    }
+    .events {
+        span {
+            margin: 20px 0;
+            display: block;
+        }
+        .form-control {
+            width: 20%;
+        }
+        .search-box {
+            margin-bottom: 10px;
+            background: initial;
+            .select-form {
+                margin-bottom: 0;
+                .form-control {
+                    float: left;
+                }
+            }
+        }
+    }
+    .from-to {
+        float: left;
+        display: block;
+        line-height: 34px;
+        margin-right: 10px;
+    }
+    .button-box {
+        padding: 0 30px;
+        overflow: hidden;
+    }
+    .event-box-table {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .nameInfo {
+        width: 80%;
+    }
+}
+
+.events-history {
+    #mapO {
+        height: 500px;
+    }
+}
+
+.rezolutii-evenimente {
+    .tab-content {
+        background: white;
+        float: left;
+        width: 90%;
+        padding: 10px;
+    }
+}
+
+.coridoare-ecologice {
+    // overflow: hidden;
+    .search-box {
+        padding: 15px;
+        overflow: hidden;
+        .box {
+            margin-bottom: 10px;
+        }
+        .select-form {
+            label {
+                width: 70px;
+            }
+            #mySelect {
+                width: 65%;
+                float: right;
+            }
+        }
+        .title-cat {
+            display: block;
+            background: #EEE;
+            padding: 2px 6px;
+            font-weight: bold;
+            border: 1px solid #ccc;
+        }
+        .scroll-vert {
+            height: 75px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            border-top: 0;
+            padding: 5px;
+            .checkbox {
+                margin: 0;
+            }
+        }
+        button {
+            float: right;
+        }
+    }
+    .act-dez {
+        display: none;
+    }
+    .add-event {
+        float: right;
+    }
+    #mapO {
+        height: 622px;
+    }
+}
+
+.monitorizare-trasee {
+    .search-box {
+        .select-form {
+            margin-bottom: 10px;
+            label {
+                width: 100%;
+            }
+            #mySelect {
+                width: 100%;
+            }
+        }
+        #mapO {
+            height: 500px;
+        }
+    }
+    .admin-table {
+        .del-b {
+            float: right;
+            position: absolute;
+            right: 10px;
+            padding: 0px 6px;
+            font-size: 18px;
+            top: 3px;
+        }
+    }
+    .title-sett {
+        text-transform: uppercase;
+        font-size: 17px;
+        display: block;
+        float: left;
+        margin-top: 5px;
+        color: $mainGreen;
+    }
+}
+
+.search-box {
+    .panel-group {
+        .panel {
+            border-radius: 0;
+            .panel-heading {
+                padding: 0;
+                background: white;
+                color: $mainGreen;
+                border-radius: 0;
+                border-left: 5px solid white;
+                transition: all 0.2s ease-in;
+                a {
+                    &:hover {
+                        text-decoration: none;
+                    }
+                    div {
+                        padding: 10px;
+                        span {
+                            font-weight: bold;
+                            font-size: 15px;
+                        }
+                    }
+                }
+                &:hover {
+                    border-left: 5px solid $mainGreenHover;
+                }
+            }
+            .panel-body {
+                padding: 0;
+                ul {
+                    padding-left: 0;
+                    list-style: none;
+                    margin-bottom: 0;
+                    li {
+                        border-bottom: 1px solid $customG;
+                        button {
+                            width: 100%;
+                            text-align: left;
+                            border: 0;
+                            padding: 10px 5px;
+                            text-indent: 5px;
+                            background: white;
+                            padding-left: 17px;
+                            &:hover {
+                                background: $customG;
+                                transition: all 0.2s ease-in-out;
+                            }
+                        }
+                        &:last-child {
+                            border-bottom: none;
+                        }
+                    }
+                }
+            }
+        }
+        .panel-open {
+            .panel-heading {
+                border-left: 5px solid $mainGreen;
+            }
+        }
+    }
+    .buttonsDiv {
+        height: 54px;
+    }
+}
+
+.editare-coridor {
+    .search-box {
+        margin: 20px;
+        margin-right: 0;
+        .titleBox {
+            position: relative;
+            top: -10px;
+        }
+        .title-cat {
+            display: block;
+            background: #EEE;
+            padding: 2px 6px;
+            font-weight: bold;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            height: 26px;
+        }
+        .scroll-vert {
+            height: 75px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            border-top: 0;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        .select-form {
+            line-height: 30px;
+            display: flex;
+            label {
+                width: 34%;
+            }
+            #mySelect {
+                width: 65%;
+                float: right;
+            }
+            .from-to {
+                float: left;
+                width: 60px;
+                margin-right: 20px;
+            }
+            .ng-datepicker-input {
+                text-indent: 10px;
+            }
+            button {
+                margin-left: -1px;
+            }
+        }
+        .select-top {
+            margin-top: 20px;
+        }
+        .form1 {
+            margin-top: 20px;
+        }
+        .checkbox {
+            margin-top: 0px;
+        }
+        .checkbox-edt {
+            margin-top: 0px;
+        }
+    }
+    .event-box {
+        padding-bottom: 0;
+        label {
+            width: 15%;
+            float: left;
+        }
+        .numberC {
+            width: 10%;
+        }
+        .numberA {
+            width: 71%;
+        }
+        .form1 {
+            margin-top: 20px;
+        }
+        .select-form {
+            margin-bottom: 10px;
+        }
+        .checkbox {
+            width: initial;
+            margin: 0;
+        }
+        .title-info {
+            float: left;
+            line-height: 34px;
+        }
+    }
+    .mapO {
+        height: 350px;
+        margin-top: 10px;
+    }
+    button {
+        float: right;
+        margin-left: 10px;
+    }
+}
+
+.jurnal-sincronizari {
+    .search-box {
+        .select-form {
+            .label-text {
+                width: 100%;
+            }
+            #mySelect {
+                width: 100%;
+            }
+        }
+        .box {
+            margin-bottom: 10px;
+        }
+        button {
+            float: right;
+        }
+    }
+}
+
+.add-element {
+    .select-form {
+        line-height: 34px;
+        margin-bottom: 20px;
+        display: flex;
+        label {
+            width: 140px;
+            font-weight: normal;
+            float: left;
+        }
+        textarea,
+        select {
+            width: 71%;
+        }
+        .margin-anim {
+            margin-left: 141px;
+            input {
+                width: auto;
+            }
+        }
+        .form-control {
+            width: 62%
+        }
+    }
+    .text-area {
+        .input-help {
+            height: 34px;
+        }
+    }
+    .pic {
+        display: block;
+        margin-bottom: 25px;
+    }
+    .img-box {
+        position: relative;
+        .title {
+            position: absolute;
+            top: 0;
+            background: $mainGreen;
+            padding: 10px;
+            right: 0;
+            width: 100%;
+            color: white;
+            font-weight: bold;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        .img-prop {
+            position: relative;
+            float: left;
+            margin-left: 20px;
+        }
+    }
+    .button-box {
+        padding: 0;
+        margin-top: 20px;
+    }
+}
+
+.thumb {
+    width: 100%;
+    float: left;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    max-width: 670px;
+}
+
+.uploader {
+    clear: both;
+}
+
+.footer {
+    padding: 10px 25px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
+    background: #FDFDFD;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.panel-group {
+    margin-bottom: 5px;
+    // overflow: hidden;
+}
+
+
+/* Responsive: Portrait tablets and up */
+
+@media screen and (max-width: 768px) {
+    .container {
+        max-width: 1200px;
+    }
+    .modal-dialog {
+        width: 900px;
+        margin: 30px auto;
+        .span3 {
+            width: 100%;
+        }
+    }
+    /* Remove the padding we set earlier */
+    .header,
+    .marketing,
+    {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    /* Space out the masthead */
+    .header {
+        margin-bottom: 30px;
+    }
+    /* Remove the bottom border on the jumbotron for visual effect */
+    .jumbotron {
+        border-bottom: 0;
+    }
+    .from-to {
+        width: 100%;
+    }
+}
+
+.loader {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+    background-image: url("/images/loader.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 30;
+}
+
+.error {
+    width: 100%;
+	padding: 15px;
+    margin-left: -15px;
+    margin-right: -15px;
+    border-radius: 3px;
+    box-sizing: content-box;
+    background-color: $errorRed;
+    color: white;
+    text-align: center;
+}
+
+.nav-navigation {
+  .nav-section {
+    .nav-section-title {
+      margin: 0 0 10px;
+    }
+    .nav-section-list {
+      margin: 0;
+      .nav-section-item {
+        cursor : pointer;
+        padding: 6px;
+        span {
+          display: block;
+          outline: none;
+        }
+        &:hover {
+          background: #fafafa;
+        }
+        &.selected {
+          background: #f0f0f0;
+          span {
+            color: green;
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.data-picker {
+    display: flex;
+}
+
+.notmatch {
+    width: 130px;
+    margin-left: 20px;
+    color: red;
+}
+
+.disabledRow {
+    opacity: .5;
+    background: #f8f8f8;
+}
+
+.selectCoridor {
+    margin: 10px 0 20px;
+}
+
+.pickerClass {
+    width: 70%;
+}
+
+.leaflet-draw-section {
+    .leaflet-draw-draw-polyline, .leaflet-draw-draw-rectangle, .leaflet-draw-draw-circle, .leaflet-draw-draw-marker {
+        display: none;
+    }
+}
+
+.migration {
+    width: 100% !important;
+}
+
+.corridors-pre {
+    position: absolute;
+    bottom: 60px;
+    left: 50px;
+    background: white;
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.popUpButton {
+    background: #fff;
+    border: 0;
+    text-align: left;
+    font-size: 15px;
+    display: block;
+    color: black !important;
+    padding: 5px;
+    text-decoration: none;
+    &:hover {
+        color: black;
+        text-decoration: none;
+    }
+}
+
+.table-events {
+    max-height: 435px;
+    overflow-y: scroll;
+    margin-bottom: 20px;
+}
+
+.event-top {
+    margin-top: 20px
+}
+
+.event-pad {
+    padding-bottom: 0 !important;
+    overflow: hidden;
+    padding-top: 0px !important;
+}
+
+.myDate {
+    width: 64%;
+    float: left;
+}
+
+.table-rols {
+    input {
+        margin: auto;
+        display: block;
+    }
+}
+
+.roles-eco {
+    width: 70%;
+}
+
+.date-m {
+    margin-right: 60px;
+}
+
+.auth-mail {
+    display: flex;
+    margin-bottom: 20px;
+    input {
+        width: 300px;
+        margin-left: 100px;
+        margin-right : 40px;
+    }
+}
+
+.custom-date {
+    width: 65%;
+    float: left;
+}
+
+// .table-Forevents {
+//     margin-bottom: 5px;
+//     tr {
+//         th,td {
+//             width: 100px;
+//         }
+//     }
+// }
+
+.textarea-notificari {
+      width: 100%;
+      margin-left: 20px;
+}
+.input-notificari {
+      width: 71%;
+      margin-left: 20px;
+}
+.input-setari-gen-ev {
+      width: 3%;
+      height: 30%;
+      label {
+        width: auto;
+        font-weight: normal;
+        vertical-align: top;
+        }
+}
+.select-form-setari-gen {
+        margin-bottom: 30px;
+        label {
+        width: auto;
+        font-weight: normal;
+        vertical-align: top;
+        }
+      }
+
+.fieldset-aranj-setari-gen {
+    display: flex;
+    fieldset {
+      width: 33%;
+      &:nth-child(2) {
+        margin: 0 10px;
+      }
+    }
+    .input-setari-gen-atasamente {
+      width: 15%;
+      height: 30%;
+      label {
+        width: auto;
+        font-weight: normal;
+        vertical-align: top;
+        }
+    }   
+}
+
+
+.date-sync {
+    float: left;
+    width: 83%;
+}
+
+.settings-page {
+    .set-gen {
+        float: left;
+        margin-right: 10px !important;
+    }
+    .label-form {
+        width: auto !important;
+        margin: 0 10px;
+    }
+    .select-form {
+        .form-control {
+            width: 30%;
+            float: left;
+        }
+        .show {
+            width: 7% !important;
+        }
+        .box-img {
+            width: 27% !important;
+            margin-left: 10px;
+        }
+        .box-route {
+            width: 10% !important;
+            margin-left: 10px;
+        }
+    }
+}
+
+.w100 {
+    width: 100%;
+}
+.leaflet-control-layers-toggle {
+    display: none;
+}
+
+.sInput {
+  border-radius:20px;
+  text-indent: 10px;
+  height: 35px;
+  outline: none;
+}
+
+.fc-zip {
+    width: 45% !important;
+    margin-right: 5px;
+}
+
+.generator {
+    .add-event {
+        margin-left: 0px;
+    }
+}
+
+.alert-box {
+    position:absolute;
+    z-index:99;
+    top:0.5%;
+    right:0%;
+    width: 30%;
+    left: 0;
+    margin:0px auto;
+    text-align:center;
+    font-weight: bold;
+}
+
+.notifications {
+    .label-form {
+        width: 10% !important;
+    }
+    .form-control {
+        width: 95% !important;
+    }
+}
+
+.dateIn {
+    display: flex;
+}
+
+.dateStrap {
+    .dropdown-menu {
+        width: 200px !important;
+    }
+}
+
+
+.reports {
+    .area-margin {
+        margin-bottom:20px;
+        .title-cat {
+            display: block;
+            background: #EEE;
+            padding: 2px 6px;
+            font-weight: bold;
+            border: 1px solid #ccc;
+        }
+        .scroll-vert {
+            height: 75px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            border-top: 0;
+            padding: 5px;
+        }
+    }
+    .picker-date {
+        width: 70%;
+        float: left;
+    }
+    .img-container {
+        margin: 50px 0;
+        .tmp-img {
+            margin: auto;
+            display: block;
+        }
+        .tmp-img1 {
+            width: 400px;
+        }
+    }
+}
+
+
+// VERT TABS
+
+.tabs-below > .nav-tabs,
+.tabs-right > .nav-tabs,
+.tabs-left > .nav-tabs {
+    border-bottom: 0;
+}
+
+.tab-content > .tab-pane,
+.pill-content > .pill-pane {
+    display: none;
+}
+
+.tab-content > .active,
+.pill-content > .active {
+    display: block;
+}
+
+.tabs-below > .nav-tabs {
+    border-top: 1px solid #ddd;
+}
+
+.tabs-below > .nav-tabs > li {
+    margin-top: -1px;
+    margin-bottom: 0;
+}
+
+.tabs-below > .nav-tabs > li > a {
+    -webkit-border-radius: 0 0 4px 4px;
+    -moz-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+}
+
+.tabs-below > .nav-tabs > li > a:hover,
+.tabs-below > .nav-tabs > li > a:focus {
+    border-top-color: #ddd;
+    border-bottom-color: transparent;
+}
+
+.tabs-below > .nav-tabs > .active > a,
+.tabs-below > .nav-tabs > .active > a:hover,
+.tabs-below > .nav-tabs > .active > a:focus {
+    border-color: transparent #ddd #ddd #ddd;
+}
+
+.tabs-left > .nav-tabs > li,
+.tabs-right > .nav-tabs > li {
+    float: none;
+}
+
+.tabs-left > .nav-tabs > li > a,
+.tabs-right > .nav-tabs > li > a {
+    min-width: 74px;
+    margin-right: 0;
+    margin-bottom: 3px;
+}
+
+.tabs-left > .nav-tabs {
+    float: left;
+    margin-right: 19px;
+    border-right: 1px solid #ddd;
+}
+
+.tabs-left > .nav-tabs > li > a {
+    margin-right: -1px;
+    -webkit-border-radius: 4px 0 0 4px;
+    -moz-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+}
+
+.tabs-left > .nav-tabs > li > a:hover,
+.tabs-left > .nav-tabs > li > a:focus {
+    border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+}
+
+.tabs-left > .nav-tabs .active > a,
+.tabs-left > .nav-tabs .active > a:hover,
+.tabs-left > .nav-tabs .active > a:focus {
+    border-color: #ddd transparent #ddd #ddd;
+    *border-right-color: #ffffff;
+}
+
+.tabs-right > .nav-tabs {
+    float: right;
+    margin-left: 19px;
+    border-left: 1px solid #ddd;
+}
+
+.tabs-right > .nav-tabs > li > a {
+    margin-left: -1px;
+    -webkit-border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.tabs-right > .nav-tabs > li > a:hover,
+.tabs-right > .nav-tabs > li > a:focus {
+    border-color: #eeeeee #eeeeee #eeeeee #dddddd;
+}
+
+.tabs-right > .nav-tabs .active > a,
+.tabs-right > .nav-tabs .active > a:hover,
+.tabs-right > .nav-tabs .active > a:focus {
+    border-color: #ddd #ddd #ddd transparent;
+    *border-left-color: #ffffff;
+}
+
+
+
+
+#leftMenu .accordion-group {
+    margin-bottom: 0px;
+    border:0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}    
+
+#leftMenu .accordion-heading {
+    height: 34px;
+    border-top: 1px solid #717171; /* inner stroke */
+    border-bottom: 1px solid #5A5A5A; /* inner stroke */
+    background-color: #353535; /* layer fill content */
+    background-image: -moz-linear-gradient(90deg, #595b59 0%, #616161 100%); /* gradient overlay */
+    background-image: -o-linear-gradient(90deg, #595b59 0%, #616161 100%); /* gradient overlay */
+    background-image: -webkit-linear-gradient(90deg, #595b59 0%, #616161 100%); /* gradient overlay */
+    background-image: linear-gradient(90deg, #595b59 0%, #616161 100%); /* gradient overlay */
+    list-style-type:none;
+}  
+
+#leftMenu .accordion-heading  a{  
+    color: #cbcbcb; /* text color */
+    text-shadow: 0 1px 0 #3b3b3b; /* drop shadow */
+    text-decoration:none;
+    font-weight:bold;  
+}
+
+#leftMenu .accordion-heading  a:hover{  
+    color:#ccc     
+}
+
+#leftMenu .accordion-heading .active {
+    width: 182px;
+    height: 34px;
+    border: 1px solid #5b5b5b; /* inner stroke */
+    background-color: #353535; /* layer fill content */
+    background-image: -moz-linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+    background-image: -o-linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+    background-image: -webkit-linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+    background-image: linear-gradient(90deg, #4b4b4b 0%, #555 100%); /* gradient overlay */
+}
+
+/*Color picker*/
+
+div.colorPicker-picker {
+  height: 23px;
+  width: 23px;
+  padding: 0 !important;
+  border: 1px solid #ccc;
+  background: url(https://raw.github.com/laktek/really-simple-color-picker/master/arrow.gif) no-repeat bottom right;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+div.colorPicker-palette {
+  width: 110px;
+  position: absolute;
+  border: 1px solid #ccc;
+  background-color: #EFEFEF;
+  padding: 2px;
+  z-index: 9999;
+}
+  div.colorPicker_hexWrap {width: 100%; float:left }
+  div.colorPicker_hexWrap label {font-size: 95%; color: #2F2F2F; margin: 5px 2px; width: 25%}
+  div.colorPicker_hexWrap input {margin: 5px 2px; padding: 0; font-size: 95%; border: 1px solid #000; width: 65%; }
+
+div.colorPicker-swatch {
+  height: 20px;
+  width: 22px;
+  border: 1px solid #000;
+  margin: 2px;
+  float: left;
+  cursor: pointer;
+  line-height: 12px;
+}
+
+.input-help {
+  display: none;
+  position: relative;
+  z-index: 100;
+  top: -2px;
+  right: -20px;
+  padding: 9px;
+  background: #fefefe;
+  font-size: .875em;
+  box-shadow: 0 1px 3px #aaa;
+  border: 1px solid #ddd;
+  opacity: 0.9;
+}
+.i-h2 {
+  height: 35px;
+}
+.input-help::before {
+  content: "\25C0";
+  position: absolute;
+  top:10px;
+  left:-12px;
+  font-size:16px;
+  line-height:16px;
+  color:#ddd;
+  text-shadow:none;
+}
+.input-help h4 {
+  margin:0;
+  padding:0;
+  font-weight: normal;
+  font-size: 1.1em;
+}
+
+/* Always hide the input help when it's pristine */
+input.ng-pristine + .input-help {
+  display: none;
+}
+
+/* Hide the invalid box while the input has focus */
+.ng-invalid:focus + .input-help {
+  display: none;
+}
+
+/* Show red border when stuff has been typed in, but its invalid */
+.ng-dirty.ng-invalid {
+  border-color:#ec3f41;
+}
+
+/* Show the help box once it has focus */
+.immediate-help:focus + .input-help {
+  display: block;
+}
+
+/* Immediate help should be red when pristine */
+.immediate-help.ng-pristine:focus + .input-help {
+  border-color:#ec3f41;
+}
+.immediate-help.ng-pristine:focus + .input-help::before {
+  color:#ec3f41;
+}
+
+/* Help hould be green when input is valid */
+.ng-valid + .input-help {
+  border-color:#3a7d34;
+}
+.ng-valid + .input-help::before {
+  color:#3a7d34;
+}
+
+/* Help should show and be red when invalid */
+.ng-invalid + .input-help {
+  display: block;
+  border-color: #ec3f41;
+}
+.ng-invalid + .input-help::before {
+  color: #ec3f41;
+}
+
+/* Style input help requirement bullets */
+.input-help ul {
+  list-style: none;
+  margin: 10px 0 0 0;
+}
+
+/* Default each bullet to be invalid with a red cross and text */
+.input-help li {
+  padding-left: 22px;
+  line-height: 24px;
+  color:#ec3f41;
+  background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAA1CAYAAABIkmvkAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAJwAAACcBKgmRTwAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMC8wOS8xMlhq+BkAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAAEA0lEQVRIie2WW2jbVRzHv//zT5rkn0ub61zaNdEiPqTC9EFRhtgJk63qg3Wr0806pswNiYgDUXxwyryCEB8UBevtaSCCDHQoboKyoVvVzfRmL2napU0mrdbl8s//dy4+dM1M28n64FsPnIdz+XzO75zfOXA0pRRWU7o/uS9FxOc+3/vlIQBgq4F3fHxvKuIPJ9cFwi9uTXU8BwDa1Uaw/aN7UusCkWRbPI5yxcTI2Bgy49kXrkrwwIedqYg/nGyLXwsJiYHBYWTGs7Cq5Kpt4cA3PXft+2rX40vhrt7OVLgplIzHYuBKoH9gCKMjGVE1LdfJl86YDAAOfN2ziZP4NODyv9/z2fanFuH7P9iWCjcFk/FYK4QSGLgEk0WeUy/3mQCgPXFs9xbBRW883NrssDvQN3hWcOLPEPGWiD94MBaPQymBoaERjI9mBSfu+fHwL+biItpjR3e6JFfloDeAaGQ9SpUycvlp6ExHJBKGYsDvgyMYH81KTsL90yuX4VoWdh3pMqSQpWBjAC3RZkgpYEkCFDA8NIqJ0UlFxI3Tr/5aB9elsau305BcloKBAFpjLeBSYGRwDBNjk4oTN06/dnYZXCcAgK1vbzYkl6VwOATihOzYlOLEjTOvn1sRXiYAgDsP32YIKUuWaXFOwtP3xrnqleAVBQBwy/M3GZy4+PnN3/4TvqJgNWVVj2lNsCZYE6wJ1gRrgv9dYAMAHHw2Bl2fUEpBVavtLPVW/78nVR/Zk4CupzVHA6zChSOK0yHv0S8GFyK4BMPhAJxOgLE03/9kYhE2dz+agKaldY8bDaEQ7D5ft7Roy+UIlCooy5LQdaZ5vVBEgGmmrT172yVxaIylmdcDm9cHc2oK1Zm8kETvLAo0pRRk8mmnEqKouVw68zVCzP8F/uccFHHoXi/sjT6Y53Mw83mhOHn8J7416wQAwPftd0ouiswwdJu/CRASkBKQAmYuBzNfWIC/O173W6llwfbeu6Yi8tDsrAQJYGICyGQAIWDO5KUkaxlcJwAASdSmaWAQHCACOAc4h6YzJi1qWymNNUHlwYcT0JDWXQbACYhGgeh6gHM4Ghuh2/R0YePNiaUCTSmFcvdDCY1paZvhht3nQ2VmGmahICSR5vQHmDt6DcozeZSnp2FdLLZHhwdq94SVd+xMaJqWtrkM2L1uVHILpy0t8igidymXExfHMzBCQbhCIdga7Onz8etqkdgkUYTZbYCSqORmULlQEIq4J3jyexMA8jdu9BRzuaKyLN3udkNjDEqICID+2hbm797Wwez24/T3vJTE3aFTP9Sd9vT1NziVEMUGr1c35+Y2b5jKnqgNKqWglMLspjs6/rj1dudie2mdao07J5s3dCzt/werJTyI1yYqpQAAAABJRU5ErkJggg==) no-repeat  2px -34px;
+}
+
+/* Set to green check and text when valid */
+.input-help li.valid {
+  color:#3a7d34;
+  background-position: 2px 6px;
+}
+
+/* Set submit button */
+/*form .btn, form.ng-valid .btn[disabled] {
+  display: none;
+}*/
+form.ng-invalid .btn[disabled], form.ng-valid .btn {
+  display: inline-block;
+}
+
+.form-horizontal .control-label {
+    width: 100px;
+}
+.form-horizontal .controls {
+  position: relative;
+  margin-left: 120px;
+}
+
+

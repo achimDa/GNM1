@@ -1,0 +1,145 @@
+<div class="events-tab">
+	<div class="col-md-12">
+		<div class="eco-type">
+		    <form name="myForm">
+				<uib-accordion close-others="oneAtATime">
+				  <uib-tabset justified="true" class="event-tabs">
+				    <uib-tab heading="General" class="tabs" index="0">
+						<div class="col-md-5">
+					   		<div class="event-box row add-element">
+								<div class="select-form">
+								    <label class="label-form" for="mySelect">Denumire:</label>
+								    <input class="form-control" ng-model="itemObj.name" required/>
+							    </div>
+							    <div class="select-form">
+								    <label class="label-form" for="mySelect">Fisier:</label>
+					    			<input type="text" ng-disabled="true" class="form-control fc-zip" placeholder="{{files[0].name || session.editableRow.zipName}}" >
+								    <button 
+				      					class="btn btn-default" 
+				      					type="file"
+			      					 	ngf-select="sendFile(doc.fileMedia)"
+										ng-model="doc.fileMedia"
+										accept="/*"
+										multiple>
+				      					<i class="fa fa-plus"></i>
+				      					Incarca
+			      					</button>
+							    </div>
+					   		</div>
+					   	</div>
+						<div class="col-md-7">
+					   		<div class="event-box row">
+								<div class="select-form">
+								    <label class="label-form2" for="mySelect">Descriere:</label>
+								    <textarea class="form-control form-l" rows="5" ng-model="itemObj.description" required>
+								    </textarea>
+							    </div>
+					   		</div>
+					   	</div>
+					   	<div class="col-md-12">
+					   		<leaflet lf-center="center" 
+								 	 height="470px"
+								 	 defaults="defaults"
+								 	 style="margin-bottom:16px;" 
+								 	 width="100%">
+							</leaflet>
+					   	</div>
+					   	<div class="col-md-12">
+						   	<div class="pull-right" style="margin-bottom:20px;">
+						   		<button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid" ng-hide="">OK</button>
+						   		<button class="btn btn-default" ng-click="main.go({url:'administrare'})">Renunta</button>
+						   	</div>
+					   	</div>
+					</uib-tab>
+					<uib-tab heading="Metadate harta" class="tabs" disable="!itemObj.id" index="1">
+					   	<div class="col-md-12 map-zone">
+					   		<div class="event-box row">
+						   		<a ng-href="" class="add-event"><i class="fa fa-plus"></i>Interogare metadate</a>
+						   		<br>
+							   	<p><b>Metadata harta</b> - reprezinta metadatele asociate cu simbolurile de pe harta</p>
+							   	<table class="table">
+							   		<thead>
+							   			<tr>
+							   				<th ng-repeat="headers in formDropdownData.header"
+							   				ng-bind="headers"></th>	
+							   			</tr>
+							   		</thead>
+							   		<tbody>
+							   			<tr class="repeat-data done-{{todo.done}}" 
+											ng-repeat="items in formDropdownData.metamaps">
+												<td ng-repeat="item in items track by $index" ng-bind="item"></td>
+										</tr>
+							   		</tbody>
+							   	</table>
+					    	</div>
+					   	</div>
+					   	<div class="col-md-12">
+						   	<div class="pull-right" style="margin-bottom:20px;">
+						   		<button class="btn btn-default" ng-click="sendPost(itemObj)" ng-disabled="myForm.$invalid" ng-hide="">OK</button>
+						   		<button class="btn btn-default" ng-click="main.go({url:'administrare'})">Renunta</button>
+						   	</div>
+					   	</div>
+					</uib-tab>
+					<uib-tab heading="Corelare metadate" class="tabs" disable="!itemObj.id" index="2">
+					   	<div class="col-md-12 map-zone">
+					   		<div class="event-box row">
+						   	<p><b>Metadate interne</b> - Specificati corelarea intre metadatele interne (care vor fi folosite in aplicatie) si metadatele hartii</p>
+						   	<table class="table">
+						   		<thead>
+						   			<tr>
+						   				<th>Metadata interna</th>
+						   				<th>Metadata harta</th>
+						   			</tr>
+						   		</thead>
+						   		<tbody>
+						   			<tr>
+						   				<td>ID</td>
+						   				<td>
+						   					<select name="mySelect1" 
+										    		class="form-control custom-select1"
+										    		ng-options="option for option in formDropdownData.metadataid"
+										    	
+							    					ng-model="itemCore.idColumn">
+					    						<option value>-- Selecteaza --</option>
+					    					</select>
+				    					</td>
+						   			</tr>
+						   			<tr>
+						   				<td>Denumire</td>
+						   				<td>
+						   					<select name="mySelect1" 
+										    		class="form-control custom-select1"
+										    		ng-options="option for option in formDropdownData.metadataid"
+										    		
+							    					ng-model="itemCore.nameColumn">
+				    						<option value>-- Selecteaza --</option>
+				    					</select></td>
+						   			</tr>
+						   			<tr>
+						   				<td>Geometrie</td>
+						   				<td>
+						   					<select name="mySelect1" 
+										    		class="form-control custom-select1"
+										    		ng-options="option for option in formDropdownData.metadataid"
+										    		
+							    					ng-model="itemCore.geometryColumn">
+				    						<option value>-- Selecteaza --</option>
+				    					</select></td>
+						   			</tr>
+						   		</tbody>
+						   	</table>
+					    	</div>
+					   	</div>
+					   	<div class="col-md-12">
+						   	<div class="pull-right" style="margin-bottom:20px;">
+						   		<button class="btn btn-default" ng-click="corelare(itemCore)" ng-disabled="myForm.$invalid" ng-hide="">OK</button>
+						   		<button class="btn btn-default" ng-click="main.go({url:'administrare'})">Renunta</button>
+						   	</div>
+					   	</div>
+					</uib-tab>
+				  </uib-tabset>
+				</uib-accordion>
+			</form>
+		</div>
+	</div>
+</div>
