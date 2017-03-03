@@ -39,13 +39,13 @@ angular.module('gnmApp')
     		};
     		protectedArea();
 
-    		var animalCategory = function () {
-    			var animalCategory = url + 'animalcategories';
-    			$http.get(animalCategory).then(function(success){
-    				$scope.formDropdownData.animalCategory = success.data.items;
-    			});
-    		};
-    		animalCategory();
+    		// var animalCategory = function () {
+    		// 	var animalCategory = url + 'animalcategories';
+    		// 	$http.get(animalCategory).then(function(success){
+    		// 		$scope.formDropdownData.animalCategory = success.data.items;
+    		// 	});
+    		// };
+    		// animalCategory();
 
     		var animalSpecies = function () {
     			var animalSpecies = url + 'animalspecies';
@@ -81,8 +81,8 @@ angular.module('gnmApp')
 					'animalSizeIds': [],
 					'animalIds': [],
 					'status': raportObj.type,
-					'startDate': Date.parse(raportObj.startDate),
-					'endDate': Date.parse(raportObj.endDate)
+					'startDate': raportObj.startDate,
+					'endDate': raportObj.endDate
 				};
 
 				angular.forEach($scope.formDropdownData.eventCategory, function(each, index){
@@ -97,15 +97,15 @@ angular.module('gnmApp')
 					}
 				});
 
-				angular.forEach($scope.formDropdownData.animalCategory, function(each, index){
+				angular.forEach($scope.formDropdownData.animalSize, function(each, index){
 					if (each.isChecked === true) {
-					  	search.animalCategoryIds.push(each.id);
+					  	search.animalSizeIds.push(each.id);
 					}
 				});
 
-				angular.forEach($scope.categories.stare, function(each, index){
+				angular.forEach($scope.formDropdownData.animal, function(each, index){
 			        if (each.isChecked === true) {
-			          search.resolutionIds.push(each.value);
+			          search.animalIds.push(each.id);
 			        }
 		      	});
 			
@@ -139,8 +139,8 @@ angular.module('gnmApp')
 					'animalSizeIds': [],
 					'animalIds': [],
 					'status': raportObj.type,
-					'startDate': Date.parse(raportObj.startDate),
-					'endDate': Date.parse(raportObj.endDate)
+					'startDate': raportObj.startDate,
+					'endDate': raportObj.endDate
 				};
 
 				angular.forEach($scope.formDropdownData.eventCategory, function(each, index){
@@ -155,15 +155,15 @@ angular.module('gnmApp')
 					}
 				});
 
-				angular.forEach($scope.formDropdownData.animalCategory, function(each, index){
+				angular.forEach($scope.formDropdownData.animalSize, function(each, index){
 					if (each.isChecked === true) {
-					  	search.animalCategoryIds.push(each.id);
+					  	search.animalSizeIds.push(each.id);
 					}
 				});
 
-				angular.forEach($scope.categories.stare, function(each, index){
+				angular.forEach($scope.formDropdownData.animal, function(each, index){
 			        if (each.isChecked === true) {
-			          search.resolutionIds.push(each.value);
+			          search.animalIds.push(each.id);
 			        }
 		      	});
 

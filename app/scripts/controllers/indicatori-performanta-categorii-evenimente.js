@@ -43,8 +43,8 @@ angular.module('gnmApp')
 	    		var search = {
 					'eventCategoryIds': [],
 					'protectedAreaIds': [],
-					'startDate': Date.parse(raportObj.startDate),
-					'endDate': Date.parse(raportObj.endDate)
+					'startDate': raportObj.startDate,
+					'endDate': raportObj.endDate
 				};
 
 				angular.forEach($scope.formDropdownData.eventCategory, function(each, index){
@@ -84,8 +84,8 @@ angular.module('gnmApp')
     			var search = {
 					'eventCategoryIds': [],
 					'protectedAreaIds': [],
-					'startDate': Date.parse(raportObj.startDate),
-					'endDate': Date.parse(raportObj.endDate)
+					'startDate': raportObj.startDate,
+					'endDate': raportObj.endDate
 				};
 
 				angular.forEach($scope.formDropdownData.eventCategory, function(each, index){

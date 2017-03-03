@@ -1,126 +1,186 @@
 <div class="search-box reports">
-		<div class="event-box box-padding">
-    		<form name="myForm">
-			    <fieldset class="search-box">
-			   		<legend><b>Completati conditiile de filtrare inainte de a rula raportul</b></legend>
-			   		<div class="row">
-				      	<div class="col-md-5">
-				      		<div class="row">
-
-								<div class="col-md-12 area-margin">
-									<span class="title-cat">Arie protejata</span>
-									<div class="scroll-vert">
-									 	<span ng-repeat="item in formDropdownData.protectedArea">
+	<div class="event-box box-padding">
+		<form name="myForm">
+			<fieldset class="search-box">
+				<legend><b>Completati conditiile de filtrare inainte de a rula raportul</b></legend>
+				<div class="row">
+					<div class="col-md-5">
+						<div class="row">
+							<div class="col-md-12 area-margin">
+								<span class="title-cat">Administrator arie protejata</span>
+								<div class="scroll-vert">
+									<span ng-repeat="item in formDropdownData.areaAdmin">
 									      	<label class="checkbox">
 									        	<input type="checkbox" ng-model="item.isChecked"/>
 									        	{{item.name}}
 									      	</label>
 									    </span>
-								    </div>
 								</div>
+							</div>
 
-					      	</div>
-					      	<div class="row" style="diplay:flex">
-					      		<div class="col-md-2">
-						      		<label class="label-form" for="numar">De la:</label>
-					      		</div>
-					      		<div class="col-md-4">
-							      	<input  type="text" 
-							      			class="form-control picker-date" 
-							      			ng-model="raportObj.startDate" 
-							      			data-bs-show="raportObj.startDate" 
-							      			bs-datepicker>
-						      		<span class="input-group-btn">
-								        <label class="btn btn-default btn-datePicker" for="sentDate">
-								        <i class="glyphicon glyphicon-calendar"></i></label>
-								    </span>
-					      		</div>
-					      		
-					      		<div class="col-md-2">
-						      		<label class="label-form2" for="numar" style="text-align:center">pana la:</label>
+							<div class="col-md-12 area-margin">
+								<span class="title-cat">Arie protejata</span>
+								<div class="scroll-vert">
+									<span ng-repeat="item in formDropdownData.protectedArea">
+									      	<label class="checkbox">
+									        	<input type="checkbox" ng-model="item.isChecked"/>
+									        	{{item.name}}
+									      	</label>
+									    </span>
 								</div>
-					      		<div class="col-md-4">
-							      	<input  type="text" 
-							      			class="form-control picker-date" 
-							      			ng-model="raportObj.endDate" 
-							      			data-bs-show="raportObj.endDate" 
-							      			bs-datepicker>
+							</div>
+
+						</div>
+						<div class="row" style="diplay:flex">
+							<div class="col-md-2">
+								<label class="label-form" for="numar">De la:</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control picker-date" ng-model="raportObj.startDate" data-bs-show="raportObj.startDate" bs-datepicker>
+								<span class="input-group-btn">
 								        <label class="btn btn-default btn-datePicker" for="sentDate">
 								        <i class="glyphicon glyphicon-calendar"></i></label>
 								    </span>
-							    </div>
-						    </div>
-				      	</div>
-			
-				      	<div class="col-md-5">
-				      	</div>
-				      	<div class="col-md-2">
-					      	<div class="pull-right">
-				      			<div class="col-md-12">
-						      		<button 
-						      				type="button" 
-						      				ng-click="runRaport(raportObj)" 
-						      				class="btn add-event export-list" 
-						      				ng-disabled="myForm.$invalid">
+							</div>
+
+							<div class="col-md-2">
+								<label class="label-form2" for="numar" style="text-align:center">pana la:</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control picker-date" ng-model="raportObj.endDate" data-bs-show="raportObj.endDate" bs-datepicker>
+								<label class="btn btn-default btn-datePicker" for="sentDate">
+								        <i class="glyphicon glyphicon-calendar"></i></label>
+								</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-5">
+						<div class="row">
+							<div class="col-md-12 area-margin">
+								<span class="title-cat">Ranger</span>
+								<div class="scroll-vert">
+									<span ng-repeat="item in formDropdownData.ranger">
+											<label class="checkbox">
+												<input type="checkbox" ng-model="item.isChecked"/>
+												{{item.userName}}
+											</label>
+										</span>
+								</div>
+							</div>
+							<div class="col-md-12 area-margin">
+								<label for="">Tip raport</label>
+								<select type="text" ng-change="type(typeReport)" ng-model="typeReport.type" class="form-control actTip" required>
+										<option value>-- Selecteaza --</option>
+										<option value="1">Detalii generale</option>
+										<option value="2">Subtotal arie</option>
+										<option value="3">Subtotal administrator arie</option>
+									</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="pull-right">
+							<div class="col-md-12">
+								<button type="button" ng-click="runRaport(raportObj)" class="btn add-event export-list" ng-disabled="myForm.$invalid">
 												<i class="fa fa-arrow-right"></i>
 												Ruleaza raport
 									</button>
-								</div>
-				      			<div class="col-md-12">
-						      		<button
-						      				type="button"
-							      			ng-click="downloadRaport(raportObj,'raportPdf')" 
-											class=" btn add-event export-list" 
-											ng-disabled="myForm.$invalid">
+							</div>
+							<div class="col-md-12">
+								<button type="button" ng-click="downloadRaport(raportObj,'raportPdf')" class=" btn add-event export-list" ng-disabled="myForm.$invalid">
 												<i class="fa fa-file-pdf-o"></i>
 												Exporta in format PDF
 									</button>
-								</div>
 							</div>
-				      	</div>
-			      	</div>
-			    </fieldset>
-			</form>
-		   <div class="row">
-		   		<div class="col-md-12 img-container">
-		   			<div class="col-md-3"><img src="images/minister.png" class="tmp-img1"></div>
-		   			<div class="col-md-3"><img src="images/logo.png" class="tmp-img"></div>
-		   			<div class="col-md-3"><img src="images/comp.png" class="tmp-img"></div>
-		   			<div class="col-md-3"><img src="images/eea.jpg" class="tmp-img"></div>
-		   		</div>
-		   		<div class="col-md-12">
-		   			<h1 style="text-align:center">Indicatori de performanta</h1>
-		   		</div>
-		   </div>
-		   <div class="row">
-		   		<div class="col-md-12">
-		   			<div class="tableDiv">
-						<table 
-								object-table 
-						       	data="tabelData" 
-						       	display="15" 
-						       	headers="Administrator arie protejata, Ranger, Arie protejata, Data, Nr puncte GPS inregistrate, Distanta parcursa (km), Viteza medie, Timpul efectiv parcurs, Numar evenimente raportate"
-						       	fields="type, country, county, cui, economicalAgentName, officeName, wasteType, wasteCode, wasteName, formNumber, operationDate, quantity, measurementUnitName"
-						       	sorting="compound"
-						       	paging="false"
-						       	search="false"
-						       	editable="false">
-						       	<tbody>
-									<tr>
-										<td ng-bind="item.name"></td>
-										<td ng-bind="item.number"></td>
-										<td ng-bind="item.type"></td>
-										<td ng-bind="item.resolution"></td>
-										<td ng-bind="item.status"></td>
-										<td ng-bind="item.createdBy"></td>
-										<td ng-bind="item.createdDate"></td>
-										<td ng-bind="item.validatedBy"></td>
-										<td ng-bind="item.validationDate | date: 'dd-MM-yyyy'"></td>
-									</tr>
-								</tbody>
-				        </table>
-		   		</div>
-		   </div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+		<div class="row">
+			<div class="col-md-12 img-container">
+				<div class="col-md-3"><img src="images/minister.png" class="tmp-img1"></div>
+				<div class="col-md-3"><img src="images/logo.png" class="tmp-img"></div>
+				<div class="col-md-3"><img src="images/comp.png" class="tmp-img"></div>
+				<div class="col-md-3"><img src="images/eea.jpg" class="tmp-img"></div>
+			</div>
+			<div class="col-md-12">
+				<h1 style="text-align:center">Indicatori de performanta</h1>
+			</div>
 		</div>
-</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="tableDiv" ng-if="generalTable">
+					<table object-table 
+						   data="tabelData" 
+						   display="15" 
+						   headers="Administrator arie protejata, Ranger, Arie protejata, Data, Nr puncte GPS inregistrate, Distanta parcursa (km), Viteza medie, Timpul efectiv parcurs, Numar evenimente raportate" 
+						   fields="protectedAreaAdmin, ranger, protectedArea, date, gpsPointsNr, distance, speed, duration, reportedEventsNr"
+					 	   sorting="compound" 
+						   paging="false" 
+						   search="false" 
+						   editable="false">
+						<tbody>
+							<tr>
+								<td ng-bind="item.protectedAreaAdmin"></td>
+								<td ng-bind="item.ranger"></td>
+								<td ng-bind="item.protectedArea"></td>
+								<td ng-bind="item.date"></td>
+								<td ng-bind="item.gpsPointsNr"></td>
+								<td ng-bind="item.distance"></td>
+								<td ng-bind="item.speed"></td>
+								<td ng-bind="item.duration"></td>
+								<td ng-bind="item.reportedEventsNr"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 
+				<div class="tableDiv" ng-if="area">
+					<table object-table 
+						   data="tabelData" 
+						   display="15" 
+						   headers="Administrator arie protejata, Arie protejata, Nr puncte GPS inregistrate, Distanta parcursa (km), Viteza medie, Timpul efectiv parcurs, Numar evenimente raportate" 
+						   fields="protectedAreaAdmin, protectedArea, gpsPointsNr, distance, speed, duration, reportedEventsNr"
+					 	   sorting="compound" 
+						   paging="false" 
+						   search="false" 
+						   editable="false">
+						<tbody>
+							<tr>
+								<td ng-bind="item.protectedAreaAdmin"></td>
+								<td ng-bind="item.protectedArea"></td>
+								<td ng-bind="item.gpsPointsNr"></td>
+								<td ng-bind="item.distance"></td>
+								<td ng-bind="item.speed"></td>
+								<td ng-bind="item.duration"></td>
+								<td ng-bind="item.reportedEventsNr"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="tableDiv" ng-if="admin">
+					<table object-table 
+						   data="tabelData" 
+						   display="15" 
+						   headers="Administrator arie protejata, Nr puncte GPS inregistrate,  Viteza medie, Timpul efectiv parcurs" 
+						   fields="protectedAreaAdmin, gpsPointsNr, distance, duration"
+					 	   sorting="compound" 
+						   paging="false" 
+						   search="false" 
+						   editable="false">
+						<tbody>
+							<tr>
+								<td ng-bind="item.protectedAreaAdmin"></td>
+								<td ng-bind="item.gpsPointsNr"></td>
+								<td ng-bind="item.distance"></td>
+								<td ng-bind="item.duration"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>

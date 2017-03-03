@@ -54,8 +54,10 @@ angular.module('gnmApp')
 	    			'legislationIds': [],
 	    			'regulationIds' : [],
 					'eventCategoryIds': [],
-					'startDate': Date.parse(evenimenteObj.startDate),
-					'endDate': Date.parse(evenimenteObj.endDate)
+					'startDate': evenimenteObj.startDate,
+					'endDate': evenimenteObj.endDate
+					// 'startDate': Date.parse(evenimenteObj.startDate),
+					// 'endDate': Date.parse(evenimenteObj.endDate)
 				};
 
 				angular.forEach($scope.formDropdownData.eventCategory, function(each, index){
@@ -102,8 +104,8 @@ angular.module('gnmApp')
 	    			'legislationIds': [],
 	    			'regulationIds' : [],
 					'eventCategoryIds': [],
-					'startDate': Date.parse(evenimenteObj.startDate),
-					'endDate': Date.parse(evenimenteObj.endDate)
+					'startDate': evenimenteObj.startDate,
+					'endDate': evenimenteObj.endDate
 				};
 
 				angular.forEach($scope.formDropdownData.eventCategory, function(each, index){
