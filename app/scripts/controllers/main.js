@@ -88,7 +88,9 @@ angular.module('gnmApp')
   	// Setup Map for event Page
     angular.extend($scope, {
       center: {
-          autoDiscover: true,
+          lat: 45.81348,
+          lng: 24.54345,
+          // autoDiscover: true,
           zoom: 11
       },  
       defaults: {

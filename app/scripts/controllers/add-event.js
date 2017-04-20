@@ -191,6 +191,8 @@ angular.module('gnmApp')
                 $scope.getGeom = $resource(url + url_geom, null, options).get();
 
                 $scope.getGeom.$promise.then(function(success) {
+                    $scope.markers.pin.lat = success.lat;
+                    $scope.markers.pin.lng = success.lon;
                     angular.extend($scope.layers.overlays, {
                         countries: {
                             name:'Coridoare ecologice',
@@ -368,7 +370,8 @@ angular.module('gnmApp')
             
             angular.extend($scope, {
                 center: {
-                    autoDiscover: true,
+                    lat: 45.81348,
+                    lng: 24.54345,
                     zoom: 11
                 },
                  defaults: {
@@ -376,8 +379,8 @@ angular.module('gnmApp')
                 },
                 markers: {
                     pin: {
-                        lat: 46.77173,
-                        lng: 23.51932,
+                        lat: 45.81348,
+                        lng: 24.54345,
                         focus: true,
                         draggable: true,
                         // message: "Hi there!",

@@ -8,7 +8,13 @@
 					<div class="dateIn">
 			            <!-- <input date-time min-date="minDate" max-date="maxDate" ng-model="itemObj.startDate" class="form-control myDate"/> -->
 
-			            <input type="text" class="form-control pickerClass" ng-model="itemObj.startDate" data-bs-show="itemObj.startDate" bs-datepicker>
+			            <input type="text" 
+							   class="form-control pickerClass" 
+							   ng-model="itemObj.startDate" 
+							   data-bs-show="itemObj.startDate" 
+							   ng-change="changeStartDate(itemObj.startDate)"
+							   data-max-date="{{maxStartDate}}"
+							   bs-datepicker>
 
 		                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
 			        </div>
@@ -18,7 +24,13 @@
 			      	<div class="dateIn">
 			            <!-- <input date-time min-date="minDate" max-date="maxDate" ng-model="itemObj.endDate" class="form-control myDate"/> -->
 
-			            <input type="text" class="form-control pickerClass" ng-model="itemObj.endDate" data-bs-show="itemObj.endDate" bs-datepicker>
+			            <input type="text" 
+							   class="form-control pickerClass" 
+							   ng-model="itemObj.endDate" 
+							   data-bs-show="itemObj.endDate" 
+							   ng-change="changeEndDate(itemObj.endDate)"
+							   data-max-date="today"							   
+							   bs-datepicker>
 			            
 		                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
 		        	</div>

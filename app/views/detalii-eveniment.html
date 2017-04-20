@@ -61,11 +61,19 @@
 						      		<label class="label-form" for="numar">De la:</label>
 					      		</div>
 					      		<div class="col-md-4">
-							      	<input  type="text" 
+							      	<!--<input  type="text" 
 							      			class="form-control picker-date" 
 							      			ng-model="raportObj.startDate" 
 							      			data-bs-show="raportObj.startDate" 
-							      			bs-datepicker>
+							      			bs-datepicker>-->
+
+									<input  type="text" 
+											class="form-control picker-date" 
+											ng-model="raportObj.startDate" 
+											data-bs-show="raportObj.startDate" 
+											ng-change="changeStartDate(raportObj.startDate)"
+											data-max-date="{{maxStartDate}}"
+											bs-datepicker>
 						      		<span class="input-group-btn">
 								        <label class="btn btn-default btn-datePicker" for="sentDate">
 								        <i class="glyphicon glyphicon-calendar"></i></label>
@@ -76,11 +84,18 @@
 						      		<label class="label-form2" for="numar" style="text-align:center">pana la:</label>
 								</div>
 					      		<div class="col-md-4">
-							      	<input  type="text" 
+							      	<!--<input  type="text" 
 							      			class="form-control picker-date" 
 							      			ng-model="raportObj.endDate" 
 							      			data-bs-show="raportObj.endDate" 
-							      			bs-datepicker>
+							      			bs-datepicker>-->
+										<input  type="text" 
+												class="form-control picker-date" 
+												ng-model="raportObj.endDate" 
+												data-bs-show="raportObj.endDate" 
+												ng-change="changeEndDate(raportObj.endDate)"
+												data-max-date="today"
+												bs-datepicker>
 								        <label class="btn btn-default btn-datePicker" for="sentDate">
 								        <i class="glyphicon glyphicon-calendar"></i></label>
 								    </span>

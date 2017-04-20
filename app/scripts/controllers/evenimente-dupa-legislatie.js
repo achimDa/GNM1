@@ -47,6 +47,43 @@ angular.module('gnmApp')
     			});
     		};
 
+			var currentDate = new Date();
+
+			var minStartDateParse = Date.parse(currentDate) - 2629746000;
+			$scope.maxStartDate = currentDate;
+
+			$scope.evenimenteObj.startDate = new Date(minStartDateParse);
+			$scope.evenimenteObj.endDate = new Date();
+
+			$scope.changeStartDate = function (data) {
+				var currendDate = new Date();
+				var startDate = Date.parse(data);
+				var endDate = Date.parse($scope.evenimenteObj.endDate);
+				var delta = endDate - startDate;
+
+				if (delta < 0) {
+					if (startDate + 2629746000 > Date.parse(currendDate)) {
+						$scope.evenimenteObj.endDate = currendDate;
+					} else {
+						$scope.evenimenteObj.endDate = new Date(startDate + 2629746000);
+					}
+				} else if (Date.parse($scope.evenimenteObj.endDate) - Date.parse(data) > 2629746000) {
+					$scope.evenimenteObj.endDate = new Date(Date.parse(data) + 2629746000);
+				}
+			};
+
+			$scope.changeEndDate = function (data) {
+				var currendDate = new Date();
+				var startDate = Date.parse($scope.evenimenteObj.startDate);
+				var endDate = Date.parse(data);
+				var delta = endDate - startDate;
+
+				if (delta < 0) {
+					$scope.evenimenteObj.startDate = new Date(endDate - 2629746000);
+				} else if (Date.parse(data) - Date.parse($scope.evenimenteObj.startDate) > 2629746000) {
+					$scope.evenimenteObj.startDate = new Date(Date.parse(data) - 2629746000);
+				}
+			};
 
     		$scope.runRaport = function(evenimenteObj) {
 	    		

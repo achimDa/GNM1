@@ -39,13 +39,13 @@ angular.module('gnmApp')
     		};
     		protectedArea();
 
-    		// var animalCategory = function () {
-    		// 	var animalCategory = url + 'animalcategories';
-    		// 	$http.get(animalCategory).then(function(success){
-    		// 		$scope.formDropdownData.animalCategory = success.data.items;
-    		// 	});
-    		// };
-    		// animalCategory();
+    		var animalCategory = function () {
+    			var animalCategory = url + 'animalcategories';
+    			$http.get(animalCategory).then(function(success){
+    				$scope.formDropdownData.animalCategory = success.data.items;
+    			});
+    		};
+    		animalCategory();
 
     		var animalSpecies = function () {
     			var animalSpecies = url + 'animalspecies';
@@ -71,9 +71,48 @@ angular.module('gnmApp')
     		};
     		animal();
 
+			var currentDate = new Date();
+
+			var minStartDateParse = Date.parse(currentDate) - 2629746000;
+			$scope.maxStartDate = currentDate;
+
+			$scope.raportObj.startDate = new Date(minStartDateParse);
+			$scope.raportObj.endDate = new Date();
+
+			$scope.changeStartDate = function (data) {
+				var currendDate = new Date();
+				var startDate = Date.parse(data);
+				var endDate = Date.parse($scope.raportObj.endDate);
+				var delta = endDate - startDate;
+
+				if (delta < 0) {
+					if (startDate + 2629746000 > Date.parse(currendDate)) {
+						$scope.raportObj.endDate = currendDate;
+					} else {
+						$scope.raportObj.endDate = new Date(startDate + 2629746000);
+					}
+				} else if (Date.parse($scope.raportObj.endDate) - Date.parse(data) > 2629746000) {
+					$scope.raportObj.endDate = new Date(Date.parse(data) + 2629746000);
+				}
+			};
+
+			$scope.changeEndDate = function (data) {
+				var currendDate = new Date();
+				var startDate = Date.parse($scope.raportObj.startDate);
+				var endDate = Date.parse(data);
+				var delta = endDate - startDate;
+
+				if (delta < 0) {
+					$scope.raportObj.startDate = new Date(endDate - 2629746000);
+				} else if (Date.parse(data) - Date.parse($scope.raportObj.startDate) > 2629746000) {
+					$scope.raportObj.startDate = new Date(Date.parse(data) - 2629746000);
+				}
+			};
+
     		$scope.runRaport = function(raportObj) {
 	    		
 	    		var search = {
+					'ecoCorridorTypeIds': [],
 					'eventCategoryIds': [],
 					'protectedAreaIds': [],
 					'animalCategoryIds': [],
@@ -85,9 +124,21 @@ angular.module('gnmApp')
 					'endDate': raportObj.endDate
 				};
 
+				angular.forEach($scope.formDropdownData.ecocorridorTypes, function(each, index){
+					if (each.isChecked === true) {
+					  	search.ecoCorridorTypeIds.push(each.id);
+					}
+				});
+
 				angular.forEach($scope.formDropdownData.eventCategory, function(each, index){
 					if (each.isChecked === true) {
 					  	search.eventCategoryIds.push(each.id);
+					}
+				});
+
+				angular.forEach($scope.formDropdownData.animalCategory, function(each, index){
+					if (each.isChecked === true) {
+					  	search.animalCategoryIds.push(each.id);
 					}
 				});
 
@@ -132,6 +183,7 @@ angular.module('gnmApp')
     		$scope.downloadRaport = function(raportObj, stringValue) {
 
     			var search = {
+					'ecoCorridorTypeIds': [],
 					'eventCategoryIds': [],
 					'protectedAreaIds': [],
 					'animalCategoryIds': [],
@@ -143,9 +195,21 @@ angular.module('gnmApp')
 					'endDate': raportObj.endDate
 				};
 
+				angular.forEach($scope.formDropdownData.ecocorridorTypes, function(each, index){
+					if (each.isChecked === true) {
+					  	search.ecoCorridorTypeIds.push(each.id);
+					}
+				});
+
 				angular.forEach($scope.formDropdownData.eventCategory, function(each, index){
 					if (each.isChecked === true) {
 					  	search.eventCategoryIds.push(each.id);
+					}
+				});
+
+				angular.forEach($scope.formDropdownData.animalCategory, function(each, index){
+					if (each.isChecked === true) {
+					  	search.animalCategoryIds.push(each.id);
 					}
 				});
 

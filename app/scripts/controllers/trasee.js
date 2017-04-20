@@ -71,6 +71,44 @@ angular.module('gnmApp')
 			};
 			ranger();
 
+			var currentDate = new Date();
+
+			var minStartDateParse = Date.parse(currentDate) - 2629746000;
+			$scope.maxStartDate = currentDate;
+
+			$scope.raportObj.startDate = new Date(minStartDateParse);
+			$scope.raportObj.endDate = new Date();
+
+			$scope.changeStartDate = function (data) {
+				var currendDate = new Date();
+				var startDate = Date.parse(data);
+				var endDate = Date.parse($scope.raportObj.endDate);
+				var delta = endDate - startDate;
+
+				if (delta < 0) {
+					if (startDate + 2629746000 > Date.parse(currendDate)) {
+						$scope.raportObj.endDate = currendDate;
+					} else {
+						$scope.raportObj.endDate = new Date(startDate + 2629746000);
+					}
+				} else if (Date.parse($scope.raportObj.endDate) - Date.parse(data) > 2629746000) {
+					$scope.raportObj.endDate = new Date(Date.parse(data) + 2629746000);
+				}
+			};
+
+			$scope.changeEndDate = function (data) {
+				var currendDate = new Date();
+				var startDate = Date.parse($scope.raportObj.startDate);
+				var endDate = Date.parse(data);
+				var delta = endDate - startDate;
+
+				if (delta < 0) {
+					$scope.raportObj.startDate = new Date(endDate - 2629746000);
+				} else if (Date.parse(data) - Date.parse($scope.raportObj.startDate) > 2629746000) {
+					$scope.raportObj.startDate = new Date(Date.parse(data) - 2629746000);
+				}
+			};
+
 			$scope.runRaport = function (raportObj) {
 
 				var search = {

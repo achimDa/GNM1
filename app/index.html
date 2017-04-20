@@ -28,28 +28,19 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <header id="header">
-        <div class="col-xs-6">
+        <div class="col-lg-3 col-md-2 col-xs-5">
             <a href="#/dashboard">
                 <img src="images/logo.png" class="logo"><h2>GNM</h2>
             </a>
-            <h2 class="header-title" ng-bind="session.title || session.addLink.title"></h2>
         </div>
-        <div class="col-xs-4">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="header-logo pull-right">
-                        <img src="images/minister.png">
-                        <img src="images/comp.png">
-                        <img src="images/eea.png">
-                    </div>
-                </div>
+        <div class="col-lg-6 col-md-7 col-xs-2 logo-div">
+            <div class="header-logo pull-right logos-responisve">
+                <img src="images/minister.png">
+                <img src="images/comp.png">
+                <img src="images/eea.png">
             </div>
         </div>
-      <!--   <div class="col-xs-2 logos">
-            <div>
-            </div>
-        </div> -->
-        <div class="col-xs-2" ng-show="session.isLoggedIn === true">
+        <div class="col-lg-3 col-md-3 col-xs-7" ng-show="session.isLoggedIn === true">
             <div class="info-settings">
                 <a class="fa fa-home" ng-href="#/dashboard" type="button" ng-show="session.isLoggedIn === true"></a>
                 <span id="userName" ng-bind="main.session.user.firstName + ' ' + main.session.user.lastName"></span>
@@ -62,6 +53,10 @@
             </div>
         </div>
     </header>
+    <div class="col-md-12">
+        <span class="info-page" ng-bind="session.title || session.addLink.title"></span>
+    </div>
+    
     <uib-alert 
         ng-repeat="alert in main.alerts"
         type="{{alert.type}}"

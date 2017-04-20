@@ -16,7 +16,7 @@ angular.module('gnmApp')
 
     		$scope.itemObj = {};
             $scope.formDropdownData = {};
-            $scope.session.addLink.title = 'Aloca utilizator existent';
+            // $scope.session.addLink.title = 'Aloca utilizator existent';
 
         	var url_accounts = {};
          	var options = {
@@ -38,7 +38,6 @@ angular.module('gnmApp')
             	
 
             } else {
-            	console.log('User',$sessionStorage.user.authority);
             	url_accounts = 'accounts/licenses/used';
             }
             

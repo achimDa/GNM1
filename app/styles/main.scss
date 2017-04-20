@@ -247,10 +247,10 @@ input[type="file"].visible {
 header {
     height: 70px;
     background: white;
-    margin-bottom: 30px;
     .header-title {
         float: left;
         margin-left: 30px;
+        font-size: 14px;
     }
     .info-settings {
         position: relative;
@@ -1613,6 +1613,7 @@ header {
 
 .dateIn {
     display: flex;
+    width: 100%;
 }
 
 .dateStrap {
@@ -1955,6 +1956,24 @@ form.ng-invalid .btn[disabled], form.ng-valid .btn {
 .form-horizontal .controls {
   position: relative;
   margin-left: 120px;
+}
+
+@media screen and (max-width: 1000px) {
+    .logo-div {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1195px) {
+    .header-title {
+        display: none;
+    }
+}
+
+.info-page {
+    font-size: 20px;
+    margin: 20px 0;
+    display: block;
 }
 
 

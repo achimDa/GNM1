@@ -41,6 +41,8 @@
 							      			class="form-control picker-date" 
 							      			ng-model="raportObj.startDate" 
 							      			data-bs-show="raportObj.startDate" 
+											ng-change="changeStartDate(raportObj.startDate)"
+							   				data-max-date="{{maxStartDate}}"
 							      			bs-datepicker>
 						      		<span class="input-group-btn">
 								        <label class="btn btn-default btn-datePicker" for="sentDate">
@@ -56,6 +58,8 @@
 							      			class="form-control picker-date" 
 							      			ng-model="raportObj.endDate" 
 							      			data-bs-show="raportObj.endDate" 
+											ng-change="changeEndDate(raportObj.endDate)"
+							   				data-max-date="today"
 							      			bs-datepicker>
 								        <label class="btn btn-default btn-datePicker" for="sentDate">
 								        <i class="glyphicon glyphicon-calendar"></i></label>

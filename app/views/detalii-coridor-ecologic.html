@@ -19,10 +19,22 @@
 								    </div>
 								</div>
 
-								<div class="col-md-12 area-margin">
+								<!--<div class="col-md-12 area-margin">
 									<span class="title-cat">Arie protejata</span>
 									<div class="scroll-vert">
 									 	<span ng-repeat="item in formDropdownData.protectedArea">
+									      	<label class="checkbox">
+									        	<input type="checkbox" ng-model="item.isChecked"/>
+									        	{{item.name}}
+									      	</label>
+									    </span>
+								    </div>
+								</div>-->
+
+								<div class="col-md-12 area-margin">
+									<span class="title-cat">Categorii animale</span>
+									<div class="scroll-vert">
+									 	<span ng-repeat="item in formDropdownData.animalCategory">
 									      	<label class="checkbox">
 									        	<input type="checkbox" ng-model="item.isChecked"/>
 									        	{{item.name}}
@@ -37,11 +49,19 @@
 						      		<label class="label-form" for="numar">De la:</label>
 					      		</div>
 					      		<div class="col-md-4">
-							      	<input  type="text" 
+							      	<!--<input  type="text" 
 							      			class="form-control picker-date" 
 							      			ng-model="raportObj.startDate" 
 							      			data-bs-show="raportObj.startDate" 
-							      			bs-datepicker>
+							      			bs-datepicker>-->
+									<input  type="text" 
+											class="form-control picker-date" 
+											ng-model="raportObj.startDate" 
+											data-bs-show="raportObj.startDate" 
+											ng-change="changeStartDate(raportObj.startDate)"
+											data-max-date="{{maxStartDate}}"
+											bs-datepicker>
+
 						      		<span class="input-group-btn">
 								        <label class="btn btn-default btn-datePicker" for="sentDate">
 								        <i class="glyphicon glyphicon-calendar"></i></label>
@@ -52,11 +72,19 @@
 						      		<label class="label-form2" for="numar" style="text-align:center">pana la:</label>
 								</div>
 					      		<div class="col-md-4">
-							      	<input  type="text" 
+							      	<!--<input  type="text" 
 							      			class="form-control picker-date" 
 							      			ng-model="raportObj.endDate" 
 							      			data-bs-show="raportObj.endDate" 
-							      			bs-datepicker>
+							      			bs-datepicker>-->
+
+										<input  type="text" 
+												class="form-control picker-date" 
+												ng-model="raportObj.endDate" 
+												data-bs-show="raportObj.endDate" 
+												ng-change="changeEndDate(raportObj.endDate)"
+												data-max-date="today"
+												bs-datepicker>
 								        <label class="btn btn-default btn-datePicker" for="sentDate">
 								        <i class="glyphicon glyphicon-calendar"></i></label>
 								    </span>

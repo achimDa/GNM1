@@ -157,7 +157,7 @@ angular.module('gnmApp')
                     $scope.markRow(success.data.items[0]);
 					// $location.search('link', 'url');
 
-                    $scope.perPage = 15;
+                    $scope.perPage = 20;
                     $scope.maxSize = 5;
                     $scope.setPage = function (pageNo) {
                         $scope.currentPage = pageNo;

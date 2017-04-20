@@ -27,11 +27,11 @@ angular.module('gnmApp')
                 show: false
             };
 
-            if ($sessionStorage.editableRow.isUsed === true) {
-                $scope.session.addLink.title = 'Modifica contul utilizatorului';
-            } else {
-                $scope.session.addLink.title = 'Aloca utilizator nou';
-            } 
+            // if ($sessionStorage.editableRow.isUsed === true) {
+            //     $scope.session.addLink.title = 'Modifica contul utilizatorului';
+            // } else {
+            //     $scope.session.addLink.title = 'Aloca utilizator nou';
+            // } 
 
             $scope.formDropdownData = {};
             $scope.itemObj = {};
