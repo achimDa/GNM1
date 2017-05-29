@@ -207,6 +207,45 @@ angular.module('gnmApp')
                 }
             };
 
+			var currentDate = new Date();
+
+			var minStartDateParse = Date.parse(currentDate) - 2629746000;
+
+			$scope.maxStartDate = currentDate;
+
+			$scope.itemObj.startDate = new Date(minStartDateParse);
+			$scope.itemObj.endDate = new Date();
+
+			$scope.changeStartDate = function (data) {
+				var currendDate = new Date();
+				var startDate = Date.parse(data);
+				var endDate = Date.parse($scope.itemObj.endDate);
+				var delta = endDate - startDate;
+
+				if (delta < 0) {
+					if (startDate + 2629746000 > Date.parse(currendDate)) {
+						$scope.itemObj.endDate = currendDate;
+					} else {
+						$scope.itemObj.endDate = new Date(startDate + 2629746000);
+					}
+				} else if (Date.parse($scope.itemObj.endDate) - Date.parse(data) > 2629746000) {
+					$scope.itemObj.endDate = new Date(Date.parse(data) + 2629746000);
+				}
+			};
+
+			$scope.changeEndDate = function (data) {
+				var currendDate = new Date();
+				var startDate = Date.parse($scope.itemObj.startDate);
+				var endDate = Date.parse(data);
+				var delta = endDate - startDate;
+
+				if (delta < 0) {
+					$scope.itemObj.startDate = new Date(endDate - 2629746000);
+				} else if (Date.parse(data) - Date.parse($scope.itemObj.startDate) > 2629746000) {
+					$scope.itemObj.startDate = new Date(Date.parse(data) - 2629746000);
+				}
+			};
+
 			$scope.animalSearch = function() {
 
 				var obj = {
